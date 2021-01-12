@@ -1,0 +1,81 @@
+body{
+    font-family:FreeSans;
+}
+h5{
+    font-size: medium;
+}
+header{
+    height: 22vh;
+}
+.draggable-list-header{
+    margin-bottom: 2vh;
+}
+.draggable-list-text{
+    font-size: medium;
+}
+div.draggable-list{
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+div.target-table{
+    min-height: 100%;
+    /*background-color:yellow;*/
+}
+ul.tasker{
+    padding-left: 0px;
+    list-style: none;
+}
+ul.task-week{
+    padding-left: 0px;
+    list-style: none;
+}
+li.draggable-task{
+    border: 1px solid lightgray;
+    margin-top: 1vh;
+    font-size: small;
+    text-align: center;
+    min-height: 5vh;
+}
+li.draggable-task[draggable=false]{
+    background: greenyellow;
+}
+.flex-container {
+    display: flex;
+    /*background-color: DodgerBlue;*/
+    overflow: scroll;
+}
+.flex-container > div {
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    /*margin: 1px;*/
+    /*padding: 1px;*/
+    font-size: 16px;
+    flex: 0 0 13em;
+}
+div.droppable-list{
+    /*display: inline-flex;*/
+    /*background-color: red;*/
+    text-align: center;
+}
+div.week-header{
+    background: antiquewhite;
+    font-size: medium;
+    border: 1px solid lightgray;
+}
+div.week-container{
+    /*display: flex;*/
+    min-height: 55vh;
+    border: 1px solid lightgray;
+}
+.subtitle-1{
+    border: 1px solid lightgray;
+}
+
+.subtitle{
+    width: 20%;
+    border: 1px solid lightgray;
+}
+.title > h2 {
+    text-align: center;
+}
