@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Libelle</th>
+                <th>Campagne</th>
+                <th>Type action</th>
                 <th>Questions</th>
 
                 <th>actions</th>
@@ -20,6 +22,8 @@
             <tr>
                 <td>{{ task.id }}</td>
                 <td>{{ task.libelle }}</td>
+                <td>{{ task.campagne }}</td>
+                <td>{{ task.typeAction }}</td>
                 <td>
                     <ul>
                         {% for question in task.questions %}

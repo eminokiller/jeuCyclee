@@ -33,6 +33,18 @@
         </span>
                 </a>
             </li>
+            <li class="m-menu__item" aria-haspopup="true">
+                <a href="{{ path('joueur_index') }}" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <span
+                {% if app.request.get('_route') == 'joueur_index' %}
+                    style="color: red;"
+                {% endif %}
+                class="m-menu__link-text">
+            {{ "Gestion des equipes/joueur"|trans }}
+        </span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- END: Aside Menu -->
