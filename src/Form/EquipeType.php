@@ -2,30 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Question;
-use App\Entity\Task;
+use App\Entity\Equipe;
+use App\Repository\JoueurRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TaskType extends AbstractType
+class EquipeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('libelle')
-            ->add('questions')
+            ->add('joueurs')
             ->add('campagne')
-            ->add('typeAction')
-
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Task::class,
+            'data_class' => Equipe::class,
         ]);
     }
 }

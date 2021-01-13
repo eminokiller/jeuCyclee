@@ -11,3 +11,58 @@
 
     {{ include('question/_delete_form.html.twig') }}
 {% endblock %}
+{% block JSPersonalScripts %}
+    <script>
+
+        var $collectionHolder;
+        var $addNewItem = $('<a  href="javascript:;" class="create"><i class="fa fa-plus" style="font-size: x-large;color: #78a2d2;"></i></a>');
+
+        $(document).ready(function() {
+            $collectionHolder = $('#exp_list');
+            $collectionHolder.append($addNewItem);
+            $collectionHolder.data('index', $collectionHolder.find('.dv').length);
+            $collectionHolder.find('.dv').each(function () {
+                addRemoveButton($(this));
+            });
+
+
+            $addNewItem.click(function (e) {
+                e.preventDefault();
+                addNewForm();
+            });
+
+            /**
+             * adds a remove button to the panel that is passed in the parameter
+             * @param $panel
+             */
+            function addRemoveButton ($panel) {
+                var $removeButton = $('<a  href="javascript:;" class="cancel"><i class="fa fa-trash" style="font-size: x-large;color: #d2322d;"></i></a>');
+                var $panelFooter = $('<div class="col-md-4 trash"><div class="form-group"></div></div>').append($removeButton);
+                $removeButton.click(function (e) {
+                    e.preventDefault();
+                    $(e.target).parents('.repeat').slideUp(1000, function() {
+                        $(this).remove();
+                    })
+                });
+                $panel.find('.forms').append($panelFooter);
+            }
+            /*
+             * creates a new form and appends it to the collectionHolder
+             */
+            function addNewForm() {
+                var prototype = $collectionHolder.data('prototype');
+                var index = $collectionHolder.data('index');
+                var newForm = prototype;
+                newForm = newForm.replace(/__name__/g, index);
+                $collectionHolder.data('index', index+1);
+                var $panel = $('<div class="repeat"></div>');
+                var $panelBody = $('<div class="row forms"></div>').append(newForm);
+                $panel.append($panelBody);
+                addRemoveButton($panel);
+                $addNewItem.before($panel);
+            }
+        });
+
+    </script>
+{% endblock %}
+

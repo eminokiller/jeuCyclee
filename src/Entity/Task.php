@@ -17,6 +17,16 @@ class Task extends EntityRef
      */
     private $questions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="tasks")
+     */
+    private $campagne;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeAction::class, inversedBy="tasks")
+     */
+    private $typeAction;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -50,6 +60,30 @@ class Task extends EntityRef
                 $question->setTask(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCampagne(): ?Campagne
+    {
+        return $this->campagne;
+    }
+
+    public function setCampagne(?Campagne $campagne): self
+    {
+        $this->campagne = $campagne;
+
+        return $this;
+    }
+
+    public function getTypeAction(): ?TypeAction
+    {
+        return $this->typeAction;
+    }
+
+    public function setTypeAction(?TypeAction $typeAction): self
+    {
+        $this->typeAction = $typeAction;
 
         return $this;
     }
