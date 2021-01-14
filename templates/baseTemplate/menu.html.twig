@@ -41,7 +41,19 @@
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des equipes/joueur"|trans }}
+            {{ "Gestion des joueurs"|trans }}
+        </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true">
+                <a href="{{ path('equipe_index') }}" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <span
+                {% if app.request.get('_route') == 'equipe_index' %}
+                    style="color: red;"
+                {% endif %}
+                class="m-menu__link-text">
+            {{ "Gestion des equipes"|trans }}
         </span>
                 </a>
             </li>
