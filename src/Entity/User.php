@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity()
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"joueur"="Joueur"})
+ * @ORM\DiscriminatorMap({"joueur"="Joueur","admin"="Admin"})
  */
 abstract class User implements UserInterface
 {
