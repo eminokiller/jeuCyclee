@@ -61,13 +61,11 @@ class JoueurController extends AbstractController
     /**
      * @Route("/{id}/edit", name="joueur_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request,Joueur $joueur): Response
     {
 
-        $joueur = $this->getDoctrine()->getRepository(Joueur::class)->findOneBy(
-            [ 'id' => 'pop']
-            );
-        dump($joueur);die;
+
+        //dump($joueur);die;
         $form = $this->createForm(JoueurType::class, $joueur);
         $form->handleRequest($request);
 

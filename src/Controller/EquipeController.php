@@ -35,6 +35,9 @@ class EquipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($equipe->getJoueurs() as $item){
+                $equipe->addJoueur($item);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($equipe);
             $entityManager->flush();
@@ -67,6 +70,9 @@ class EquipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($equipe->getJoueurs() as $item){
+                $equipe->addJoueur($item);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('equipe_index');

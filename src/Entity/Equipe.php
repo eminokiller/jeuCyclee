@@ -37,10 +37,12 @@ class Equipe extends EntityRef
 
     public function addJoueur(Joueur $joueur): self
     {
-        if (!$this->joueurs->contains($joueur)) {
-            $this->joueurs[] = $joueur;
-            $joueur->setEquipe($this);
-        }
+        $this->joueurs->add($joueur);
+        $joueur->setEquipe($this);
+//        if (!$this->joueurs->contains($joueur)) {
+//            $this->joueurs[] = $joueur;
+//            $joueur->setEquipe($this);
+//        }
 
         return $this;
     }
