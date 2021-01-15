@@ -21,16 +21,17 @@ class Campagne extends EntityRef
      * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="campagne")
      */
     private $equipes;
+
     /**
-     * @ORM\Column(type="json_array", nullable=true)
-     * @var array $weeks
+     * @ORM\OneToMany(targetEntity=ActionMarketing::class, mappedBy="campagne")
      */
-    private  $weeks;
+    private $actionMarketings;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
         $this->equipes = new ArrayCollection();
-        $this->weeks = [];
+        $this->actionMarketings = new ArrayCollection();
     }
 
     /**
@@ -94,23 +95,33 @@ class Campagne extends EntityRef
     }
 
     /**
-     * @return array
+     * @return Collection|ActionMarketing[]
      */
-    public function getWeeks(): array
+    public function getActionMarketings(): Collection
     {
-        return $this->weeks;
+        return $this->actionMarketings;
     }
 
-    /**
-     * @param array $weeks
-     * @return Campagne
-     */
-    public function setWeeks(array $weeks): Campagne
+    public function addActionMarketing(ActionMarketing $actionMarketing): self
     {
-        $this->weeks = $weeks;
+        if (!$this->actionMarketings->contains($actionMarketing)) {
+            $this->actionMarketings[] = $actionMarketing;
+            $actionMarketing->setCampagne($this);
+        }
+
         return $this;
     }
 
+    public function removeActionMarketing(ActionMarketing $actionMarketing): self
+    {
+        if ($this->actionMarketings->removeElement($actionMarketing)) {
+            // set the owning side to null (unless already changed)
+            if ($actionMarketing->getCampagne() === $this) {
+                $actionMarketing->setCampagne(null);
+            }
+        }
 
+        return $this;
+    }
 
 }

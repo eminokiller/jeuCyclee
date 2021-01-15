@@ -24,7 +24,6 @@
     <!--begin::Global Theme Styles -->
     <link href="{{ asset('metronic/vendors/base/vendors.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('metronic/demo/default/base/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--end::Global Theme Styles -->
 
@@ -32,6 +31,14 @@
     <link rel="shortcut icon" href="{{ asset('metronic/demo/default/media/img/logo/favicon.ico') }}"/>
 
     <!-- Personal Css Files -->
+
+    <link
+            href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}"
+            rel="stylesheet"
+            type="text/css"
+    />
+
+
     {% block StyleSheet %}{% endblock %}
 
 </head>
@@ -150,6 +157,8 @@
 <script src="{{ asset('metronic/demo/default/custom/components/base/toastr.js') }}"></script>
 <script src="{{ asset('metronic/personal_scripts/bootstrap-datepicker.ar-tn.min.js') }}"></script>
 <script src="{{ asset('metronic/personal_scripts/select2_ar.js') }}"></script>
+<script src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
 <script>
     toastr.options = {
         "closeButton": true,
