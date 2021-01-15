@@ -76,7 +76,7 @@ ajaxInterceptor = function (config) {
     if (routeCollection.length) {
         setTimeout(function () {
             current['success'](routeCollection[0]['ok']())
-        }, 100)
+        }, 10)
     } else {
         current['error'](new Error())
     }

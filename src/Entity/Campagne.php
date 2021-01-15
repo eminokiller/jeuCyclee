@@ -21,11 +21,16 @@ class Campagne extends EntityRef
      * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="campagne")
      */
     private $equipes;
-
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @var array $weeks
+     */
+    private  $weeks;
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
         $this->equipes = new ArrayCollection();
+        $this->weeks = [];
     }
 
     /**
@@ -87,5 +92,25 @@ class Campagne extends EntityRef
 
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getWeeks(): array
+    {
+        return $this->weeks;
+    }
+
+    /**
+     * @param array $weeks
+     * @return Campagne
+     */
+    public function setWeeks(array $weeks): Campagne
+    {
+        $this->weeks = $weeks;
+        return $this;
+    }
+
+
 
 }

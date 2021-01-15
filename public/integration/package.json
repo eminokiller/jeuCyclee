@@ -1,0 +1,14 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "GAME PLAY",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chehimi.mohamed.himdan@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "mobile-drag-drop": "^2.3.0-rc.2"
+  }
+}
