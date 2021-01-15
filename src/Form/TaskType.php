@@ -16,8 +16,7 @@ class TaskType extends AbstractType
         $builder
             ->add('libelle')
             ->add('questions')
-            ->add('campagne')
-            ->add('typeAction')
+
 
         ;
     }

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActionMarketing{% endblock %}
+
+{% block body %}
+    <h1>ActionMarketing</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ action_marketing.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('action_marketing_index') }}">back to list</a>
+
+    <a href="{{ path('action_marketing_edit', {'id': action_marketing.id}) }}">edit</a>
+
+    {{ include('action_marketing/_delete_form.html.twig') }}
+{% endblock %}
