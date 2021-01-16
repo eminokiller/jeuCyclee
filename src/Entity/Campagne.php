@@ -12,56 +12,31 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campagne extends EntityRef
 {
-    /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="campagne", cascade={"persist", "remove"})
-     */
-    private $tasks;
 
     /**
-     * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="campagne")
+     * @ORM\ManyToMany(targetEntity=Equipe::class)
      */
     private $equipes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=ActionMarketing::class)
+     */
+    private $actionMarketings;
+
     /**
      * @ORM\Column(type="json_array", nullable=true)
      * @var array $weeks
      */
     private  $weeks;
+
     public function __construct()
     {
-        $this->tasks = new ArrayCollection();
+
         $this->equipes = new ArrayCollection();
+        $this->actionMarketings = new ArrayCollection();
         $this->weeks = [];
     }
 
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): self
-    {
-        if (!$this->tasks->contains($task)) {
-            $task->setCampagne($this);
-            $this->tasks[] = $task;
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): self
-    {
-        if($this->tasks->contains($task)){
-            if ($task->getCampagne() === $this) {
-                $task->setCampagne(null);
-                $this->tasks->removeElement($task);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Equipe[]
@@ -94,6 +69,36 @@ class Campagne extends EntityRef
     }
 
     /**
+     * @return Collection|ActionMarketing[]
+     */
+    public function getActionMarketings(): Collection
+    {
+        return $this->actionMarketings;
+    }
+
+    public function addActionMarketing(ActionMarketing $actionMarketing): self
+    {
+        if (!$this->actionMarketings->contains($actionMarketing)) {
+            $this->actionMarketings[] = $actionMarketing;
+            $actionMarketing->setCampagne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActionMarketing(ActionMarketing $actionMarketing): self
+    {
+        if ($this->actionMarketings->removeElement($actionMarketing)) {
+            // set the owning side to null (unless already changed)
+            if ($actionMarketing->getCampagne() === $this) {
+                $actionMarketing->setCampagne(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getWeeks(): array
@@ -112,16 +117,20 @@ class Campagne extends EntityRef
     }
 
     /**
-     * @param mixed $tasks
-     * @return Campagne
+     * @param mixed $actionMarketings
      */
-    public function setTasks($tasks)
+    public function setActionMarketings($actionMarketings): void
     {
-        $this->tasks = $tasks;
-        return $this;
+        $this->actionMarketings = $actionMarketings;
     }
 
-
+    /**
+     * @param mixed $equipes
+     */
+    public function setEquipes($equipes): void
+    {
+        $this->equipes = $equipes;
+    }
 
 
 

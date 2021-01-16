@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Campagne;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,13 +15,9 @@ class CampagneType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('tasks', CollectionType::class, [
-                'entry_type'=> CampaignTaskType::class,
-                'by_reference' => false,
-                'prototype' => true,
-                'allow_add' => true,
-                'allow_delete' => true,
-            ])
+            ->add('actionMarketings')
+            ->add('equipes')
+            ->add('weeks', HiddenType::class)
         ;
     }
 

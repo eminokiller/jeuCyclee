@@ -89,8 +89,7 @@ class EntityRef
 
     public function __toString()
     {
-        return $this->libelle;
-        // TODO: Implement __toString() method.
+        return strval($this->libelle)??strval('');
     }
 
 

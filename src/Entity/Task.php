@@ -18,18 +18,24 @@ class Task extends EntityRef
     private $questions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="tasks")
+     * @ORM\OneToMany(targetEntity=ActionMarketing::class, mappedBy="task")
      */
-    private $campagne;
+    private $actionMarketings;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=TypeAction::class, inversedBy="tasks")
-     */
-    private $typeAction;
+//    /**
+//     * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="tasks")
+//     */
+//    private $campagne;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity=TypeAction::class, inversedBy="tasks")
+//     */
+//    private $typeAction;
 
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->actionMarketings = new ArrayCollection();
     }
 
     /**
@@ -64,29 +70,59 @@ class Task extends EntityRef
         return $this;
     }
 
-    public function getCampagne(): ?Campagne
-    {
-        return $this->campagne;
+//    public function getCampagne(): ?Campagne
+//    {
+//        return $this->campagne;
+//    }
+//
+//    public function setCampagne(?Campagne $campagne): self
+//    {
+//        $this->campagne = $campagne;
+//
+//        return $this;
+//    }
+//
+//    public function getTypeAction(): ?TypeAction
+//    {
+//        return $this->typeAction;
+//    }
+//
+//    public function setTypeAction(?TypeAction $typeAction): self
+//    {
+//        $this->typeAction = $typeAction;
+//
+//        return $this;
+//    }
+
+/**
+ * @return Collection|ActionMarketing[]
+ */
+public function getActionMarketings(): Collection
+{
+    return $this->actionMarketings;
+}
+
+public function addActionMarketing(ActionMarketing $actionMarketing): self
+{
+    if (!$this->actionMarketings->contains($actionMarketing)) {
+        $this->actionMarketings[] = $actionMarketing;
+        $actionMarketing->setTask($this);
     }
 
-    public function setCampagne(?Campagne $campagne): self
-    {
-        $this->campagne = $campagne;
+    return $this;
+}
 
-        return $this;
+public function removeActionMarketing(ActionMarketing $actionMarketing): self
+{
+    if ($this->actionMarketings->removeElement($actionMarketing)) {
+        // set the owning side to null (unless already changed)
+        if ($actionMarketing->getTask() === $this) {
+            $actionMarketing->setTask(null);
+        }
     }
 
-    public function getTypeAction(): ?TypeAction
-    {
-        return $this->typeAction;
-    }
-
-    public function setTypeAction(?TypeAction $typeAction): self
-    {
-        $this->typeAction = $typeAction;
-
-        return $this;
-    }
+    return $this;
+}
 
 
 }

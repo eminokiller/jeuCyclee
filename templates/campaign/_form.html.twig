@@ -1,13 +1,5 @@
 {% import "campaign/macro.html.twig" as forms %}
 {{ form_start(form) }}
-{{ form_row(form.libelle) }}
-<div data-prototype="{{forms.render_widget_item(form.tasks.vars.prototype, '__name__')|e('html_attr') }}" class="widget-container">
-    {{ form_label(form.tasks) }}
-    {% for i,task in form.tasks %}
-        {{ forms.render_widget_item(task, i) }}
-    {% endfor %}
-    <button  type="button" onclick="return addItem(this);" class="btn btn-success"><i class="fa fa-plus-circle"></i></button>
-</div>
 {{ form_rest(form) }}
 <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

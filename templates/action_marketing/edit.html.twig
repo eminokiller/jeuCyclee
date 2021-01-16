@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ActionMarketing{% endblock %}
+
+{% block body %}
+
+
+    {{ include('action_marketing/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('action_marketing_index') }}">back to list</a>
+
+    {{ include('action_marketing/_delete_form.html.twig') }}
+{% endblock %}

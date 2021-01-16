@@ -14,7 +14,12 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
+            ->add('libelle',null,[
+                'attr' =>[
+                    'placeholder' => 'Ajouter votre question ici'
+                ]
+
+            ])
             ->add('reponses', CollectionType::class, [
                 'entry_type' => ReponseType::class,
                 'label' =>false,

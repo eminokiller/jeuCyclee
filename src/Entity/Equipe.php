@@ -17,11 +17,6 @@ class Equipe extends EntityRef
      */
     private $joueurs;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="equipes")
-     */
-    private $campagne;
-
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -55,18 +50,6 @@ class Equipe extends EntityRef
                 $joueur->setEquipe(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCampagne(): ?Campagne
-    {
-        return $this->campagne;
-    }
-
-    public function setCampagne(?Campagne $campagne): self
-    {
-        $this->campagne = $campagne;
 
         return $this;
     }

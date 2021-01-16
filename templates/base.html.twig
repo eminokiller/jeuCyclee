@@ -24,14 +24,22 @@
     <!--begin::Global Theme Styles -->
     <link href="{{ asset('metronic/vendors/base/vendors.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('metronic/demo/default/base/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css"/>
 
     <!--end::Global Theme Styles -->
 
     <!--end::Page Vendors Styles -->
     <link rel="shortcut icon" href="{{ asset('metronic/demo/default/media/img/logo/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('metronic/vendors/select2/dist/css/select2.css') }}"/>
 
     <!-- Personal Css Files -->
+
+    <link
+            href="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.css') }}"
+            rel="stylesheet"
+            type="text/css"
+    />
+
+
     {% block StyleSheet %}{% endblock %}
 
 </head>
@@ -111,6 +119,42 @@
         <!-- END: Menu -->
 
         <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <!-- BEGIN: Subheader -->
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title m-subheader__title--separator">Select2</h3>
+                        <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                            <li class="m-nav__item m-nav__item--home">
+                                <a href="#" class="m-nav__link m-nav__link--icon">
+                                    <i class="m-nav__link-icon la la-home"></i>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator">-</li>
+                            <li class="m-nav__item">
+                                <a href="" class="m-nav__link">
+                                    <span class="m-nav__link-text">Forms & Controls</span>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator">-</li>
+                            <li class="m-nav__item">
+                                <a href="" class="m-nav__link">
+                                    <span class="m-nav__link-text">Form Widgets</span>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator">-</li>
+                            <li class="m-nav__item">
+                                <a href="" class="m-nav__link">
+                                    <span class="m-nav__link-text">Select2</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- END: Subheader -->
             <div class="m-content">
                 {% block body %}{% endblock %}
             </div>
@@ -149,7 +193,9 @@
 <script src="{{ asset('metronic/demo/default/custom/components/base/sweetalert2.js') }}"></script>
 <script src="{{ asset('metronic/demo/default/custom/components/base/toastr.js') }}"></script>
 <script src="{{ asset('metronic/personal_scripts/bootstrap-datepicker.ar-tn.min.js') }}"></script>
-<script src="{{ asset('metronic/personal_scripts/select2_ar.js') }}"></script>
+<script src="{{ asset('metronic/assets/demo/custom/crud/forms/widgets/select2.js') }}"></script>
+<script src="{{ asset('metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+
 <script>
     toastr.options = {
         "closeButton": true,

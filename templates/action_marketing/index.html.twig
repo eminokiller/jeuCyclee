@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Equipe index{% endblock %}
+{% block title %}ActionMarketing index{% endblock %}
 
 {% block body %}
 <div class="m-portlet m-portlet--mobile">
@@ -8,17 +8,17 @@
         <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
                 <h3 class="m-portlet__head-text">
-                    Configuration les équipes
+                    Configuration action marketing
                 </h3>
             </div>
         </div>
         <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
                 <li class="m-portlet__nav-item">
-                    <a href="{{ path('equipe_new') }}" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                    <a href="{{ path('action_marketing_new') }}" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
 												<span>
 													<i class="la la-plus"></i>
-													<span>Ajouter une équipe</span>
+													<span>Ajouter une action</span>
 												</span>
                     </a>
                 </li>
@@ -31,34 +31,28 @@
         <table class="table table-striped- table-bordered table-hover table-checkable"  id="m_table_1">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Joueurs</th>
-
+                <th>Nom d'action</th>
+                <th>Campagne</th>
+                <th>Type d'action</th>
+                <th>Impact</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for equipe in equipes %}
+        {% for action_marketing in action_marketings %}
             <tr>
-                <td>{{ equipe.id }}</td>
-                <td>{{ equipe.libelle }}</td>
-                <td>
-                    <ul>
-                        {% for item in equipe.joueurs %}
-                            <li>{{ item.Nom }} ( {{ item.email }} ) </li>
-                        {% endfor %}
-                    </ul>
-                </td>
+                <td>{{ action_marketing.nomAction }}</td>
+                <td>{{ action_marketing.task }}</td>
+                <td>{{ action_marketing.impact }}</td>
 
                 <td>
-                    <a href="{{ path('equipe_show', {'id': equipe.id}) }}">show</a>
-                    <a href="{{ path('equipe_edit', {'id': equipe.id}) }}">edit</a>
+                    <a href="{{ path('action_marketing_show', {'id': action_marketing.id}) }}">show</a>
+                    <a href="{{ path('action_marketing_edit', {'id': action_marketing.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="2">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -67,4 +61,5 @@
 
     </div>
 </div>
+
 {% endblock %}
