@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ActionMarketingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ActionMarketingRepository::class)
@@ -14,31 +15,38 @@ class ActionMarketing
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"campagne"})
      */
     private $id;
-
     /**
+     * @var Campagne|null
      * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="actionMarketings")
      */
     private $campagne;
 
+
+
     /**
+     * @Groups({"campagne"})
      * @ORM\ManyToOne(targetEntity=Task::class, inversedBy="actionMarketings")
      */
     private $task;
 
     /**
+     * @Groups({"campagne"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nomAction;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"campagne"})
      */
     private $impact;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"campagne"})
      */
     private $level;
 
@@ -47,17 +55,7 @@ class ActionMarketing
         return $this->id;
     }
 
-    public function getCampagne(): ?Campagne
-    {
-        return $this->campagne;
-    }
 
-    public function setCampagne(?Campagne $campagne): self
-    {
-        $this->campagne = $campagne;
-
-        return $this;
-    }
 
     public function getTask(): ?Task
     {
@@ -106,4 +104,30 @@ class ActionMarketing
 
         return $this;
     }
+
+    public function __toString()
+    {
+       return strval($this->nomAction);
+    }
+
+    /**
+     * @return Campagne|null
+     */
+    public function getCampagne(): ?Campagne
+    {
+        return $this->campagne;
+    }
+
+    /**
+     * @param Campagne|null $campagne
+     * @return ActionMarketing
+     */
+    public function setCampagne(?Campagne $campagne): ActionMarketing
+    {
+        $this->campagne = $campagne;
+        return $this;
+    }
+
+
+
 }

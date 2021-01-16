@@ -18,6 +18,10 @@
             }
         });
     </script>
+    <script src="{{ asset('integration/node_modules/mobile-drag-drop/index.min.js') }}/"></script>
+
+    <!--optional import of scroll behaviour-->
+    <script src="{{ asset('integration/node_modules/mobile-drag-drop/scroll-behaviour.min.js')}}"></script>
 
     <!--end::Web font -->
 
@@ -38,7 +42,7 @@
             rel="stylesheet"
             type="text/css"
     />
-
+    <link rel="stylesheet" href="{{ asset('integration/node_modules/mobile-drag-drop/default.css') }}">
 
     {% block StyleSheet %}{% endblock %}
 
@@ -238,6 +242,7 @@
         pickerPosition: "bottom-left"
     });
 </script>
+
 {% block JsPlugins %}
 {% endblock %}
 <!--end::Page Vendors -->

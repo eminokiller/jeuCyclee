@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Task extends EntityRef
 {
     /**
-     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="task", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="task")
      */
     private $questions;
 
@@ -21,16 +21,6 @@ class Task extends EntityRef
      * @ORM\OneToMany(targetEntity=ActionMarketing::class, mappedBy="task")
      */
     private $actionMarketings;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="tasks")
-//     */
-//    private $campagne;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity=TypeAction::class, inversedBy="tasks")
-//     */
-//    private $typeAction;
 
     public function __construct()
     {
@@ -50,11 +40,6 @@ class Task extends EntityRef
     {
         $this->questions->add($question);
         $question->setTask($this);
-//        if (!$this->questions->contains($question)) {
-//            $this->questions[] = $question;
-//            $question->setTask($this);
-//        }
-
         return $this;
     }
 
@@ -70,59 +55,35 @@ class Task extends EntityRef
         return $this;
     }
 
-//    public function getCampagne(): ?Campagne
-//    {
-//        return $this->campagne;
-//    }
-//
-//    public function setCampagne(?Campagne $campagne): self
-//    {
-//        $this->campagne = $campagne;
-//
-//        return $this;
-//    }
-//
-//    public function getTypeAction(): ?TypeAction
-//    {
-//        return $this->typeAction;
-//    }
-//
-//    public function setTypeAction(?TypeAction $typeAction): self
-//    {
-//        $this->typeAction = $typeAction;
-//
-//        return $this;
-//    }
-
-/**
- * @return Collection|ActionMarketing[]
- */
-public function getActionMarketings(): Collection
-{
-    return $this->actionMarketings;
-}
-
-public function addActionMarketing(ActionMarketing $actionMarketing): self
-{
-    if (!$this->actionMarketings->contains($actionMarketing)) {
-        $this->actionMarketings[] = $actionMarketing;
-        $actionMarketing->setTask($this);
+    /**
+     * @return Collection|ActionMarketing[]
+     */
+    public function getActionMarketings(): Collection
+    {
+        return $this->actionMarketings;
     }
 
-    return $this;
-}
-
-public function removeActionMarketing(ActionMarketing $actionMarketing): self
-{
-    if ($this->actionMarketings->removeElement($actionMarketing)) {
-        // set the owning side to null (unless already changed)
-        if ($actionMarketing->getTask() === $this) {
-            $actionMarketing->setTask(null);
+    public function addActionMarketing(ActionMarketing $actionMarketing): self
+    {
+        if (!$this->actionMarketings->contains($actionMarketing)) {
+            $this->actionMarketings[] = $actionMarketing;
+            $actionMarketing->setTask($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeActionMarketing(ActionMarketing $actionMarketing): self
+    {
+        if ($this->actionMarketings->removeElement($actionMarketing)) {
+            // set the owning side to null (unless already changed)
+            if ($actionMarketing->getTask() === $this) {
+                $actionMarketing->setTask(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 }

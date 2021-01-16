@@ -18,7 +18,6 @@ class ActionMarketingType extends AbstractType
     {
         $builder
             ->add('nomAction')
-            ->add('campagne')
             ->add('task')
             ->add('impact',RangeType::class,[
 

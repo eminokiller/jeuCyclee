@@ -1,0 +1,111 @@
+
+
+.draggable-list-header {
+    margin-bottom: 2vh;
+}
+
+.draggable-list-text {
+    font-size: medium;
+}
+
+div.draggable-list {
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+
+div.target-table {
+    min-height: 100%;
+    border-radius: 1% 1% 1% 1%;
+    /*background-color:yellow;*/
+}
+
+ul.tasker {
+    padding-left: 0px;
+    list-style: none;
+}
+
+ul.task-week {
+    padding-left: 0px;
+    list-style: none;
+}
+
+li.draggable-task {
+    border: 1px solid lightgray;
+    margin-top: 1vh;
+    font-size: small;
+    text-align: center;
+    min-height: 5vh;
+}
+
+li.draggable-task[draggable=false] {
+    background: greenyellow;
+}
+
+.flex-container {
+    display: flex;
+    /*background-color: DodgerBlue;*/
+    overflow: scroll;
+}
+
+.flex-container > div {
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    /*margin: 1px;*/
+    /*padding: 1px;*/
+    font-size: 16px;
+    flex: 0 0 13em;
+}
+
+div.droppable-list {
+    /*display: inline-flex;*/
+    /*background-color: red;*/
+    text-align: center;
+}
+
+div.week-header {
+    background: darkviolet;
+    color: #f1f1f1;
+    align-content: center;
+    font-weight: bold;
+    font-size: medium;
+    height: 40px;
+    border: 1px solid lightgray;
+}
+
+div.week-container {
+    /*display: flex;*/
+    min-height: 55vh;
+    border: 1px solid lightgray;
+    background-color: #8644d3;
+    /*opacity: 0.5;*/
+}
+.task-week > .draggable-task{
+    padding-top: 3px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 1px 1px #f1f1f1;
+}
+
+.subtitle-1 {
+    border: 1px solid lightgray;
+}
+
+.subtitle {
+    width: 20%;
+    border: 1px solid lightgray;
+}
+
+.title > h2 {
+    text-align: center;
+}
+
+.stopwatch {
+    padding-top: 5px;
+    text-align: center;
+    font-size: 42px;
+}
+
+div.card-align {
+    height: 15vh !important;
+}

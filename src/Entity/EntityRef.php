@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EntityRefRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class EntityRef
@@ -17,6 +18,7 @@ class EntityRef
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"ref"})
      */
     private $id;
 
@@ -89,8 +91,7 @@ class EntityRef
 
     public function __toString()
     {
-        return $this->libelle;
-        // TODO: Implement __toString() method.
+        return strval($this->libelle)??strval('');
     }
 
 

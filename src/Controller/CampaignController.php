@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Campagne;
+use App\Form\CampagneConfigType;
 use App\Form\CampagneType;
+use App\Service\SerializerManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +22,12 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class CampaignController
  * @package App\Controller
- * @Route("/campaign")
+ * @Route("/admin/campaign")
  */
 class CampaignController extends AbstractController
 {
     /**
-     * @Route("/campaign", name="campaign_index")
+     * @Route("/", name="campaign_index")
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
@@ -36,7 +38,7 @@ class CampaignController extends AbstractController
     }
 
     /**
-     * @Route("/campaign/new", name="campaign_new",methods={"GET", "POST"})
+     * @Route("/new", name="campaign_new",methods={"GET", "POST"})
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return object|Response
@@ -46,12 +48,14 @@ class CampaignController extends AbstractController
         $campagne = new Campagne();
         $form = $this->createForm(CampagneType::class, $campagne);
         $status = Response::HTTP_OK;
+        $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 try {
                     $entityManager->persist($campagne);
                     $entityManager->flush();
                     $status = Response::HTTP_CREATED;
+                    $this->redirectToRoute('campaign_index');
                 } catch (\Exception $exception) {
                     $status = Response::HTTP_UNPROCESSABLE_ENTITY;
                 }
@@ -66,15 +70,17 @@ class CampaignController extends AbstractController
     }
 
     /**
-     * @Route("/campaign/update/{id}", name="campaign_update",methods={"GET", "POST"})
+     * @Route("/update/{id}", name="campaign_update",methods={"GET", "POST"})
+     * @param Request $request
      * @param Campagne $campagne
      * @param EntityManagerInterface $entityManager
      * @return object|Response
      */
-    public function update(Campagne $campagne, EntityManagerInterface $entityManager)
+    public function update(Request $request, Campagne $campagne, EntityManagerInterface $entityManager)
     {
         $form = $this->createForm(CampagneType::class, $campagne);
         $status = Response::HTTP_OK;
+        $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 try {
@@ -96,6 +102,9 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="campaign_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Campagne $campagne
+     * @return Response
      */
     public function delete(Request $request, Campagne $campagne): Response
     {
@@ -106,5 +115,25 @@ class CampaignController extends AbstractController
         }
 
         return $this->redirectToRoute('campaign_index');
+    }
+
+    /**
+     * @Route("/configure/{id}", name="campaign_configure",methods={"GET", "POST"})
+     * @param Campagne $campagne
+     * @return Response
+     */
+    public function configure(Request $request, Campagne $campagne, SerializerManager $serializerManager, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createForm(CampagneConfigType::class, $campagne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try{
+                $entityManager->flush();
+            } catch (\Exception $exception){
+
+            }
+        }
+        $normalized = $serializerManager->normalize($campagne, ['ref', 'campagne']);
+        return $this->render('campaign/configure.html.twig', ['campagne' => $normalized, 'form' => $form->createView()]);
     }
 }
