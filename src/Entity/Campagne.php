@@ -12,10 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campagne extends EntityRef
 {
-    /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="campagne")
-     */
-    private $tasks;
 
     /**
      * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="campagne")
@@ -27,42 +23,20 @@ class Campagne extends EntityRef
      */
     private $actionMarketings;
 
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @var array $weeks
+     */
+    private  $weeks;
+
     public function __construct()
     {
-        $this->tasks = new ArrayCollection();
+
         $this->equipes = new ArrayCollection();
         $this->actionMarketings = new ArrayCollection();
+        $this->weeks = [];
     }
 
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): self
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks[] = $task;
-            $task->setCampagne($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): self
-    {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getCampagne() === $this) {
-                $task->setCampagne(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Equipe[]
@@ -121,6 +95,24 @@ class Campagne extends EntityRef
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWeeks(): array
+    {
+        return $this->weeks;
+    }
+
+    /**
+     * @param array $weeks
+     * @return Campagne
+     */
+    public function setWeeks(array $weeks): Campagne
+    {
+        $this->weeks = $weeks;
         return $this;
     }
 
