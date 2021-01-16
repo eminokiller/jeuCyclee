@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Task extends EntityRef
 {
     /**
-     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="task", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="task")
      */
     private $questions;
 

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Campagne extends EntityRef
 {
     /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="campagne")
+     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="campagne", cascade={"persist", "remove"})
      */
     private $tasks;
 
@@ -44,8 +44,8 @@ class Campagne extends EntityRef
     public function addTask(Task $task): self
     {
         if (!$this->tasks->contains($task)) {
-            $this->tasks[] = $task;
             $task->setCampagne($this);
+            $this->tasks[] = $task;
         }
 
         return $this;
@@ -53,10 +53,10 @@ class Campagne extends EntityRef
 
     public function removeTask(Task $task): self
     {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
+        if($this->tasks->contains($task)){
             if ($task->getCampagne() === $this) {
                 $task->setCampagne(null);
+                $this->tasks->removeElement($task);
             }
         }
 
@@ -110,6 +110,18 @@ class Campagne extends EntityRef
         $this->weeks = $weeks;
         return $this;
     }
+
+    /**
+     * @param mixed $tasks
+     * @return Campagne
+     */
+    public function setTasks($tasks)
+    {
+        $this->tasks = $tasks;
+        return $this;
+    }
+
+
 
 
 

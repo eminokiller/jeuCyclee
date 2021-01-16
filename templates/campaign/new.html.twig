@@ -5,3 +5,7 @@
     {{ include('campaign/_form.html.twig') }}
     <a href="{{ path('campaign_index') }}">back to list</a>
 {% endblock %}
+
+{% block JSPersonalScripts %}
+    <script src="{{ asset('plugins/collection.js') }}"></script>
+{% endblock %}

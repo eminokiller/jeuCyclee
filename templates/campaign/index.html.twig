@@ -14,6 +14,16 @@
         </tr>
         </thead>
         <tbody>
+        {% for campagne in campaigns %}
+            <tr>
+                <td>{{ campagne.id }}</td>
+                <td>{{  campagne.libelle}}</td>
+                <td>
+                    <a href="{{ path('campaign_update', {'id': campagne.id}) }}">{{ "edit"|trans }}</a>
+
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
