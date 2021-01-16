@@ -25,16 +25,22 @@ class Campagne extends EntityRef
 
     /**
      * @ORM\Column(type="json_array", nullable=true)
-     * @var array $weeks
+     * @var array $weeksLevel1
      */
-    private  $weeks;
+    private  $weeksLevel1;
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @var array $weeksLevel2
+     */
+    private  $weeksLevel2;
 
     public function __construct()
     {
 
         $this->equipes = new ArrayCollection();
         $this->actionMarketings = new ArrayCollection();
-        $this->weeks = [];
+        $this->weeksLevel1 = [];
+        $this->weeksLevel2 = [];
     }
 
 
@@ -101,18 +107,18 @@ class Campagne extends EntityRef
     /**
      * @return array
      */
-    public function getWeeks(): array
+    public function getWeeksLevel1(): array
     {
-        return $this->weeks;
+        return $this->weeksLevel1;
     }
 
     /**
-     * @param array $weeks
+     * @param array $weeksLevel1
      * @return Campagne
      */
-    public function setWeeks(array $weeks): Campagne
+    public function setWeeksLevel1(array $weeksLevel1): Campagne
     {
-        $this->weeks = $weeks;
+        $this->weeksLevel1 = $weeksLevel1;
         return $this;
     }
 
@@ -131,6 +137,26 @@ class Campagne extends EntityRef
     {
         $this->equipes = $equipes;
     }
+
+    /**
+     * @return array
+     */
+    public function getWeeksLevel2(): array
+    {
+        return $this->weeksLevel2;
+    }
+
+    /**
+     * @param array $weeksLevel2
+     * @return Campagne
+     */
+    public function setWeeksLevel2(array $weeksLevel2): Campagne
+    {
+        $this->weeksLevel2 = $weeksLevel2;
+        return $this;
+    }
+
+
 
 
 
