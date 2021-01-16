@@ -37,6 +37,11 @@ class ActionMarketing
      */
     private $impact;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $level;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class ActionMarketing
     public function setImpact(?int $impact): self
     {
         $this->impact = $impact;
+
+        return $this;
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?string $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }
