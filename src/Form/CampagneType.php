@@ -15,9 +15,17 @@ class CampagneType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('actionMarketings')
-            ->add('equipes')
-            ->add('weeks', HiddenType::class)
+            ->add('actionMarketings', CollectionType::class, [
+                'entry_type' => ActionMarketingType::class,
+                'entry_options' => ['label' => false],
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ])
+//            ->add('equipes')
+//            ->add('weeksLevel1', HiddenType::class)
+//            ->add('weeksLevel2', HiddenType::class)
         ;
     }
 

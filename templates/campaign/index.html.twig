@@ -8,7 +8,7 @@
         <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
                 <h3 class="m-portlet__head-text">
-                    Configuration les campagnes
+                    Mes Campagnes
                 </h3>
             </div>
         </div>
@@ -43,6 +43,7 @@
                 <td>{{  campagne.libelle}}</td>
                 <td>
                     <a href="{{ path('campaign_update', {'id': campagne.id}) }}">{{ "edit"|trans }}</a>
+                    <a href="{{ path('campaign_configure', {'id': campagne.id}) }}">{{ "configure"|trans }}</a>
 
                 </td>
             </tr>

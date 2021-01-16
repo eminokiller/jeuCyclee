@@ -6,6 +6,7 @@ use App\Repository\CampagneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampagneRepository::class)
@@ -19,7 +20,8 @@ class Campagne extends EntityRef
     private $equipes;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ActionMarketing::class)
+     * @Groups({"campagne"})
+     * @ORM\OneToMany(targetEntity=ActionMarketing::class, mappedBy="campagne", cascade={"persist","remove"})
      */
     private $actionMarketings;
 
@@ -107,7 +109,7 @@ class Campagne extends EntityRef
     /**
      * @return array
      */
-    public function getWeeksLevel1(): array
+    public function getWeeksLevel1(): ?array
     {
         return $this->weeksLevel1;
     }
@@ -116,7 +118,7 @@ class Campagne extends EntityRef
      * @param array $weeksLevel1
      * @return Campagne
      */
-    public function setWeeksLevel1(array $weeksLevel1): Campagne
+    public function setWeeksLevel1(?array $weeksLevel1): Campagne
     {
         $this->weeksLevel1 = $weeksLevel1;
         return $this;
@@ -141,7 +143,7 @@ class Campagne extends EntityRef
     /**
      * @return array
      */
-    public function getWeeksLevel2(): array
+    public function getWeeksLevel2(): ?array
     {
         return $this->weeksLevel2;
     }
@@ -150,7 +152,7 @@ class Campagne extends EntityRef
      * @param array $weeksLevel2
      * @return Campagne
      */
-    public function setWeeksLevel2(array $weeksLevel2): Campagne
+    public function setWeeksLevel2(?array $weeksLevel2): Campagne
     {
         $this->weeksLevel2 = $weeksLevel2;
         return $this;

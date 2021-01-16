@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configure Campagne{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-sm-5 col-lg-2">
+            <div class="card">
+                <div class="draggable-list-header card-header">
+                    <div class="subtitle-1">
+                        <h2 class="draggable-list-text" style="text-align: center">Positionner ces Actions
+                            sur le planing</h2>
+                    </div>
+                </div>
+                <div class="draggable-list card-body">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-7 col-lg-10">
+            <div class="card">
+                <div class="game-container-header card-header">
+                    <div class="title">TABLEAU TRIMESTRIEL <span onclick="return prepareRemove(this);"
+                                                                 style="float: right;color: silver"> <i
+                                    class="fa fa-trash fa-3x"></i></span></div>
+                </div>
+                <div class="card-body game-container">
+                    <div class="target-table flex-container" data-id="1"></div>
+                </div>
+                <div class="card-body game-container">
+                    <div class="target-table flex-container" data-id="2"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{ form_rest(form) }}
+    <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+{% block JSPersonalScripts %}
+    <script>
+        let dataset = {{ campagne|json_encode|raw }};
+
+        function mockData() {
+            return dataset.actionMarketings.map(function (item) {
+                console.log(item)
+                return {
+                    id: item.id,
+                    text: item.nomAction,
+                    draggable: true,
+                    level: item.level
+                };
+            })
+        }
+
+        $(function () {
+            document.addEventListener('saveDataEvent', function (evt) {
+                let loaded = JSON.parse(evt.detail)
+                if(loaded .id == 1){
+                    $('#campagne_config_weeksLevel1').val(evt.detail)
+                } else {
+                    $('#campagne_config_weeksLevel2').val(evt.detail)
+                }
+            })
+        })
+    </script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/draggable-list.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/game-borad.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/ajax-interceptor.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/stopwatch.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/score.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/ajax-modal.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/models.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/eventDispatcher.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/plugins/chat.js') }}"></script>
+    <script src="{{ asset('plugins/integration/scripts/main.js') }}"></script>
+
+{% endblock %}
+{% block StyleSheet %}
+    <style>
+        .draggable-list-header {
+            margin-bottom: 2vh;
+        }
+
+        .draggable-list-text {
+            font-size: medium;
+        }
+
+        div.draggable-list {
+            max-height: 60vh;
+            overflow-y: scroll;
+        }
+
+        div.target-table {
+            min-height: 100%;
+            border-radius: 1% 1% 1% 1%;
+            /*background-color:yellow;*/
+        }
+
+        ul.tasker {
+            padding-left: 0px;
+            list-style: none;
+        }
+
+        ul.task-week {
+            padding-left: 0px;
+            list-style: none;
+        }
+
+        li.draggable-task {
+            border: 1px solid lightgray;
+            margin-top: 1vh;
+            font-size: small;
+            text-align: center;
+            min-height: 5vh;
+        }
+
+        li.draggable-task[draggable=false] {
+            background: greenyellow;
+        }
+
+        .flex-container {
+            display: flex;
+            /*background-color: DodgerBlue;*/
+            overflow: scroll;
+        }
+
+        .flex-container > div {
+            display: flex;
+            flex-direction: column;
+            background-color: #f1f1f1;
+            /*margin: 1px;*/
+            /*padding: 1px;*/
+            font-size: 16px;
+            flex: 0 0 13em;
+        }
+
+        div.droppable-list {
+            /*display: inline-flex;*/
+            /*background-color: red;*/
+            text-align: center;
+        }
+
+        div.week-header {
+            /*background: darkviolet;*/
+            /*color: #f1f1f1;*/
+            align-content: center;
+            font-weight: bold;
+            font-size: medium;
+            height: 40px;
+            border: 1px solid lightgray;
+        }
+
+        div.week-container {
+            /*display: flex;*/
+            min-height: 55vh;
+            border: 1px solid lightgray;
+            /*background-color: #8644d3;*/
+            /*opacity: 0.5;*/
+        }
+
+        .task-week > .draggable-task {
+            padding-top: 3px;
+            /*color: white;*/
+            font-weight: bold;
+            box-shadow: 1px 1px #f1f1f1;
+        }
+
+        .subtitle-1 {
+            border: 1px solid lightgray;
+        }
+
+        .subtitle {
+            width: 20%;
+            border: 1px solid lightgray;
+        }
+
+        .title > h2 {
+            text-align: center;
+        }
+
+        .stopwatch {
+            padding-top: 5px;
+            text-align: center;
+            font-size: 42px;
+        }
+
+        div.card-align {
+            height: 15vh !important;
+        }
+    </style>
+{% endblock %}

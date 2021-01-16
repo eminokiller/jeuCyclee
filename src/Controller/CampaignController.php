@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Campagne;
+use App\Form\CampagneConfigType;
 use App\Form\CampagneType;
+use App\Service\SerializerManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +76,7 @@ class CampaignController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return object|Response
      */
-    public function update(Request $request,Campagne $campagne, EntityManagerInterface $entityManager)
+    public function update(Request $request, Campagne $campagne, EntityManagerInterface $entityManager)
     {
         $form = $this->createForm(CampagneType::class, $campagne);
         $status = Response::HTTP_OK;
@@ -113,5 +115,25 @@ class CampaignController extends AbstractController
         }
 
         return $this->redirectToRoute('campaign_index');
+    }
+
+    /**
+     * @Route("/configure/{id}", name="campaign_configure",methods={"GET", "POST"})
+     * @param Campagne $campagne
+     * @return Response
+     */
+    public function configure(Request $request, Campagne $campagne, SerializerManager $serializerManager, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createForm(CampagneConfigType::class, $campagne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try{
+                $entityManager->flush();
+            } catch (\Exception $exception){
+
+            }
+        }
+        $normalized = $serializerManager->normalize($campagne, ['ref', 'campagne']);
+        return $this->render('campaign/configure.html.twig', ['campagne' => $normalized, 'form' => $form->createView()]);
     }
 }

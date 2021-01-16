@@ -1,17 +1,31 @@
 {% macro render_widget_item(item, index) %}
-    <div class="widget-item row">
-        <div class="col-md-3">
-            {{ form_row(item.libelle, {attr:{class:"form-control"}}) }}
+    <div class="widget-item card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form_label(item.nomAction) }}
+                    {{ form_widget(item.nomAction, {attr:{class:"form-control"}}) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(item.task, {attr:{class:"form-control"}}) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(item.level, {attr:{class:"form-control"}}) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(item.value, {attr:{class:"form-control"}}) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(item.impact, {attr:{class:"form-control"}}) }}
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-            {{ form_row(item.typeAction, {attr:{class:"form-control"}}) }}
-        </div>
-        <div class="col-md-3">
-            {{ form_row(item.questions, {attr:{class:"form-control"}}) }}
-        </div>
-        <div class="col-md-3">
+        <div class="card-footer">
             <label>&nbsp;</label>
-            <button onclick="removeItem(this);" type="button" class="mt-3 btn btn-danger"><i class="fa fa-trash"></i></button>
+            <button onclick="removeItem(this);" type="button" class="mt-3 btn btn-danger"><i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 {% endmacro %}
