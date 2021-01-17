@@ -159,7 +159,7 @@ class Game {
                 if (!weekData) return new Week(i);
                 let week = new Week(weekData.id + 1)
                 weekData.tasks.map(function (taskData, i) {
-                    week.tasks[i] = new Task(taskData.id, taskData.text)
+                    week.tasks[i] = taskData? new Task(taskData.id, taskData.text):{}
                 })
                 return week;
             })
