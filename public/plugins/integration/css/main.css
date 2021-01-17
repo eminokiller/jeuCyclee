@@ -36,7 +36,13 @@ li.draggable-task {
     text-align: center;
     min-height: 5vh;
 }
-
+li.task-hook{
+    margin-top: 1vh;
+    font-size: small;
+    text-align: center;
+    min-height: 5vh;
+    border: darkgray dashed thin;
+}
 li.draggable-task[draggable=false] {
     background: greenyellow;
 }
