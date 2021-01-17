@@ -25,7 +25,9 @@
                 $div[0].addEventListener('touchmove', function (evt) {
                     console.log('touchmove', evt)
                 });
-                $div.bind('drop', current['ondrop']);
+                $div.bind('drop', function(evt){
+                    current['ondrop'](evt);
+                });
                 $div[0].addEventListener('touchcancel', function (evt) {
                     console.log('touchcancel', evt)
                 });

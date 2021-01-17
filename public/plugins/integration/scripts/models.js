@@ -154,15 +154,17 @@ class Game {
     }
 
     static loadData(instance, data) {
-        instance.weeks = data.weeks.map(function (weekData,i) {
-            if(!weekData) return new Week(i);
-            let week = new Week(weekData.id + 1)
-            weekData.tasks.map(function (taskData, i) {
-                week.tasks[i] = new Task(taskData.id, taskData.text)
+        if (data.weeks) {
+            instance.weeks = data.weeks.map(function (weekData, i) {
+                if (!weekData) return new Week(i);
+                let week = new Week(weekData.id + 1)
+                weekData.tasks.map(function (taskData, i) {
+                    week.tasks[i] = new Task(taskData.id, taskData.text)
+                })
+                return week;
             })
-            return week;
-        })
-        console.log('loaded instance',instance)
+        }
+
         return instance;
     }
 
