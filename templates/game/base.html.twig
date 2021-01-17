@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title wyz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ asset('integration/css/main.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{ asset('integration/node_modules/mobile-drag-drop/default.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="{{ asset('integration/node_modules/mobile-drag-drop/index.min.js') }}"></script>
+
+    <!--optional import of scroll behaviour-->
+    <script src="{{ asset('integration/node_modules/mobile-drag-drop/scroll-behaviour.min.js') }}"></script>
+    <script>
+        // options are optional ;)
+        MobileDragDrop.polyfill({
+            // use this to make use of the scroll behaviour
+            dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+        });
+    </script>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="main">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+            <a class="navbar-brand" href="#">PLAN MY <br>CAMPAIGN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto header-top">
+                    <li class="nav-item active">
+                        <div class="team">
+                            <div class="team-wrapper">
+                                <div class="level">
+                                    LEVEL <span class="item" id="level">1</span> <span id="levelName">MEDEO</span>
+                                </div>
+                                <div class="boxed-title">
+                                    EQUIPE :<span id="teamName">Bumble Bee</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="level-indicator"></div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="stopwatch"></div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="account">
+                            <div class="profile-img">
+                                <img alt="SHIT">
+                            </div>
+                            <div class="">Jack Daniel</div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div onclick="return showAsside(this);" data-target="#chat-component" class="account">
+                            <div class="profile-img">
+                                <img alt="SHIT">
+                            </div>
+                            <div class="">Jack Daniel</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="container-fluid" role="main">
+            <div class="jumbotron" style=" margin-top: 10vh ">
+                <div class="row">
+                    <div class="col-sm-5 col-lg-2">
+                        <div class="card">
+                            <div class="draggable-list-header card-header">
+                                <div class="subtitle-1">
+                                    <h2 class="draggable-list-text" style="text-align: center">Positionner ces Actions
+                                        sur le planing</h2>
+                                </div>
+                            </div>
+                            <div class="draggable-list card-body">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7 col-lg-10">
+                        <div class="card">
+                            <div class="game-container-header card-header">
+                                <div class="title">TABLEAU TRIMESTRIEL <span onclick="return prepareRemove(this);" style="float: right;color: silver"> <i class="fa fa-trash fa-3x"></i></span></div>
+                            </div>
+                            <div class="card-body game-container">
+                                <div class="target-table flex-container" data-phase="1"></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body kpi-flex-container">
+                                <div class="kpi-item">
+                                    <div class="kpi-circle">Mon Score <br> <span class="score" id="myScore">15%</span>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+
+                                    <div class="kpi-circle">Score Equipe <br><span class="score">15%</span></div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-circle">Meilleur Score <br> <span class="score">15%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body kpi-flex-container">
+                                <div class="kpi-item">
+                                    <div class="kpi">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="">IMPACT</h5>
+                                            </div>
+                                            <div class="card-body"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+
+                                    <div class="kpi">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="">FACE TO FACE</h5>
+                                            </div>
+                                            <div class="card-body"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="">VISITE REMOTE</h5>
+                                            </div>
+                                            <div class="card-body"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="asside" id="chat-component">
+                <div class="asside-wrapper">
+                    <div class="asside-content">
+                        <div class="search">
+                            <form id="chat-component-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="q">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="topic">
+                            <div class="topic-content">
+                                <ul class="chat-room" id="chat-room">
+                                    <li class="chat-room-item team-member">
+                                        <div class="topic-item">
+                                            <div class="team-member-pic-container">
+                                                <div class="pic-container">
+                                                    <img alt="FCK">
+                                                </div>
+                                            </div>
+                                            <div class="team-member-message-widget">
+                                                <div class="team-member-name">ARIANE</div>
+                                                <div class="team-message-message">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
+                                                        quis quisquam quo reiciendis repellat saepe sint soluta
+                                                        suscipit! Architecto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="chat-room-item team-member">
+                                        <div class="topic-item">
+                                            <div class="team-member-pic-container">
+                                                <div class="pic-container">
+                                                    <img alt="FCK">
+                                                </div>
+                                            </div>
+                                            <div class="team-member-message-widget">
+                                                <div class="team-member-name">ARIANE</div>
+                                                <div class="team-message-message">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
+                                                        quis quisquam quo reiciendis repellat saepe sint soluta
+                                                        suscipit! Architecto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="chat-room-item team-member">
+                                        <div class="topic-item">
+                                            <div class="team-member-pic-container">
+                                                <div class="pic-container">
+                                                    <img alt="FCK">
+                                                </div>
+                                            </div>
+                                            <div class="team-member-message-widget">
+                                                <div class="team-member-name">ARIANE</div>
+                                                <div class="team-message-message">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
+                                                        quis quisquam quo reiciendis repellat saepe sint soluta
+                                                        suscipit! Architecto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="chat-room-item team-member">
+                                        <div class="topic-item">
+                                            <div class="team-member-pic-container">
+                                                <div class="pic-container">
+                                                    <img alt="FCK">
+                                                </div>
+                                            </div>
+                                            <div class="team-member-message-widget">
+                                                <div class="team-member-name">ARIANE</div>
+                                                <div class="team-message-message">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
+                                                        quis quisquam quo reiciendis repellat saepe sint soluta
+                                                        suscipit! Architecto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="chat-room-item team-member">
+                                        <div class="topic-item">
+                                            <div class="team-member-pic-container">
+                                                <div class="pic-container">
+                                                    <img alt="FCK">
+                                                </div>
+                                            </div>
+                                            <div class="team-member-message-widget">
+                                                <div class="team-member-name">ARIANE</div>
+                                                <div class="team-message-message">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
+                                                        quis quisquam quo reiciendis repellat saepe sint soluta
+                                                        suscipit! Architecto?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asside-footer">
+                        <form id="chat-console">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="...Envoyer votre message" name="message">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-success" type="submit"><i class="fa fa-send"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer></footer>
+    </div>
+</div>
+<!------------->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script src="{{ asset('integration/scripts/plugins/draggable-list.js') }}"></script>
+<script src="{{ asset('integration/scripts/plugins/game-borad.js')}}"></script>
+<script src="{{ asset('integration/scripts/plugins/ajax-interceptor.js') }}"></script>
+<script src="{{ asset('integration/scripts/plugins/stopwatch.js') }}"></script>
+<script src="{{ asset('integration/scripts/plugins/score.js') }}"></script>
+<script src="{{ asset('integration/scripts/ajax-modal.js') }}"></script>
+<script src="{{ asset('integration/scripts/models.js') }}"></script>
+<script src="{{ asset('integration/scripts/eventDispatcher.js') }}"></script>
+<script src="{{ asset('integration/scripts/plugins/chat.js') }}"></script>
+<script src="{{ asset('integration/scripts/main.js') }}"></script>
+</body>
+</html>

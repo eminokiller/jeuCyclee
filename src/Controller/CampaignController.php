@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Entity\Campagne;
 use App\Form\CampagneConfigType;
 use App\Form\CampagneType;
+use App\Form\TeamCampagneType;
 use App\Service\SerializerManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -135,5 +136,29 @@ class CampaignController extends AbstractController
         }
         $normalized = $serializerManager->normalize($campagne, ['ref', 'campagne']);
         return $this->render('campaign/configure.html.twig', ['campagne' => $normalized, 'form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/configure-team/{id}", name="campaign_configure_team",methods={"GET", "POST"})
+     * @param Request $request
+     * @param Campagne $campagne
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function configureTeam(Request $request, Campagne $campagne, EntityManagerInterface $entityManager)
+    {
+        $form =$this->createForm(TeamCampagneType::class, $campagne);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            try{
+                $entityManager->flush();
+            }catch (\Exception $exception){
+
+            }
+        }
+        return $this->render('campaign/affect.html.twig', [
+            'form' => $form->createView(),
+            'campagne' => $campagne
+        ]);
     }
 }

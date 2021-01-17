@@ -26,11 +26,13 @@ class Campagne extends EntityRef
     private $actionMarketings;
 
     /**
+     * @Groups({"gamemodel"})
      * @ORM\Column(type="json_array", nullable=true)
      * @var array $weeksLevel1
      */
     private  $weeksLevel1;
     /**
+     * @Groups({"gamemodel"})
      * @ORM\Column(type="json_array", nullable=true)
      * @var array $weeksLevel2
      */

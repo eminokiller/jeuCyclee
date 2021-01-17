@@ -23,6 +23,7 @@ class EntityRef
     private $id;
 
     /**
+     * @Groups({"ref"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelle;

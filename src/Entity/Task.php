@@ -6,6 +6,7 @@ use App\Repository\TaskRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Task extends EntityRef
 {
     /**
+     * @Groups({"survey"})
      * @ORM\OneToMany(targetEntity=Question::class, mappedBy="task")
      */
     private $questions;
