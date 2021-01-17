@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReponseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReponseRepository::class)
@@ -11,11 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Reponse extends EntityRef
 {
     /**
+     *
      * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="reponses")
      */
     private $question;
 
     /**
+     * @Groups({"survey"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $status;

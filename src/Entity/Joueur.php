@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\JoueurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=JoueurRepository::class)
@@ -12,10 +13,12 @@ class Joueur extends User
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"profile"})
      */
     private $Nom;
 
     /**
+     * @Groups({"profile"})
      * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="joueurs")
      */
     private $equipe;
@@ -34,7 +37,7 @@ class Joueur extends User
 
     public function __construct()
     {
-        $this->password = 'change_me';
+//        $this->password = 'change_me';
         $this->roles = ['ROLE_USER'];
     }
 

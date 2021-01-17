@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Campagne;
+use App\Entity\Equipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,18 @@ class CampagneRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Campagne::class);
+    }
+
+    public function getCampaignByTeam(Equipe $equipe)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb
+            ->select('campagne')
+            ->from(Campagne::class, 'campagne')
+            ->join('campagne.equipes', 'equipe', 'WITH', 'equipe.id='.$equipe->getId())
+            ->setMaxResults(1)
+            ;
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     // /**

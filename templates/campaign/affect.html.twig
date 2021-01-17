@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configure les equipe pour la campagne {{ campagne.libelle }}{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+{% block JSPersonalScripts %}
+    <script src="{{ asset('plugins/collection.js') }}"></script>
+{% endblock %}

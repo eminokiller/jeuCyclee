@@ -11,6 +11,7 @@ function prepareRemove(element) {
     const startWeek = 1;
     const endWeek = 8;
     let data = mockData()
+    console.log(data)
     const game1 = Game.loadInstance(1, startWeek, endWeek, data, JSON.parse($('#campagne_config_weeksLevel1').val()) );
     const game2 = Game.loadInstance(2, startWeek, endWeek, data, JSON.parse($('#campagne_config_weeksLevel2').val()));
     const gameModel = Game.createInstance(1, startWeek, endWeek, data);

@@ -27,7 +27,7 @@ class ActionMarketing
 
 
     /**
-     * @Groups({"campagne"})
+     * @Groups({"campagne","survey"})
      * @ORM\ManyToOne(targetEntity=Task::class, inversedBy="actionMarketings")
      */
     private $task;

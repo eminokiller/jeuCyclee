@@ -23,6 +23,22 @@ security:
             chain:
                 providers: [ 'app_user_provider','joueur_provider','admin_provider']
     firewalls:
+        login:
+            pattern: /api/login
+            stateless: true
+            anonymous: true
+            provider: joueur_provider
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api
+            stateless: true
+            guard:
+                provider: joueur_provider
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         admin_acces:
             anonymous: true
             pattern: ^/admin
