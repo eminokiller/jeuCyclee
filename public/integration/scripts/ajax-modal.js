@@ -30,11 +30,13 @@ $(function () {
             })
         })
     }
-
+    //  ajax modal
     $('#exampleModal').on('shown.bs.modal', function () {
         let dataId = $(this).data('id');
         let targetId = $(this).data('target-id');
         let clone = $(this).data('clone');
+        let hookIndex = $(this).data('target-hook');
+        console.log('hooke---->',hookIndex);
         let $element = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first());
         if(!clone){
             $element = $($('.task-week > li.draggable-task[data-id="' + dataId + '"]').first());
@@ -46,10 +48,13 @@ $(function () {
                 e.preventDefault();
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
                     let $taskList = $($targetContainer.find('ul.task-week').first());
+                    let $hook = $taskList.find(`li:nth-child(${hookIndex+1})`);
+                    $hook.css('background-color', 'red');
                     if (clone) {
-                        $taskList.append($element.addClass('done').clone(true)[0]);
+                        $hook.replaceWith($element.addClass('done').clone(true)[0])
+                        // $taskList.append();
                     } else {
-                        $taskList.append($element.addClass('done')[0]);
+                        $hook.replaceWith($element.addClass('done')[0])
                     }
                     $('#exampleModal').modal('hide')
                     dispatchGameChangeEvent();
@@ -66,4 +71,33 @@ $(function () {
             $('#exampleModal').modal('hide')
         })
     });
+    // login form
+    function  submitLoginForm(form)
+    {
+        return new Promise((resolve, reject) => {
+            ajaxInterceptor({
+                mocks: true,
+                data: $(form).serialize(),
+                url: '/login',
+                method: 'POST',
+                success: function (response) {
+                    resolve(response);
+                },
+                error: function (error) {
+                    reject(error)
+                }
+            })
+        })
+    }
+    $('#loginForm').on('submit', function (evt) {
+        evt.preventDefault();
+        submitLoginForm(evt.target).then(function (resp) {
+            if(!$('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
+            localStorage.setItem('token', resp.data.token)
+            dispatchUserConnectedEvent();
+        }).catch(function (err) {
+            if($('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
+        })
+
+    })
 })

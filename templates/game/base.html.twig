@@ -25,7 +25,33 @@
     </script>
 </head>
 <body>
-<div class="page-wrapper">
+<div id="login">
+    <div style="width: 33%; height: 33%">
+        <form action="" id="loginForm" name="loginForm">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input name="email" required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-danger fade">Bad credential</small>
+                    </div>
+                </div>
+                <div class="card-footer" style="justify-content: center">
+                    <button type="submit" class="btn btn-primary w-100">Connéxion</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="videoTeaser">
+    <div style="text-align:center">
+        <video id="video1" width="420">
+            <source src="{{ asset('integration/media/aa_bb.mp4')}}" type="video/mp4">
+            Your browser does not support HTML video.
+        </video>
+    </div>
+</div>
+<div id="gamePlay" class="page-wrapper hide">
     <div class="main">
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
             <a class="navbar-brand" href="#">PLAN MY <br>CAMPAIGN</a>
@@ -72,8 +98,8 @@
                 </ul>
             </div>
         </nav>
-        <main class="container-fluid" role="main">
-            <div class="jumbotron" style=" margin-top: 10vh ">
+        <main class="d-flex flex-column p-2" role="main">
+            <div class="jumbotron">
                 <div class="row">
                     <div class="col-sm-5 col-lg-2">
                         <div class="card">
@@ -91,7 +117,9 @@
                     <div class="col-sm-7 col-lg-10">
                         <div class="card">
                             <div class="game-container-header card-header">
-                                <div class="title">TABLEAU TRIMESTRIEL <span onclick="return prepareRemove(this);" style="float: right;color: silver"> <i class="fa fa-trash fa-3x"></i></span></div>
+                                <div class="title">TABLEAU TRIMESTRIEL <span onclick="return prepareRemove(this);"
+                                                                             style="float: right;color: silver"> <i
+                                                class="fa fa-trash fa-3x"></i></span></div>
                             </div>
                             <div class="card-body game-container">
                                 <div class="target-table flex-container" data-phase="1"></div>
@@ -159,7 +187,8 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search" name="q">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -264,7 +293,8 @@
                     <div class="asside-footer">
                         <form id="chat-console">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="...Envoyer votre message" name="message">
+                                <input type="text" class="form-control" placeholder="...Envoyer votre message"
+                                       name="message">
                                 <div class="input-group-btn">
                                     <button class="btn btn-success" type="submit"><i class="fa fa-send"></i></button>
                                 </div>
@@ -277,6 +307,7 @@
         <footer></footer>
     </div>
 </div>
+<div id="result"></div>
 <!------------->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -320,6 +351,7 @@
 <script src="{{ asset('integration/scripts/models.js') }}"></script>
 <script src="{{ asset('integration/scripts/eventDispatcher.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/chat.js') }}"></script>
+<script src="{{ asset('integration/scripts/application.js') }}"></script>
 <script src="{{ asset('integration/scripts/main.js') }}"></script>
 </body>
 </html>

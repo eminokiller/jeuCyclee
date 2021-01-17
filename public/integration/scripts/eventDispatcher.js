@@ -14,3 +14,13 @@ function dispatchPrepareRemoveEvent() {
     document.dispatchEvent(event);
 }
 
+function dispatchUserConnectedEvent() {
+    const event = document.createEvent('Event');
+    event.initEvent('userConnectedEvent', true, true);
+    document.dispatchEvent(event);
+}
+function dispatchTeaserEnded() {
+    const event = document.createEvent('Event');
+    event.initEvent('teaserEndedEvent', true, true);
+    document.dispatchEvent(event);
+}
