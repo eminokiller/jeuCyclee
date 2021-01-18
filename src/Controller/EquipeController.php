@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\Equipe;
 use App\Form\EquipeType;
 use App\Repository\EquipeRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/equipe")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class EquipeController extends AbstractController
 {
@@ -73,6 +75,7 @@ class EquipeController extends AbstractController
             foreach ($equipe->getJoueurs() as $item){
                 $equipe->addJoueur($item);
             }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('equipe_index');

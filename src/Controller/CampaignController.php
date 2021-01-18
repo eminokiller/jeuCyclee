@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: mohamedchehimi
+ * User: ubuntu
  * Date: 15/01/21
  * Time: 00:11
  */
@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\Campagne;
 use App\Form\CampagneConfigType;
 use App\Form\CampagneType;
@@ -24,6 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class CampaignController
  * @package App\Controller
  * @Route("/admin/campaign")
+ * @Route("/campaign")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class CampaignController extends AbstractController
 {

@@ -20,10 +20,8 @@ class UserFixtures extends Fixture
         // $manager->persist($product);
 
         $user = new Admin();
-        $user->setPassword($this->passwordEncoder->encodePassword(
-            $user,
-            'root'
-        ));
+        $pwd = $this->passwordEncoder->encodePassword($user,'admin');
+        $user->setPassword($pwd);
         $user->setEmail('admin@admin.com');
 
         $user->setRoles(array('ROLE_ADMIN'));

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\Joueur;
 use App\Form\JoueurType;
 use App\Repository\JoueurRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/joueur")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class JoueurController extends AbstractController
 {

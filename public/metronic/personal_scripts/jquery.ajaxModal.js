@@ -1,5 +1,5 @@
 /**
- * @Author <mohamed.chehimi@tritux.com>
+ * @Author <ubuntu@tritux.com>
  */
 (function ($) {
     $.fn.ajaxModal = function (config) {

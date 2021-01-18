@@ -35,7 +35,7 @@ class AuthenticationListener implements AuthenticationSuccessHandlerInterface
         $response = null;
 
 
-                $response = new RedirectResponse($this->router->generate('action_marketing_index'));
+                $response = new RedirectResponse($this->router->generate('admin_index'));
 
         // redirect
         return $response;

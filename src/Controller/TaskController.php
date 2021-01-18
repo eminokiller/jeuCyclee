@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/task")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class TaskController extends AbstractController
 {
