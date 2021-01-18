@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\ActionMarketing;
 use App\Form\ActionMarketingType;
 use App\Repository\ActionMarketingRepository;
@@ -12,11 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/actionmarketing")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class ActionMarketingController extends AbstractController
 {
     /**
      * @Route("/", name="action_marketing_index", methods={"GET"})
+     * @Breadcrumb({
+     *
+     *   { "label" = "gestion action marketing" }
+     * })
      */
     public function index(ActionMarketingRepository $actionMarketingRepository): Response
     {
@@ -27,6 +33,10 @@ class ActionMarketingController extends AbstractController
 
     /**
      * @Route("/new", name="action_marketing_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   { "label" = "gestion action marketing", "route" = "action_marketing_index" },
+     *   { "label" = "Nouvelle action" }
+     * })
      */
     public function new(Request $request): Response
     {

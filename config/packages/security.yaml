@@ -47,7 +47,7 @@ security:
                 login_path: admin_login
                 check_path: /admin/login
                 csrf_token_generator: security.csrf.token_manager
-                default_target_path: action_marketing_index
+                default_target_path: admin_index
                 failure_path: admin_login
                 success_handler: account.security_listener
                 username_parameter: email
@@ -68,7 +68,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: app_login
+                target: admin_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

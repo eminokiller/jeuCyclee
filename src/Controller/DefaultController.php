@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class DefaultController
  * @package App\Controller
  * @Route ("/admin")
+ * @Breadcrumb({"label" = "home", "translationDomain" = "domain" })
  */
 class DefaultController extends AbstractController
 {
