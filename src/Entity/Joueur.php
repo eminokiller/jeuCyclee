@@ -37,7 +37,7 @@ class Joueur extends User
 
     public function __construct()
     {
-//        $this->password = 'change_me';
+        $this->password = 'change_me';
         $this->roles = ['ROLE_USER'];
     }
 
