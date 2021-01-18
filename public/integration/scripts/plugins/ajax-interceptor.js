@@ -12,12 +12,13 @@ ajaxInterceptor = function (config) {
         }
     };
     let current = $.extend(defaultConfig, config);
-    let routes = [
-        {
-            'regex': "/\\/getQuestion\\/(\\d+)$/",
-            'method': 'GET',
-            'ok': function () {
-                return `<form name="question" method="post">
+    if(current['mocks']){
+        let routes = [
+            {
+                'regex': "/\\/getQuestion\\/(\\d+)$/",
+                'method': 'GET',
+                'ok': function () {
+                    return `<form name="question" method="post">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,35 +52,53 @@ ajaxInterceptor = function (config) {
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
             </form>`;
+                },
+                'ko': function () {
+
+                    return `zizo`;
+                }
             },
-            'ko': function () {
-
-                return `zizo`;
-            }
-        },
-        {
-            'regex': "/\\/getQuestion\\/(\\d+)$/",
-            'method': 'POST',
-            'ok': function () {
-                return `wyz`;
+            {
+                'regex': "/\\/getQuestion\\/(\\d+)$/",
+                'method': 'POST',
+                'ok': function () {
+                    return `OK`;
+                },
+                'ko': function () {
+                    return `KO`;
+                }
             },
-            'ko': function () {
-                return `zizo`;
+            {
+                'regex': "/\\/login$/",
+                'method': 'POST',
+                'ok': function () {
+                    return  {
+                        data: {
+                            token : 'XYZ_T'
+                        }
+                    };
+                },
+                'ko':function () {
+                    return 'KO'
+                }
             }
-        },
-    ];
+        ];
 
-    let routeCollection = routes.filter(function (item) {
-        return item['method'] === current['method'] && eval(item['regex']).test(current['url'])
-    })
+        let routeCollection = routes.filter(function (item) {
+            return item['method'] === current['method'] && eval(item['regex']).test(current['url'])
+        })
 
-    if (routeCollection.length) {
-        setTimeout(function () {
-            current['success'](routeCollection[0]['ok']())
-        }, 10)
+        if (routeCollection.length) {
+            setTimeout(function () {
+                current['success'](routeCollection[0]['ok']())
+            }, 10)
+        } else {
+            current['error'](new Error())
+        }
     } else {
-        current['error'](new Error())
+        $.ajax(current);
     }
+
 
 
 };

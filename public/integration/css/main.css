@@ -7,34 +7,51 @@
     to {width: 0;}
 }
 body {
-    font-family: FreeSans;
+    margin: 0;
+    height: 100%;
+    padding: 0 ;
     color: white;
-    background-color: #925dd3;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(105, 74, 121) 35%, rgb(182, 133, 255) 100%);
+    opacity: 0.85;
+}
+#login{
+    display:flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+#login > div {
+    padding-top: 12vh;
+    flex: 0 1 auto;
 }
 .title {
     text-shadow: 1px 1px;
 }
 nav.bg-light{
     color: white;
-    background-color: #a874fa !important;
+    background-color: #9892dc !important;
+    border-bottom: black 1px;
+    border-radius: 0 0 5% 5%;
 }
 .page-wrapper{
     padding-top: 0;
     margin:0;
-    background-color: #925dd3;
+    background-color: #892cdc;
 }
 .jumbotron{
-    background-color: darkviolet ;
+    background-color: #9892dc ;
+    margin-top: 10vh;
 }
 div.asside{
-    position: absolute;
+    position: fixed;
+    z-index: 1000!important;
+    margin-top:100px;
+    right: 0;
     float: right;
     background-color: darkviolet;
-    width: 0;
-    height: 100%;
-    top: 13vh;
-    right: 0;
-    z-index: 1000;
+    /*height: 100vh;*/
     border-radius: 5% 0 0 10%;
     padding-top: 3vh;
     animation: getout 2s 1 ease 0.5s normal forwards ;
@@ -157,7 +174,13 @@ li.draggable-task {
     text-align: center;
     min-height: 5vh;
 }
-
+li.task-hook{
+    margin-top: 1vh;
+    font-size: small;
+    text-align: center;
+    min-height: 5vh;
+    border: darkgray dashed thin;
+}
 li.draggable-task[draggable=false] {
     background: greenyellow;
 }
@@ -250,7 +273,7 @@ div.kpi-flex-container {
 .kpi-circle{
     background: radial-gradient( 5px -9px, circle, purpule 8%, gray 26px );
     background-color: blueviolet;
-    border: 2px solid white;
+    border: 6px solid whitesmoke;
     border-radius: 50%; /* one half of ( (border * 2) + height + padding ) */
     box-shadow: 1px 1px 1px black;
     color: white;
@@ -264,11 +287,11 @@ div.kpi-flex-container {
 
 }
 .card{
-    background-color: #b989d3;
-    text-shadow:0 0 2px #888;
+    background-color: #9a23d3;
+    text-shadow:1px 1px 0 #2c6c88;
 }
 .modal-header{
-    background-color: #925dd3;
+    background-color: #9d7ed3;
 }
 .modal-body{
     background-color: #f1f1f1;
@@ -283,4 +306,31 @@ div.kpi-flex-container {
 }
 .navbar-nav {
     margin-left: 5vw!important;
+    box-shadow: #f1f1f1!important;
+    border-bottom: #f1f1f1!important;
+}
+.hide{
+    display: none!important;
+}
+#videoTeaser{
+    padding-top: 15%;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
