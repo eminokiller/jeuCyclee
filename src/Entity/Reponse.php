@@ -13,7 +13,7 @@ class Reponse extends EntityRef
 {
     /**
      *
-     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="reponses")
+     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="reponses",  cascade={"persist", "remove"})
      */
     private $question;
 
