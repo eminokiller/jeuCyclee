@@ -15,7 +15,7 @@ class Question extends EntityRef
 {
     /**
      * @Groups({"survey"})
-     * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="question", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="question", cascade={"persist", "remove"})
      */
     private $reponses;
 

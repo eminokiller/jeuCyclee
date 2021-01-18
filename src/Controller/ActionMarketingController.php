@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
 use App\Entity\ActionMarketing;
+use App\Form\ActionMarketingCampagneType;
 use App\Form\ActionMarketingType;
 use App\Repository\ActionMarketingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +42,7 @@ class ActionMarketingController extends AbstractController
     public function new(Request $request): Response
     {
         $actionMarketing = new ActionMarketing();
-        $form = $this->createForm(ActionMarketingType::class, $actionMarketing);
+        $form = $this->createForm(ActionMarketingCampagneType::class, $actionMarketing);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +74,7 @@ class ActionMarketingController extends AbstractController
      */
     public function edit(Request $request, ActionMarketing $actionMarketing): Response
     {
-        $form = $this->createForm(ActionMarketingType::class, $actionMarketing);
+        $form = $this->createForm(ActionMarketingCampagneType::class, $actionMarketing);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -15,7 +15,10 @@ class TaskType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('questions')
+            ->add('questions',null,
+            [
+                'attr' => [ 'class' => 'select2']
+            ])
 
 
         ;
