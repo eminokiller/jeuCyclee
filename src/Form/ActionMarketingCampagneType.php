@@ -20,7 +20,9 @@ class ActionMarketingCampagneType extends AbstractType
         $builder
             ->add('nomAction')
             ->add('campagne')
-            ->add('task')
+            ->add('task',null,[
+                'label' => 'Type / Channel'
+            ])
             ->add('impact',RangeType::class,[
 
                 'help' => 'L\' impact est entre 0 et 5',

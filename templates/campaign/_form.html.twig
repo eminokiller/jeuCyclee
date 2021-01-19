@@ -1,14 +1,24 @@
 {% import "campaign/macro.html.twig" as forms %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-{{ form_start(form) }}
+{{ form_start(form, { 'attr': {'class': 'm-form'} }) }}
+<div class="m-portlet__body">
+    <div class="m-form__section m-form__section--first">
 {{ form_row(form.libelle) }}
 {#{{ form_row(form.equipes) }}#}
 <div data-prototype="{{ forms.render_widget_item(form.actionMarketings.vars.prototype, '__name__')|e('html_attr') }}" class="widget-container">
     {% for i,action in form.actionMarketings %}
         {{ forms.render_widget_item(action, i) }}
     {% endfor %}
+    <br><br>
 <button onclick="return addItem(this);" type="button" class="btn btn-success"><i class="fa fa-plus-circle"></i></button>
 </div>
+    </div>
 {{ form_rest(form) }}
-<button class="btn" type="submit">{{ button_label|default('Save') }}</button>
+</div>
+<div class="card-footer">
+    <label>&nbsp;</label>
+
+    <button class="btn alert-success" style="width: 100%">Enregistre</button>
+</div>
+
 {{ form_end(form) }}

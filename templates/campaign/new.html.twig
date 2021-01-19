@@ -1,9 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block title %}New Campaign{% endblock %}
+{% block title %}Ajouter une campagne{% endblock %}
 {% block body %}
-    <h1>Create new Campaign</h1>
+    <!--begin::Portlet-->
+<div class="m-portlet">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+										<span class="m-portlet__head-icon m--hide">
+											<i class="la la-gear"></i>
+										</span>
+                <h3 class="m-portlet__head-text">
+                    Ajouter une nouvelle campagne
+                </h3>
+            </div>
+        </div>
+    </div>
     {{ include('campaign/_form.html.twig') }}
-    <a href="{{ path('campaign_index') }}">back to list</a>
+</div>
 {% endblock %}
 
 {% block JSPersonalScripts %}
