@@ -46,6 +46,7 @@ class ActionMarketingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Action bien ajouter');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($actionMarketing);
             $entityManager->flush();
@@ -79,7 +80,7 @@ class ActionMarketingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Action bien mis à jour');
             return $this->redirectToRoute('action_marketing_index');
         }
 
@@ -99,7 +100,7 @@ class ActionMarketingController extends AbstractController
             $entityManager->remove($actionMarketing);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'a été supprimer');
         return $this->redirectToRoute('action_marketing_index');
     }
 }

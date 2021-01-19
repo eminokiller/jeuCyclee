@@ -75,6 +75,7 @@ class QuestionController extends AbstractController
         $originalTags = new ArrayCollection();
         // Create an ArrayCollection of the current Tag objects in the database
         foreach ($question->getReponses() as $tag) {
+            dump($tag);
             $originalTags->add($tag);
         }
 
