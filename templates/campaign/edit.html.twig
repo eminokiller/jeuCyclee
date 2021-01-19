@@ -34,6 +34,8 @@
 {% block JSPersonalScripts %}
     <script src="{{ asset('plugins/collection.js') }}"></script>
     <script>
+        var x = 10;
+        console.log(x);
         document.querySelector('input[type=range]').addEventListener('input', function rangeChange() {
             // trigger the CSS to update
             this.setAttribute('value', this.value);
