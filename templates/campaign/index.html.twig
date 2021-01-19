@@ -42,10 +42,18 @@
                 <td>{{ campagne.id }}</td>
                 <td>{{  campagne.libelle}}</td>
                 <td>
-                    <a href="{{ path('campaign_update', {'id': campagne.id}) }}">{{ "edit"|trans }}</a>
-                    <a href="{{ path('campaign_configure', {'id': campagne.id}) }}">{{ "configure"|trans }}</a>
-                    <a href="{{ path('campaign_configure_team', {'id': campagne.id}) }}">{{ "configure team"|trans }}</a>
 
+
+                        <span class="dropdown">
+                            <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
+                              <i class="la la-ellipsis-h"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-196px, 27px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                <a class="dropdown-item" href="{{ path('campaign_update', {'id': campagne.id}) }}"><i class="la la-edit"></i> Mettre à jour</a>
+                                <a class="dropdown-item" href="{{ path('campaign_configure', {'id': campagne.id}) }}"><i class="la la-leaf"></i> Configurer le jeu</a>
+                                <a class="dropdown-item" href="{{ path('campaign_configure_team', {'id': campagne.id}) }}"><i class="la la-print"></i> Configurer les équipes</a>
+                            </div>
+                        </span>
                 </td>
             </tr>
         {% endfor %}

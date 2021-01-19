@@ -4,10 +4,23 @@
 
 {% block body %}
 
-
+<!--begin::Portlet-->
+<div class="m-portlet">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+										<span class="m-portlet__head-icon m--hide">
+											<i class="la la-gear"></i>
+										</span>
+                <h3 class="m-portlet__head-text">
+                    Formulaire creation une action marketing
+                </h3>
+            </div>
+        </div>
+    </div>
     {{ include('action_marketing/_form.html.twig') }}
+</div>
 
-    <a href="{{ path('action_marketing_index') }}">back to list</a>
 {% endblock %}
 {% block JSPersonalScripts %}
 

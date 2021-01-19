@@ -1,11 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Task{% endblock %}
+{% block title %}New type{% endblock %}
 
 {% block body %}
 
-
+<!--begin::Portlet-->
+<div class="m-portlet">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+										<span class="m-portlet__head-icon m--hide">
+											<i class="la la-gear"></i>
+										</span>
+                <h3 class="m-portlet__head-text">
+                    Formulaire creation d'un type
+                </h3>
+            </div>
+        </div>
+    </div>
     {{ include('task/_form.html.twig') }}
+</div>
 
-    <a href="{{ path('task_index') }}">back to list</a>
 {% endblock %}

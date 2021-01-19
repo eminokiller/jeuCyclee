@@ -12,7 +12,9 @@ class TeamCampagneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('equipes')
+            ->add('equipes',null,[
+                'attr' => [ 'class' => 'select2']
+            ])
         ;
     }
 

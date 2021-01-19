@@ -1,4 +1,19 @@
-{{ form_start(form) }}
+{{ form_start(form, { 'attr': {'class': 'm-form'} }) }}
+<div class="m-portlet__body">
+    <div class="m-form__section m-form__section--first">
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+<div class="m-portlet__foot m-portlet__foot--fit">
+    <div class="m-form__actions m-form__actions">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <button class="btn btn-accent m-btn m-btn--pill m-btn--air">Enregistrer</button>
+                <button onclick="location.href='{{ path('joueur_index') }}';" class="btn btn-secondary m-btn m-btn--pill m-btn--air">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{ form_end(form) }}
