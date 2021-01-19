@@ -23,6 +23,11 @@ class ActionMarketing
      * @ORM\ManyToOne(targetEntity=Campagne::class, inversedBy="actionMarketings")
      */
     private $campagne;
+    /**
+     * @var string|null $color
+     * @Groups({"campagne"})
+     */
+    private $color;
 
 
 
@@ -127,6 +132,16 @@ class ActionMarketing
         $this->campagne = $campagne;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getColor(): ?string
+    {
+        return $this->getTask()->getTaskColor();
+    }
+
+
 
 
 

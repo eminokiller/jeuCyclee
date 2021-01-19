@@ -21,6 +21,7 @@ function prepareRemove(element) {
             evt.originalEvent.dataTransfer.setData('data-id', $(evt.target).data('id'))
             evt.originalEvent.dataTransfer.setData('data-parent', $(evt.target).parent().attr('class'))
             evt.originalEvent.dataTransfer.setData('data-index', $(evt.target).index())
+            evt.originalEvent.dataTransfer.setData('data-level', $(evt.target).attr('data-level'))
             if (!$(evt.target).parent().hasClass('tasker')) {
                 let weekIndex = $(evt.target).parents('.droppable-list').first().data('id')
                 evt.originalEvent.dataTransfer.setData('data-week-index', weekIndex)
@@ -78,6 +79,8 @@ function prepareRemove(element) {
             return {
                 id: item.id,
                 text: item.text,
+                level:item.level,
+                color: item.color,
                 draggable: item.draggable,
             }
         }
@@ -93,6 +96,8 @@ function prepareRemove(element) {
             let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
+            let level =  evt.originalEvent.dataTransfer.getData('data-level');
+            if(level!=1) return;
             let $source = $('<div></div>');
             if (dataWeekIndex != "false") {
                 $source = $($($($($(`.droppable-list[data-id="${dataWeekIndex}"]`).first()).find('.week-container').first()).find('.task-week').first()).find(`li:nth-child(${dataIndex + 1})`).first());
@@ -125,6 +130,8 @@ function prepareRemove(element) {
             let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
+            let level =  evt.originalEvent.dataTransfer.getData('data-level');
+            if(level!=2) return;
             let $source = $('<div></div>');
             if (dataWeekIndex != "false") {
                 $source = $($($($($(`.droppable-list[data-id="${dataWeekIndex}"]`).first()).find('.week-container').first()).find('.task-week').first()).find(`li:nth-child(${dataIndex + 1})`).first());
