@@ -3,12 +3,10 @@
 namespace App\Form;
 
 use App\Entity\ActionMarketing;
-use blackknight467\StarRatingBundle\Form\RatingType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,14 +30,7 @@ class ActionMarketingType extends AbstractType
                     ]
 
             ])
-            ->add('value' ,TextType::class,[
-                'mapped' => false,
-                'attr' => [
-                    'oninput' => 'action_marketing_impact.value = action_marketing_value.value',
-                    'readonly' => true
-                ]
 
-            ])
             ->add('level', ChoiceType::class, [
                 'choices'  => [
                     'Niveau 1' => 1,
