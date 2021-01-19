@@ -1,31 +1,30 @@
+{% import "question/macro.html.twig" as forms %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {{ form_start(form, { 'attr': {'class': 'm-form'} }) }}
 <div class="m-portlet__body">
     <div class="m-form__section m-form__section--first">
     {{ form_widget(form.libelle) }}
-<br><br>
-<label>Votre reponse</label>
 
 
-<div class="dv" id="exp_list" data-prototype="{{ form_widget(form.reponses.vars.prototype)|e('html_attr') }}">
-    {% for row in form.reponses %}
-        {{ form_widget(row) }}
+
+
+<div data-prototype="{{ forms.render_widget_item(form.reponses.vars.prototype, '__name__')|e('html_attr') }}"  class="widget-container">
+    {% for i,action in form.reponses %}
+        {{ forms.render_widget_item(action, i) }}
     {% endfor %}
+    <br><br>
+    <button onclick="return addItem(this);" type="button" class="btn btn-success"><i class="fa fa-plus-circle"></i></button>
 </div>
 
-<br><br>
+
+
     </div>
+    {{ form_rest(form) }}
 </div>
-<div class="m-portlet__foot m-portlet__foot--fit">
-    <div class="m-form__actions m-form__actions">
-        <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                <button class="btn btn-accent m-btn m-btn--pill m-btn--air">Enregistrer</button>
-                <button onclick="location.href='{{ path('question_index') }}';" class="btn btn-secondary m-btn m-btn--pill m-btn--air">Annuler</button>
-            </div>
-        </div>
-    </div>
+<div class="card-footer">
+        <label>&nbsp;</label>
+
+    <button class="btn alert-success" style="width: 100%">Mettre à jour</button>
 </div>
 
-
-{{ form_end(form) }}
+    {{ form_end(form) }}
