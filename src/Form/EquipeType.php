@@ -15,7 +15,11 @@ class EquipeType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('joueurs')
+            ->add('joueurs',null,[
+                'attr' => [
+                    'class' => 'select2'
+                ]
+            ])
         ;
     }
 

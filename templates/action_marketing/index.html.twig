@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="m-portlet__body">
-        <table class="table table-striped- table-bordered table-hover table-checkable"  id="m_table_1">
-        <thead>
+        <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
+            <thead>
             <tr>
                 <th>Nom d'action</th>
                 <th>Campagne</th>
@@ -37,28 +37,31 @@
                 <th>Impact</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for action_marketing in action_marketings %}
-            <tr>
-                <td>{{ action_marketing.nomAction }}</td>
-                <td>{{ action_marketing.campagne }}</td>
-                <td>{{ action_marketing.task }}</td>
-                <td>{{ action_marketing.impact }}</td>
+            </thead>
+            <tbody>
+            {% for action_marketing in action_marketings %}
+                <tr>
+                    <td>{{ action_marketing.nomAction }}</td>
+                    <td>{{ action_marketing.campagne }}</td>
+                    <td>{{ action_marketing.task }}</td>
+                    <td>{{ action_marketing.impact }}</td>
 
-                <td>
-                    <a href="{{ path('action_marketing_show', {'id': action_marketing.id}) }}">show</a>
-                    <a href="{{ path('action_marketing_edit', {'id': action_marketing.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <td>
+                        {#                    <a href="{{ path('action_marketing_show', {'id': action_marketing.id}) }}">show</a>#}
 
+
+                        <a href="{{ path('action_marketing_edit', {'id': action_marketing.id}) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="Mettre à jour">
+                            <i class="la la-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 </div>

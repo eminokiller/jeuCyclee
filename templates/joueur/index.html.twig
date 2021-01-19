@@ -48,8 +48,10 @@
                 <td>{{ joueur.Nom }}</td>
                 <td>{{ joueur.equipe }}</td>
                 <td>
-                    <a href="{{ path('joueur_show', {'id': joueur.id}) }}">show</a>
-                    <a href="{{ path('joueur_edit', {'id': joueur.id}) }}">edit</a>
+{#                    <a href="{{ path('joueur_show', {'id': joueur.id}) }}">show</a>#}
+                    <a href="{{ path('joueur_edit', {'id': joueur.id}) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="Mettre à jour">
+                        <i class="la la-edit"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}

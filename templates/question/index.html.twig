@@ -34,7 +34,7 @@
                 <th>Id</th>
                 <th>Libelle</th>
                 <th>Reponses</th>
-                <th>UpdatedAt</th>
+               
                 <th>actions</th>
             </tr>
         </thead>
@@ -50,10 +50,13 @@
                     </ul>
 
                 </td>
-                <td>{{ question.updatedAt ? question.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+
                 <td>
-                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
-                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+{#                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>#}
+
+                    <a href="{{ path('question_edit', {'id': question.id}) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="Mettre à jour">
+                        <i class="la la-edit"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
