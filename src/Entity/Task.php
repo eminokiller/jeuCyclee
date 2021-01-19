@@ -24,6 +24,11 @@ class Task extends EntityRef
      */
     private $actionMarketings;
 
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $taskColor;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -83,6 +88,18 @@ class Task extends EntityRef
                 $actionMarketing->setTask(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTaskColor(): ?string
+    {
+        return $this->taskColor;
+    }
+
+    public function setTaskColor(?string $taskColor): self
+    {
+        $this->taskColor = $taskColor;
 
         return $this;
     }

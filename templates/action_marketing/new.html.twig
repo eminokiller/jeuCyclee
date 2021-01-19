@@ -1,7 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New ActionMarketing{% endblock %}
+{% block StyleSheet %}
+<style>
+    input[type="range"] {
+        position: relative;
+    }
 
+    input[type="range"]:before {
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        margin-left: -10px;
+        content: attr(value);
+        display: block;
+        text-align: center;
+        width: 20px;
+        height: 10px;
+        font-weight: bold;
+
+    }
+</style>
+{% endblock %}
 {% block body %}
 
 <!--begin::Portlet-->
@@ -23,6 +43,11 @@
 
 {% endblock %}
 {% block JSPersonalScripts %}
-
+<script>
+    document.querySelector('input[type=range]').addEventListener('input', function rangeChange() {
+        // trigger the CSS to update
+        this.setAttribute('value', this.value);
+    });
+</script>
 
 {% endblock %}
