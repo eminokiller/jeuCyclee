@@ -12,6 +12,7 @@
                     id: item.id,
                     text: item.text,
                     level: item.level,
+                    color: item.color,
                     draggable: true,
                 }
             }
@@ -36,7 +37,7 @@
                 $li.attr('data-id', item.id)
                 $li.attr('data-level', item.level)
                 $li.attr('draggable', item.draggable)
-                $li.css("background-color", getRandomColor());
+                $li.css('background-color', item.color)
                 if(item.draggable){
                     $li.bind('dragstart', current['ondragstart'])
                     $li.bind('touchstart', function (evt) {
