@@ -1,7 +1,9 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Entity\Admin:
             algorithm: auto
+        App\Entity\Joueur:
+            id: 'App\Security\FaultyPasswordEncoder'
         Symfony\Component\Security\Core\User\User: 'auto'
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

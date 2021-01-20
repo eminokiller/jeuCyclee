@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\JoueurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -70,6 +71,5 @@ class Joueur extends User
         return $this->email;
         // TODO: Implement __toString() method.
     }
-
 
 }
