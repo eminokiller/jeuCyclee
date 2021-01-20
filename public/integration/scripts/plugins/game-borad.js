@@ -2,7 +2,7 @@
     $.fn.gameBoard = function (config, game1) {
         if (!game1 instanceof Game) throw  new Error('must have a game play instance');
         const defaultConfig = {
-            containerClass: 'droppable-list',
+            containerClass: 'droppable-list column_tab_semaine',
             startWeek: 1,
             endWeek: 9,
             nbrOfHooks: 10,
