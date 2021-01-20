@@ -23,6 +23,10 @@
             dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
         });
     </script>
+
+    <!-- css plugin template transformers -->
+    <link rel="stylesheet" href="{{ asset('transformers/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('transformers/css/animate.css') }}">
 </head>
 <body>
 <div id="login">
@@ -52,260 +56,116 @@
     </div>
 </div>
 <div id="gamePlay" class="page-wrapper hide">
-    <div class="main">
-        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-            <a class="navbar-brand" href="#">PLAN MY <br>CAMPAIGN</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto header-top">
-                    <li class="nav-item active">
-                        <div class="team">
-                            <div class="team-wrapper">
-                                <div class="level">
-                                    LEVEL <span class="item" id="level">1</span> <span id="levelName">MEDEO</span>
-                                </div>
-                                <div class="boxed-title">
-                                    EQUIPE :<span id="teamName">Bumble Bee</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="level-indicator"></div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="stopwatch"></div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="account">
-                            <div class="profile-img">
-                                <img alt="SHIT">
-                            </div>
-                            <div class="">Jack Daniel</div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div onclick="return showAsside(this);" data-target="#chat-component" class="account">
-                            <div class="profile-img">
-                                <img alt="SHIT">
-                            </div>
-                            <div class="">Jack Daniel</div>
-                        </div>
-                    </li>
-                </ul>
+    <div class="container_ipad_view" id="level1_transformers">
+
+        <div class="row_transformers">
+
+            <div class="level_logo">
+                <img src="{{ asset('transformers/images/logo.png') }}">
             </div>
-        </nav>
-        <main class="d-flex flex-column p-2" role="main">
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col-sm-5 col-lg-2">
-                        <div class="card">
-                            <div class="draggable-list-header card-header">
-                                <div class="subtitle-1">
-                                    <h2 class="draggable-list-text" style="text-align: center">Positionner ces Actions
-                                        sur le planing</h2>
-                                </div>
-                            </div>
-                            <div class="draggable-list card-body">
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="col-sm-7 col-lg-10">
-                        <div class="card">
-                            <div class="game-container-header card-header">
-                                <div class="title">TABLEAU TRIMESTRIEL <span onclick="return prepareRemove(this);"
-                                                                             style="float: right;color: silver"> <i
-                                                class="fa fa-trash fa-3x"></i></span></div>
-                            </div>
-                            <div class="card-body game-container">
-                                <div class="target-table flex-container" data-phase="1"></div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body kpi-flex-container">
-                                <div class="kpi-item">
-                                    <div class="kpi-circle">Mon Score <br> <span class="score" id="myScore">15%</span>
-                                    </div>
-                                </div>
-                                <div class="kpi-item">
+            <div class="level1_team_box">
+                <h2 class="score_h2_title">Level 1</h2>
+                <h3 class="score_h3_title">équipe :<br><strong>bumble bee</strong></h3>
+            </div>
 
-                                    <div class="kpi-circle">Score Equipe <br><span class="score">15%</span></div>
-                                </div>
-                                <div class="kpi-item">
-                                    <div class="kpi-circle">Meilleur Score <br> <span class="score">15%</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body kpi-flex-container">
-                                <div class="kpi-item">
-                                    <div class="kpi">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="">IMPACT</h5>
-                                            </div>
-                                            <div class="card-body"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kpi-item">
+            <div class="level1_transformer_signs_box">
+                <div class="transformer_sign active"></div>
+                <div class="transformer_sign"></div>
+                <div class="transformer_sign"></div>
 
-                                    <div class="kpi">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="">FACE TO FACE</h5>
-                                            </div>
-                                            <div class="card-body"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kpi-item">
-                                    <div class="kpi">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="">VISITE REMOTE</h5>
-                                            </div>
-                                            <div class="card-body"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="transformer_bar_signs">
+                    <div class="bar_sign active"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
+                    <div class="bar_sign"></div>
                 </div>
             </div>
-            <div class="asside" id="chat-component">
-                <div class="asside-wrapper">
-                    <div class="asside-content">
-                        <div class="search">
-                            <form id="chat-component-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" name="q">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="topic">
-                            <div class="topic-content">
-                                <ul class="chat-room" id="chat-room">
-                                    <li class="chat-room-item team-member">
-                                        <div class="topic-item">
-                                            <div class="team-member-pic-container">
-                                                <div class="pic-container">
-                                                    <img alt="FCK">
-                                                </div>
-                                            </div>
-                                            <div class="team-member-message-widget">
-                                                <div class="team-member-name">ARIANE</div>
-                                                <div class="team-message-message">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
-                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
-                                                        quis quisquam quo reiciendis repellat saepe sint soluta
-                                                        suscipit! Architecto?</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat-room-item team-member">
-                                        <div class="topic-item">
-                                            <div class="team-member-pic-container">
-                                                <div class="pic-container">
-                                                    <img alt="FCK">
-                                                </div>
-                                            </div>
-                                            <div class="team-member-message-widget">
-                                                <div class="team-member-name">ARIANE</div>
-                                                <div class="team-message-message">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
-                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
-                                                        quis quisquam quo reiciendis repellat saepe sint soluta
-                                                        suscipit! Architecto?</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat-room-item team-member">
-                                        <div class="topic-item">
-                                            <div class="team-member-pic-container">
-                                                <div class="pic-container">
-                                                    <img alt="FCK">
-                                                </div>
-                                            </div>
-                                            <div class="team-member-message-widget">
-                                                <div class="team-member-name">ARIANE</div>
-                                                <div class="team-message-message">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
-                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
-                                                        quis quisquam quo reiciendis repellat saepe sint soluta
-                                                        suscipit! Architecto?</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat-room-item team-member">
-                                        <div class="topic-item">
-                                            <div class="team-member-pic-container">
-                                                <div class="pic-container">
-                                                    <img alt="FCK">
-                                                </div>
-                                            </div>
-                                            <div class="team-member-message-widget">
-                                                <div class="team-member-name">ARIANE</div>
-                                                <div class="team-message-message">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
-                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
-                                                        quis quisquam quo reiciendis repellat saepe sint soluta
-                                                        suscipit! Architecto?</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat-room-item team-member">
-                                        <div class="topic-item">
-                                            <div class="team-member-pic-container">
-                                                <div class="pic-container">
-                                                    <img alt="FCK">
-                                                </div>
-                                            </div>
-                                            <div class="team-member-message-widget">
-                                                <div class="team-member-name">ARIANE</div>
-                                                <div class="team-message-message">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
-                                                        amet autem eius in labore neque nobis, quam quibusdam quidem
-                                                        quis quisquam quo reiciendis repellat saepe sint soluta
-                                                        suscipit! Architecto?</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="asside-footer">
-                        <form id="chat-console">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="...Envoyer votre message"
-                                       name="message">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-success" type="submit"><i class="fa fa-send"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div class="box_timer_container">
+                <div id="ten-countdown"></div>
             </div>
-        </main>
-        <footer></footer>
-    </div>
+            <div class="box_profile_container">
+                <div class="row_transformers center_content">
+                    <div class="box_current_profile_header"></div>
+                </div>
+                <div class="profile_avatar_name">Selma Rouchiche</div>
+            </div>
+
+        </div>
+
+        <div class="section_left_title">Positionez ces actions sur le planning</div>
+        <div class="section_left_project_container">
+            <div class="draggable-list card-body">
+            </div>
+        </div>
+        <div class="scroll_down_list"></div>
+        <div class="scroll_up_list"></div>
+
+        <div class="tableau_title">tableau trimestriel "CIBLE"</div>
+        <div class="delete_lvl1"></div>
+
+        <div class="tableau_semaines">
+            <div class="box_x_scrollabele">
+
+
+
+
+
+
+            <div class="card-body game-container">
+                <div class="target-table flex-container" data-phase="1"></div>
+            </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <div class="right_arrow_scroller"></div>
+        <div class="left_arrow_scroller"></div>
+
+
+        <div class="lvl1_score_circle1">
+            <p>Mon Score</p>
+            <p><strong>12%</strong></p>
+        </div>
+        <div class="lvl1_score_circle2">
+            <p>Score équipe</p>
+            <p><strong>32%</strong></p>
+        </div>
+        <div class="lvl1_score_circle3">
+            <p>Meilleur score</p>
+            <p><strong>85%</strong></p>
+        </div>
+
+        <div class="impact-1">IMPACT SUR HCPs</div>
+        <div class="impact-2">FACE TO FACE</div>
+        <div class="impact-3">VISITE REMOTE</div>
+        <div class="impact-4">Trigger email</div>
+        <div class="impact-5">HQ email</div>
+        <div class="impact-6">Webinar</div>
+        <div class="impact-7">e-Event</div>
+        <div class="impact-8">Medeo</div>
+
+        <div class="impact_progress_1"><div style="width: 73%;"></div></div>
+        <div class="impact_progress_2"><div style="width: 83%;"></div></div>
+        <div class="impact_progress_3"><div style="width: 73%;"></div></div>
+        <div class="impact_progress_4"><div style="width: 43%;"></div></div>
+        <div class="impact_progress_5"><div style="width: 73%;"></div></div>
+        <div class="impact_progress_6"><div style="width: 93%;"></div></div>
+        <div class="impact_progress_7"><div style="width: 73%;"></div></div>
+        <div class="impact_progress_8"><div style="width: 63%;"></div></div>
+</div>
 </div>
 <div id="result"></div>
 <!------------->
@@ -353,5 +213,9 @@
 <script src="{{ asset('integration/scripts/plugins/chat.js') }}"></script>
 <script src="{{ asset('integration/scripts/application.js') }}"></script>
 <script src="{{ asset('integration/scripts/main.js') }}"></script>
+
+
+<!-- tranformers template plug -->
+<script src="{{ asset('transformers/js/main.js') }}"></script>
 </body>
 </html>

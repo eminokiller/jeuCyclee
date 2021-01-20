@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\JoueurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=JoueurRepository::class)
+ * @UniqueEntity(fields="email", message="Sorry, this email address is already in use.", groups={"admin","joueur","user"})
  */
 class Joueur extends User
 {
