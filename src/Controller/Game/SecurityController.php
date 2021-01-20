@@ -22,6 +22,7 @@ class SecurityController extends AbstractController
     public function login():JsonResponse
     {
         $user = $this->getUser();
+
         return $this->json([
             'username' => $user->getUsername()
         ]);

@@ -187,16 +187,12 @@ li.draggable-task[draggable=false] {
 
 .flex-container {
     display: flex;
-    /*background-color: DodgerBlue;*/
     overflow: scroll;
 }
 
 .flex-container > div {
     display: flex;
     flex-direction: column;
-    background-color: #f1f1f1;
-    /*margin: 1px;*/
-    /*padding: 1px;*/
     font-size: 16px;
     flex: 0 0 13em;
 }

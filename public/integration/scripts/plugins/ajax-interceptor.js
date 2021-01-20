@@ -2,6 +2,7 @@ ajaxInterceptor = function (config) {
     let defaultConfig = {
         mocks: true,
         data: '',
+        secured: false,
         url: '',
         method: 'GET',
         success: function (response) {
@@ -96,7 +97,15 @@ ajaxInterceptor = function (config) {
             current['error'](new Error())
         }
     } else {
-        $.ajax(current);
+        let payload = $.extend({}, current)
+        payload['url'] = getApi(payload['url']);
+        if(current['secured']){
+            payload['beforeSend'] = function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
+            }
+        }
+    
+        $.ajax(payload);
     }
 
 

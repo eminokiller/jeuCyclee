@@ -3,6 +3,7 @@ $(function () {
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
                 mocks: true,
+                secured: false,
                 url: '/getQuestion/' + dataId,
                 method: 'GET',
                 success: function (response) {
@@ -19,6 +20,7 @@ $(function () {
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
                 mocks: true,
+                secured: false,
                 url: '/getQuestion/' + dataId,
                 method: 'POST',
                 success: function (response) {
@@ -30,15 +32,16 @@ $(function () {
             })
         })
     }
+
     //  ajax modal
     $('#exampleModal').on('shown.bs.modal', function () {
         let dataId = $(this).data('id');
         let targetId = $(this).data('target-id');
         let clone = $(this).data('clone');
         let hookIndex = $(this).data('target-hook');
-        console.log('hooke---->',hookIndex);
+        console.log('hooke---->', hookIndex);
         let $element = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first());
-        if(!clone){
+        if (!clone) {
             $element = $($('.task-week > li.draggable-task[data-id="' + dataId + '"]').first());
         }
         let $targetContainer = $($('div.droppable-list[data-id="' + targetId + '"]').first());
@@ -48,7 +51,7 @@ $(function () {
                 e.preventDefault();
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
                     let $taskList = $($targetContainer.find('ul.task-week').first());
-                    let $hook = $taskList.find(`li:nth-child(${hookIndex+1})`);
+                    let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
                     if (clone) {
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
@@ -71,15 +74,18 @@ $(function () {
             $('#exampleModal').modal('hide')
         })
     });
+
     // login form
-    function  submitLoginForm(form)
-    {
+    function submitLoginForm(form) {
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
-                mocks: true,
-                data: $(form).serialize(),
-                url: '/login',
+                mocks: false,
+                secured: false,
+                data: JSON.stringify({username: $('#exampleInputEmail1').val(), password: "xyz"}),
+                url: '/api/login_check',
                 method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
                 success: function (response) {
                     resolve(response);
                 },
@@ -89,14 +95,15 @@ $(function () {
             })
         })
     }
+
     $('#loginForm').on('submit', function (evt) {
         evt.preventDefault();
         submitLoginForm(evt.target).then(function (resp) {
-            if(!$('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
-            localStorage.setItem('token', resp.data.token)
+            if (!$('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
+            localStorage.setItem('token', resp.token)
             dispatchUserConnectedEvent();
         }).catch(function (err) {
-            if($('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
+            if ($('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
         })
 
     })
