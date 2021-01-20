@@ -40,10 +40,17 @@
         }
         this.each(function () {
             let _that = this;
+
             for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
+                let mois = 'FÉVRIER - S'+i;
                 let $div = $('<div></div>', {'class': current['containerClass']})
                 $div.attr('data-id', `${i}_${$(_that).attr('data-phase')}`)
-                $div.append(`<div class="title_column_tab_semaine">Semaine ${i}</div>`);
+
+                if (i > 4){
+                    let j = i-4;
+                    mois = 'MARS - S' + j;
+                }
+                $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
                 let $weekContainer = $('<div class="zone_dragger zone_drg_1"><ul class="task-week"></ul></div>');
                 prepareWeekHooks($weekContainer);
                 $div.append($weekContainer);
