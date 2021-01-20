@@ -43,8 +43,8 @@
             for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
                 let $div = $('<div></div>', {'class': current['containerClass']})
                 $div.attr('data-id', `${i}_${$(_that).attr('data-phase')}`)
-                $div.append(`<div class="week-header">Semaine ${i}</div>`);
-                let $weekContainer = $('<div class="week-container"><ul class="task-week"></ul></div>');
+                $div.append(`<div class="title_column_tab_semaine">Semaine ${i}</div>`);
+                let $weekContainer = $('<div class="zone_dragger zone_drg_1"><ul class="task-week"></ul></div>');
                 prepareWeekHooks($weekContainer);
                 $div.append($weekContainer);
                 $(_that).append($div[0])
