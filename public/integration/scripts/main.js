@@ -4,6 +4,7 @@ function showAsside(element) {
 }
 
 function prepareRemove(element) {
+    console.log(element);
     dispatchPrepareRemoveEvent();
 }
 
