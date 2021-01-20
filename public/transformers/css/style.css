@@ -44,7 +44,7 @@ img{
      max-width: 1024px;
      max-height: 768px;
      width: 100%;
-     height: 100%;
+     height: 768px;
      overflow: hidden;
 }
 .container_ipad_view#login_transformers{
@@ -534,7 +534,7 @@ div#column_1_tab_month {
     width: 0;
 }
 .box_x_scrollabele {
-    width: 1490px;
+    width: 1471px;
     height: 100%;
     float: left;
     transition: all .5s;
