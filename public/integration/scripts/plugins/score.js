@@ -9,6 +9,7 @@
             let score = 0;
             document.addEventListener(current['event'], function () {
                 score = ScoreManager.score(model, game)
+                score = score + 5;
                 $(_that).text(`${score} %`)
                 console.log(model.weeks, game.weeks);
             })
