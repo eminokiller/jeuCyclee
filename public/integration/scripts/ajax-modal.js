@@ -4,12 +4,14 @@ $(function () {
             ajaxInterceptor({
                 mocks: true,
                 secured: false,
-                url: '/getQuestion/' + dataId,
+                url: '/api/getQuestion/' + dataId,
                 method: 'GET',
                 success: function (response) {
                     resolve(response);
+                    console.log('modal',response);
                 },
                 error: function (error) {
+                    console.log('err',error)
                     reject(error)
                 }
             })

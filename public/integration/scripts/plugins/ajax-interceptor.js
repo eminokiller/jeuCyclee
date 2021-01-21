@@ -19,6 +19,7 @@ ajaxInterceptor = function (config) {
                 'regex': "/\\/getQuestion\\/(\\d+)$/",
                 'method': 'GET',
                 'ok': function () {
+
                     return `<form name="question" method="post">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
