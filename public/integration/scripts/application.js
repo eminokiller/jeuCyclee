@@ -74,46 +74,27 @@ class Application {
         };
         this._gameStartHandler = function () {
             ajaxInterceptor({
-
                 secured: true,
                 mocks: false,
                 url: '/api/getGamePlay',
                 success: function (response) {
-                    console.log('heeeeeeere', response)
-                    document.querySelector('#teamName').innerHTML = response.player.equipe.libelle
-                    document.querySelector('#playerName').innerHTML = response.player.Nom
-
-                secured:true,
-                mocks:false,
-                url:'/api/getGamePlay',
-                success:function (response) {
-                    console.log('api game play',response);
+                    document.querySelector('#team').innerHTML = response.player.equipe.libelle
+                    document.querySelector('#nomPlayer').innerHTML = response.player.Nom
 
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
-                            ///console.log('itemm',item)
-                            var drag = true;
-                            if (item.level == 2){
-                                var drag = false;
-                            }
                             return {
                                 id: item.id,
                                 text: item.nomAction,
-                                draggable: drag,
+                                draggable: true,
                                 level: item.level,
                                 color: item.color
                             };
                         })
                     }
 
-
-
-                    $('div#nomPlayer').text(response.player.Nom)
-                    $('div#team').text(response.player.equipe.libelle)
-                    $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
-
                     const startWeek = 1;
-                    const endWeek = 8;
+                    const endWeek = 9;
                     let data = mockData()
                     const game = new Game(1, startWeek, endWeek, data);
                     const gameModel = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
@@ -188,7 +169,6 @@ class Application {
                                 level: item.level,
                                 color: item.color,
                                 draggable: item.draggable,
-                                color: item.color
                             }
                         }
                     })
@@ -202,7 +182,6 @@ class Application {
                         'ondrop': function (evt) {
                             evt.preventDefault();
                             let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
-                            let dataParent = evt.originalEvent.dataTransfer.getData('data-parent');
                             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
                             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
                             let level = evt.originalEvent.dataTransfer.getData('data-level');
@@ -230,7 +209,6 @@ class Application {
                                 $('#exampleModal').data('target-hook', $(evt.target).index());
                                 $('#exampleModal').modal('toggle')
                             } else {
-                                let $taskList = $($container.find('ul.task-week').first());
                                 let $hook = $(evt.target)
                                 let $clonedHook = $hook.clone(true);
                                 if ($source.parent().hasClass('tasker')) {
