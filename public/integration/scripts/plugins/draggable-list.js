@@ -8,10 +8,13 @@
             ondragend: function(evt){},
             touchend: function(evt){},
             mapFn:function (item) {
+                console.log('imm',item)
                 return {
                     id: item.id,
                     text: item.text,
                     draggable: true,
+                    color: item.color
+
                 }
             }
         };
@@ -28,13 +31,15 @@
             let _that = this;
             let $ul = $('<ul></ul>', {'class': current['containerClass']});
             let data = current['data'].map(current['mapFn']);
+            console.log('data',data)
             data.forEach(function (item) {
+                console.log(item)
                 let $li = $('<li></li>', {'class':current['itemClass']}).append(`<span>${item.text}</span>`)
                 $li.data('id', item.id)
                 $li.attr('data-id', item.id)
                 $li.attr('data-level', item.level)
                 $li.attr('draggable', item.draggable)
-                $li.css("background-color", getRandomColor());
+                $li.css("background-color", item.color);
                 if(item.draggable){
                     $li.bind('dragstart', current['ondragstart'])
                     $li.bind('touchstart', function (evt) {

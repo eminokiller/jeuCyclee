@@ -38,6 +38,12 @@ class Campagne extends EntityRef
      */
     private  $weeksLevel2;
 
+    /**
+     * @Groups({"ref"})
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $cible;
+
     public function __construct()
     {
 
@@ -157,6 +163,18 @@ class Campagne extends EntityRef
     public function setWeeksLevel2(?array $weeksLevel2): Campagne
     {
         $this->weeksLevel2 = $weeksLevel2;
+        return $this;
+    }
+
+    public function getCible(): ?string
+    {
+        return $this->cible;
+    }
+
+    public function setCible(?string $cible): self
+    {
+        $this->cible = $cible;
+
         return $this;
     }
 

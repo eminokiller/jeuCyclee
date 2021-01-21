@@ -74,6 +74,7 @@ class Application {
         };
         this._gameStartHandler = function () {
             ajaxInterceptor({
+
                 secured: true,
                 mocks: false,
                 url: '/api/getGamePlay',
@@ -81,20 +82,38 @@ class Application {
                     console.log('heeeeeeere', response)
                     document.querySelector('#teamName').innerHTML = response.player.equipe.libelle
                     document.querySelector('#playerName').innerHTML = response.player.Nom
+
+                secured:true,
+                mocks:false,
+                url:'/api/getGamePlay',
+                success:function (response) {
+                    console.log('api game play',response);
+
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
+                            ///console.log('itemm',item)
+                            var drag = true;
+                            if (item.level == 2){
+                                var drag = false;
+                            }
                             return {
                                 id: item.id,
                                 text: item.nomAction,
-                                draggable: true,
+                                draggable: drag,
                                 level: item.level,
                                 color: item.color
                             };
                         })
                     }
 
+
+
+                    $('div#nomPlayer').text(response.player.Nom)
+                    $('div#team').text(response.player.equipe.libelle)
+                    $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
+
                     const startWeek = 1;
-                    const endWeek = 9;
+                    const endWeek = 8;
                     let data = mockData()
                     const game = new Game(1, startWeek, endWeek, data);
                     const gameModel = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
@@ -168,6 +187,7 @@ class Application {
                                 text: item.text,
                                 level: item.level,
                                 draggable: item.draggable,
+                                color: item.color
                             }
                         }
                     })
