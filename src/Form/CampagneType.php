@@ -15,6 +15,7 @@ class CampagneType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('cible')
             ->add('actionMarketings', CollectionType::class, [
                 'entry_type' => ActionMarketingType::class,
                 'entry_options' => ['label' => false],
