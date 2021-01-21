@@ -37,6 +37,7 @@
                 let $li = $('<li></li>', {'class':current['itemClass']}).append(`<span>${item.text}</span>`)
                 $li.data('id', item.id)
                 $li.attr('data-id', item.id)
+                $li.attr('data-level', item.level)
                 $li.attr('draggable', item.draggable)
                 $li.css("background-color", item.color);
                 if(item.draggable){

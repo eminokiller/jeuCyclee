@@ -44,14 +44,14 @@
             for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
                 let mois = 'FÉVRIER - S'+i;
                 let $div = $('<div></div>', {'class': current['containerClass']})
-                $div.attr('data-id', `${i}_${$(_that).attr('data-phase')}`)
+                $div.attr('data-id', `${i}_${$(_that).attr('data-id')}`)
 
                 if (i > 4){
                     let j = i-4;
                     mois = 'MARS - S' + j;
                 }
                 $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
-                let $weekContainer = $('<div class="zone_dragger zone_drg_1"><ul class="task-week"></ul></div>');
+                let $weekContainer = $('<div class="week-container zone_dragger zone_drg_1"><ul class="task-week"></ul></div>');
                 prepareWeekHooks($weekContainer);
                 $div.append($weekContainer);
                 $(_that).append($div[0])
@@ -61,7 +61,7 @@
                 let weeks = []
                 $(_that).find('.droppable-list').each(function () {
                     let weekIndex = $(this).index();
-                    $(this).find('.week-container > ul.task-week').each(function () {
+                    $(this).find('div.week-container > ul.task-week').each(function () {
                         $(this).find('li.draggable-task').each(function () {
                             let taskIndex = $(this).index()
                             weeks[weekIndex] = weeks[weekIndex] ? weeks[weekIndex] : new Week(weekIndex)

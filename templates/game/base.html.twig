@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="{{ asset('integration/css/main.css')}}" rel="stylesheet">
+    <link href="{{ asset('integration/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
           integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
           crossorigin="anonymous"/>
@@ -36,7 +36,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input name="email" required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input name="email" required type="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-danger fade">Bad credential</small>
                     </div>
                 </div>
@@ -50,7 +51,7 @@
 <div id="videoTeaser">
     <div style="text-align:center">
         <video id="video1" width="420">
-            <source src="{{ asset('integration/media/aa_bb.mp4')}}" type="video/mp4">
+            <source src="{{ asset('integration/media/aa_bb.mp4') }}" type="video/mp4">
             Your browser does not support HTML video.
         </video>
     </div>
@@ -66,7 +67,10 @@
 
             <div class="level1_team_box">
                 <h2 class="score_h2_title">Level 1</h2>
+
+
                 <h3 class="score_h3_title">équipe :<br><strong><div id="team"></div></strong></h3>
+
             </div>
 
             <div class="level1_transformer_signs_box">
@@ -94,7 +98,9 @@
                 <div class="row_transformers center_content">
                     <div class="box_current_profile_header"></div>
                 </div>
+
                 <div class="profile_avatar_name" id="nomPlayer"></div>
+
             </div>
 
         </div>
@@ -112,29 +118,20 @@
 
         <div class="tableau_semaines">
             <div class="box_x_scrollabele">
-
-
-
-
-
-
-            <div class="game-container">
-                <div class="flex-container target-table" data-phase="1"></div>
-            </div>
-
-
-
-
-
-
-
-
+                <div class="game-container">
+                    <div class="flex-container target-table" data-id="1"></div>
+                </div>
             </div>
         </div>
+        {#<div class="tableau_semaines_2">#}
+            {#<div class="box_x_scrollabele">#}
+                {#<div class="game-container">#}
+                    {#<div class="flex-container target-table" data-id="2"></div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
         <div class="right_arrow_scroller"></div>
         <div class="left_arrow_scroller"></div>
-
-
         <div class="lvl1_score_circle1">
             <p>Mon Score</p>
             <p><strong><span class="score" id="myScore">15%</span></strong></p>
@@ -157,15 +154,31 @@
         <div class="impact-7">e-Event</div>
         <div class="impact-8">Medeo</div>
 
-        <div class="impact_progress_1"><div style="width: 73%;"></div></div>
-        <div class="impact_progress_2"><div style="width: 83%;"></div></div>
-        <div class="impact_progress_3"><div style="width: 73%;"></div></div>
-        <div class="impact_progress_4"><div style="width: 43%;"></div></div>
-        <div class="impact_progress_5"><div style="width: 73%;"></div></div>
-        <div class="impact_progress_6"><div style="width: 93%;"></div></div>
-        <div class="impact_progress_7"><div style="width: 73%;"></div></div>
-        <div class="impact_progress_8"><div style="width: 63%;"></div></div>
-</div>
+        <div class="impact_progress_1">
+            <div style="width: 73%;"></div>
+        </div>
+        <div class="impact_progress_2">
+            <div style="width: 83%;"></div>
+        </div>
+        <div class="impact_progress_3">
+            <div style="width: 73%;"></div>
+        </div>
+        <div class="impact_progress_4">
+            <div style="width: 43%;"></div>
+        </div>
+        <div class="impact_progress_5">
+            <div style="width: 73%;"></div>
+        </div>
+        <div class="impact_progress_6">
+            <div style="width: 93%;"></div>
+        </div>
+        <div class="impact_progress_7">
+            <div style="width: 73%;"></div>
+        </div>
+        <div class="impact_progress_8">
+            <div style="width: 63%;"></div>
+        </div>
+    </div>
 </div>
 <div id="result"></div>
 <!------------->
@@ -204,7 +217,7 @@
 
 <script src="{{ asset('integration/scripts/api.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/draggable-list.js') }}"></script>
-<script src="{{ asset('integration/scripts/plugins/game-borad.js')}}"></script>
+<script src="{{ asset('integration/scripts/plugins/game-borad.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/ajax-interceptor.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/stopwatch.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/score.js') }}"></script>
