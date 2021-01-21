@@ -39,7 +39,7 @@ class Application {
             },
         };
 
-        this.applyStep = function(stepName) {
+        this.applyStep = function (stepName) {
             for (let selector in  steps[stepName]) {
                 let fnstring = steps[stepName][selector];
                 let fn = window[fnstring];
@@ -55,15 +55,17 @@ class Application {
         this._teaserStartHandler = function () {
             (function () {
                 let myVideo = document.getElementById("video1");
-                myVideo.addEventListener('ended',function () {
+                myVideo.addEventListener('ended', function () {
                     dispatchTeaserEnded();
-                },false)
+                }, false)
+
                 function playPause() {
                     if (myVideo.paused)
                         myVideo.play();
                     else
                         myVideo.pause();
                 }
+
                 playPause();
             })();
         };
@@ -72,10 +74,13 @@ class Application {
         };
         this._gameStartHandler = function () {
             ajaxInterceptor({
-                secured:true,
-                mocks:false,
-                url:'/api/getGamePlay',
-                success:function (response) {
+                secured: true,
+                mocks: false,
+                url: '/api/getGamePlay',
+                success: function (response) {
+                    console.log('heeeeeeere', response)
+                    document.querySelector('#teamName').innerHTML = response.player.equipe.libelle
+                    document.querySelector('#playerName').innerHTML = response.player.Nom
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
                             return {
@@ -87,11 +92,13 @@ class Application {
                             };
                         })
                     }
+
                     const startWeek = 1;
                     const endWeek = 9;
                     let data = mockData()
                     const game = new Game(1, startWeek, endWeek, data);
-                    const gameModel = Game.createInstance(1, startWeek, endWeek, data);
+                    const gameModel = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
+                    console.log('-------->here game model week1', gameModel)
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -100,6 +107,8 @@ class Application {
                             evt.originalEvent.dataTransfer.setData('data-id', $(evt.target).data('id'))
                             evt.originalEvent.dataTransfer.setData('data-parent', $(evt.target).parent().attr('class'))
                             evt.originalEvent.dataTransfer.setData('data-index', $(evt.target).index())
+                            console.log('drag start data level---->', $(evt.target).attr('data-level'))
+                            evt.originalEvent.dataTransfer.setData('data-level', $(evt.target).attr('data-level'))
                             if (!$(evt.target).parent().hasClass('tasker')) {
                                 let weekIndex = $(evt.target).parents('.droppable-list').first().data('id')
                                 evt.originalEvent.dataTransfer.setData('data-week-index', weekIndex)
@@ -157,11 +166,12 @@ class Application {
                             return {
                                 id: item.id,
                                 text: item.text,
+                                level: item.level,
                                 draggable: item.draggable,
                             }
                         }
                     })
-                    $('.target-table').gameBoard({
+                    $('.target-table[data-id="1"]').gameBoard({
                         startWeek: startWeek,
                         endWeek: endWeek,
                         'ondragover': function (evt) {
@@ -174,6 +184,9 @@ class Application {
                             let dataParent = evt.originalEvent.dataTransfer.getData('data-parent');
                             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
                             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
+                            let level = evt.originalEvent.dataTransfer.getData('data-level');
+                            console.log('level------->', level)
+                            if (level != 1) return;
                             let $source = $('<div></div>');
                             if (dataWeekIndex != "false") {
                                 $source = $($($($($(`.droppable-list[data-id="${dataWeekIndex}"]`).first()).find('.week-container').first()).find('.task-week').first()).find(`li:nth-child(${dataIndex + 1})`).first());
@@ -217,7 +230,7 @@ class Application {
                     $('#myScore').score({}, gameModel, game);
                     $('#chat-component').chat({
                         'chatTeam': [
-                            {id: 1, username: 'XYZ', 'picUrl':'/css/image/me.png'}
+                            {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}
                         ],
                         'chatRoom': '#chat-room',
                         'chatSearch': '#chat-component-search',
@@ -227,7 +240,7 @@ class Application {
                         }
                     }, {});
                 },
-                error:function (error) {
+                error: function (error) {
                     console.log(error);
                     alert('SORRY........');
                 }
@@ -245,17 +258,17 @@ class Application {
         let stepHandlerRegistry = {
             '#login': [],
             '#videoTeaser': [this._teaserStartHandler],
-            '#gamePlay': [this._gameStartHandler ],
+            '#gamePlay': [this._gameStartHandler],
             '#result': [],
         }
         this.applyStepHandler = function (stepName) {
             stepHandlerRegistry[stepName].forEach(function (fn) {
-                if(typeof fn === 'function') fn();
+                if (typeof fn === 'function') fn();
             })
 
         };
         this.init = function () {
-            let currentStep = localStorage.getItem('currentStep')? localStorage.getItem('currentStep'): '#login';
+            let currentStep = localStorage.getItem('currentStep') ? localStorage.getItem('currentStep') : '#login';
             this.applyStep(currentStep);
         };
         this.getNextStep = function () {
@@ -266,9 +279,11 @@ class Application {
         }
 
     }
-    boot(){
+
+    boot() {
         this.init();
     }
+
     next() {
         let next = this.getNextStep();
         console.log(next)

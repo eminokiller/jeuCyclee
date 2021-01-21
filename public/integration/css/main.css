@@ -213,13 +213,13 @@ div.week-header {
     border: 1px solid lightgray;
 }
 
-div.week-container {
-    /*display: flex;*/
-    min-height: 55vh;
-    border: 1px solid lightgray;
-    background-color: #8644d3;
-    /*opacity: 0.5;*/
-}
+/*div.week-container {*/
+    /*!*display: flex;*!*/
+    /*min-height: 55vh;*/
+    /*border: 1px solid lightgray;*/
+    /*background-color: #8644d3;*/
+    /*!*opacity: 0.5;*!*/
+/*}*/
 .task-week > .draggable-task{
     padding-top: 3px;
     color: white;
