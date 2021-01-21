@@ -82,11 +82,6 @@ class Application {
                     console.log('heeeeeeere', response)
                     document.querySelector('#teamName').innerHTML = response.player.equipe.libelle
                     document.querySelector('#playerName').innerHTML = response.player.Nom
-
-                secured:true,
-                mocks:false,
-                url:'/api/getGamePlay',
-                success:function (response) {
                     console.log('api game play',response);
 
                     function mockData() {
@@ -108,8 +103,7 @@ class Application {
 
 
 
-                    $('div#nomPlayer').text(response.player.Nom)
-                    $('div#team').text(response.player.equipe.libelle)
+
                     $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
 
                     const startWeek = 1;
