@@ -13,14 +13,17 @@ use App\Entity\ActionMarketing;
 use App\Entity\Campagne;
 use App\Entity\Equipe;
 use App\Entity\Joueur;
+use App\Entity\Reponse;
 use App\Exception\GameNotFoundException;
 use App\Exception\PlayerNotFoundException;
 use App\Exception\TeamNotFoundException;
 use App\Repository\CampagneRepository;
+use App\Repository\ReponseRepository;
 use App\Service\SerializerManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -82,7 +85,7 @@ class ApiGameController extends AbstractController
                         $arrayResponse = [
                             'player' => $serializerManager->normalize($user, ['profile', 'ref']),
                             'team' => $serializerManager->normalize($user, ['player', 'ref']),
-                            'gamePlayModel' => $serializerManager->normalize($gamePlay, ['gamemodel','campagne', 'ref'])
+                            'gamePlayModel' => $serializerManager->normalize($gamePlay, ['gamemodel', 'campagne', 'ref'])
                         ];
 
                         return new JsonResponse($arrayResponse, 200);
@@ -112,6 +115,33 @@ class ApiGameController extends AbstractController
         }
 
 
+    }
+
+    /**
+     * @Route("/checkQuestion/{id}",name="check_question_status",options={"expose"=true})
+     * @param ActionMarketing $actionMarketing
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkQuestion(ActionMarketing $actionMarketing, Request $request, ReponseRepository $repository)
+    {
+        $answerBody = $request->request->all();
+        foreach ($answerBody['task']['questions'] as $question){
+            foreach ($question['reponses'] as $reponse){
+
+            }
+        }
+        $testAll = array_reduce($answerBody['task']['questions'], function ($test, $question) use ($repository) {
+            $test = $test && array_reduce($question['reponses'], function ($test2, $reponse) use ($repository) {
+                    $reponseEntity = $repository->find(intval($reponse['id']));
+                    $status = isset($reponse['status']) ? 1 : 0;
+                    $test2 = $test2 && (($reponseEntity instanceof Reponse) ? ($status == $reponseEntity->getStatus()) : false);
+                    return $test2;
+                }, true);
+            return $test;
+        }, true);
+        $status = $testAll ? 201 : 422;
+        return new JsonResponse(['status' => 1, 'answer' => $answerBody], $status);
     }
 
 }

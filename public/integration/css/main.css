@@ -330,3 +330,6 @@ div.kpi-flex-container {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+.wrong-answer{
+    color: red;
+}
