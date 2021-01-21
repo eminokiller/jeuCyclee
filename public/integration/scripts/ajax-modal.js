@@ -1,15 +1,66 @@
 $(function () {
+    function getResponseTemplate(response,idQuestion,idTask) {
+        return `<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios_${response.id}_${idQuestion}_${idTask}">
+  <label class="form-check-label" for="exampleRadios1">
+    ${response.libelle}
+  </label>
+</div>`;
+    }
+function getResponsesTemplate(question,idTask) {
+
+    return question.reponses.reduce((t,reponse)=>{
+        t +=getResponseTemplate(reponse,question.id,idTask);
+        return t;
+    },'')
+}
+    function getQuestionTemplate(question,idTask) {
+            return `<div class="form-group question-container">
+<p class="question_text">${question.libelle}</p>
+<div class="response-container">
+${getResponsesTemplate(question,idTask)}
+</div>
+</div>`;
+    }
+    function getQuestionsTemplate(task) {
+        return task.questions.reduce((t,question) => {
+            t+=getQuestionTemplate(question,task.id);
+            return t
+        }, '')
+    }
+
+    function getTaskTemplate(resp) {
+        return `<form name="question" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!---------->
+                    ${getQuestionsTemplate(resp.task)}
+                <!------------>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>`;
+    }
+
     function loadQuestionForm(dataId) {
+        console.log('data id ------->', dataId)
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
-                mocks: true,
-                secured: false,
-                url: '/getQuestion/' + dataId,
+                mocks: false,
+                secured: true,
+                url: '/api/getQuestion/' + dataId,
                 method: 'GET',
-                success: function (response) {
-                    resolve(response);
+                success: (response) =>{
+                    resolve(getTaskTemplate(response));
                 },
-                error: function (error) {
+                error: (error) =>{
                     reject(error)
                 }
             })
@@ -17,6 +68,7 @@ $(function () {
     }
 
     function submitQuestionForm(form, dataId) {
+        console.log('data id ------->', dataId)
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
                 mocks: true,

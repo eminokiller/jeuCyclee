@@ -167,6 +167,7 @@ class Application {
                                 id: item.id,
                                 text: item.text,
                                 level: item.level,
+                                color: item.color,
                                 draggable: item.draggable,
                             }
                         }
