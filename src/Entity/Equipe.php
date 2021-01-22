@@ -17,6 +17,11 @@ class Equipe extends EntityRef
      */
     private $joueurs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=GameSession::class, inversedBy="equipes")
+     */
+    private $gameSession;
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -50,6 +55,18 @@ class Equipe extends EntityRef
                 $joueur->setEquipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGameSession(): ?GameSession
+    {
+        return $this->gameSession;
+    }
+
+    public function setGameSession(?GameSession $gameSession): self
+    {
+        $this->gameSession = $gameSession;
 
         return $this;
     }

@@ -4,7 +4,7 @@
         const defaultConfig = {
             containerClass: 'droppable-list column_tab_semaine',
             startWeek: 1,
-            endWeek: 9,
+            endWeek: 8,
             level: 1,
             nbrOfHooks: 10,
             keystore: 'game',

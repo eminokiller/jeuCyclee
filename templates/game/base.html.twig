@@ -30,30 +30,45 @@
 </head>
 <body>
 <div id="login">
-    <div style="width: 33%; height: 33%">
-        <form action="" id="loginForm" name="loginForm">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
+    <div class="container_ipad_view" id="login_transformers">
+        <div class="row_transformers">
+            <div class="logo"><img src="{{ asset('transformers/images/logo.png') }}"></div>
+        </div>
+        <form action="" id="loginForm" name="loginForm" class="login_transformers_form">
+
                         <label for="exampleInputEmail1">Email address</label>
                         <input name="email" required type="email" class="form-control" id="exampleInputEmail1"
                                aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-danger fade">Bad credential</small>
-                    </div>
-                </div>
-                <div class="card-footer" style="justify-content: center">
-                    <button type="submit" class="btn btn-primary w-100">Connéxion</button>
-                </div>
-            </div>
+
+
+                    <button type="submit" class="btn btn-primary w-100">Commencer</button>
+
+
         </form>
     </div>
 </div>
 <div id="videoTeaser">
-    <div style="text-align:center">
-        <video id="video1" width="420">
-            <source src="{{ asset('integration/media/aa_bb.mp4') }}" type="video/mp4">
-            Your browser does not support HTML video.
-        </video>
+
+    <div class="container_ipad_view" id="htp_transformers">
+        <div class="left_col">
+            <div class="row_transformers">
+                <div class="htp_logo"><img src="{{ asset('transformers/images/logo.png') }}"></div>
+            </div>
+            <div class="row_transformers">
+                <h2 class="htp_h2_title">DÉMONSTRATION DE JEU</h2>
+            </div>
+            <div class="row_transformers">
+                <video id="video1" class="video_htp" controls>
+                    <source src="{{ asset('integration/media/aa_bb.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+
+
+        </div>
+        <div class="right_col">
+            <div class="htp_tranformer_image"><img src="{{ asset('transformers/images/tranformer_image.png')}}"></div>
+        </div>
     </div>
 </div>
 <div id="gamePlay" class="page-wrapper hide">
@@ -134,8 +149,7 @@
             </div>
         </div>
 
-        <div class="right_arrow_scroller_2"></div>
-        <div class="left_arrow_scroller_2"></div>
+
         <div id="score_container">
 
             <div class="lvl1_score_circle1">
@@ -164,25 +178,25 @@
                 <div style="width: 73%;"></div>
             </div>
             <div class="impact_progress_2">
-                <div style="width: 83%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_3">
-                <div style="width: 73%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_4">
-                <div style="width: 43%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_5">
-                <div style="width: 73%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_6">
-                <div style="width: 93%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_7">
-                <div style="width: 73%;"></div>
+                <div style="width: 0%;"></div>
             </div>
             <div class="impact_progress_8">
-                <div style="width: 63%;"></div>
+                <div style="width: 0%;"></div>
             </div>
         </div>
     </div>
