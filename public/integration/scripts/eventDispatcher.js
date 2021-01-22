@@ -13,6 +13,11 @@ function dispatchPrepareRemoveEvent() {
     event.initEvent('prepareRemove', true, true);
     document.dispatchEvent(event);
 }
+function dispatchTimeElapsedEvent() {
+    const event = document.createEvent('Event');
+    event.initEvent('timeElapsedEvent', true, true);
+    document.dispatchEvent(event);
+}
 
 function dispatchUserConnectedEvent() {
     const event = document.createEvent('Event');
@@ -22,5 +27,10 @@ function dispatchUserConnectedEvent() {
 function dispatchTeaserEnded() {
     const event = document.createEvent('Event');
     event.initEvent('teaserEndedEvent', true, true);
+    document.dispatchEvent(event);
+}
+function dispatchMasterSaveEvent() {
+    const event = document.createEvent('Event');
+    event.initEvent('masterSaveEvent', true, true);
     document.dispatchEvent(event);
 }

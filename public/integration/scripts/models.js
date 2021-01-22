@@ -206,15 +206,7 @@ class Game {
 }
 
 class ScoreManager {
-
-    static score(model, game) {
-        console.log(model, game);
-        let scorePerfect = model.weeks.reduce((s, week) => {
-            week.tasks.map((item) => {
-                s += item._id ? 2 : 0;
-            })
-            return s;
-        }, 0);
+    static calculateGameScore(game, model) {
         let scoreGameModel = 0;
         game.weeks.forEach((week, i) => {
             week.tasks.forEach((task, j) => {
@@ -230,9 +222,29 @@ class ScoreManager {
                 }
             });
         });
-        let score = scoreGameModel
-        console.log('scoring---------->game', score);
-        return Math.round((scorePerfect) ? score * 100 / scorePerfect : 0);
+        return scoreGameModel;
+    }
+
+    static calculatePerfectScore(model) {
+        return model.weeks.reduce((s, week) => {
+            week.tasks.map((item) => {
+                s += item._id ? 2 : 0;
+            })
+            return s;
+        }, 0);
+    }
+
+    static score(model1, game1, model2, game2) {
+        let scorePerfect1 = ScoreManager.calculatePerfectScore(model1)
+        let scorePerfect2 = ScoreManager.calculatePerfectScore(model2)
+        let scoreGameModel1 = ScoreManager.calculateGameScore(game1, model1)
+        let scoreGameModel2 = ScoreManager.calculateGameScore(game2, model2)
+        let scorePerfect = scorePerfect1 + scorePerfect2;
+        let scoreGame = scoreGameModel1 + scoreGameModel2;
+        console.log('here-------->score',scorePerfect1,scorePerfect2,scoreGameModel1,scoreGameModel2)
+        let ratio = scorePerfect1 ? scoreGame / scorePerfect : 1;
+        return Math.round(ratio * 100)
+
 
     }
 }

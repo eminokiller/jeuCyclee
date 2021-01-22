@@ -1,29 +1,89 @@
 $(function () {
+    function getResponseTemplate(i, j, response, idQuestion, idTask) {
+        return `<div class="form-check">
+<input type="hidden" name="task[questions][${i}][reponses][${j}][id]" value="${response.id}">
+  <input class="form-check-input" type="checkbox" name="task[questions][${i}][reponses][${j}][status]" id="exampleRadios_${response.id}_${idQuestion}_${idTask}">
+  <label class="form-check-label" for="exampleRadios_${response.id}_${idQuestion}_${idTask}">
+    ${response.libelle}
+  </label>
+</div>`;
+    }
+
+    function getResponsesTemplate(i, question, idTask) {
+        let j = 0;
+        return question.reponses.reduce((t, reponse) => {
+            t += getResponseTemplate(i, j, reponse, question.id, idTask);
+            j++;
+            return t;
+        }, '')
+    }
+
+    function getQuestionTemplate(i, question, idTask) {
+        return `<div class="form-group question-container">
+<p class="question_text">${question.libelle}</p>
+<input type="hidden" name="task[questions][${i}][id]" value="${question.id}">
+<div class="response-container">
+${getResponsesTemplate(i, question, idTask)}
+</div>
+</div>`;
+    }
+
+    function getQuestionsTemplate(task) {
+        let i = 0;
+        return task.questions.reduce((t, question) => {
+            t += getQuestionTemplate(i, question, task.id);
+            i++;
+            return t
+        }, '')
+    }
+
+    function getTaskTemplate(resp) {
+        return `<form name="question" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!---------->
+                    <input type="hidden" name="task[id]" value="${resp.task.id}"/>
+                    ${getQuestionsTemplate(resp.task)}
+                <!------------>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>`;
+    }
+
     function loadQuestionForm(dataId) {
+        console.log('data id ------->', dataId)
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
-                mocks: true,
-                secured: false,
+                mocks: false,
+                secured: true,
                 url: '/api/getQuestion/' + dataId,
                 method: 'GET',
-                success: function (response) {
-                    resolve(response);
-                    console.log('modal',response);
+                success: (response) => {
+                    resolve(getTaskTemplate(response));
                 },
-                error: function (error) {
-                    console.log('err',error)
+                error: (error) => {
                     reject(error)
                 }
             })
         })
     }
 
-    function submitQuestionForm(form, dataId) {
+    function submitQuestionForm(data, dataId) {
+        console.log('data id ------->', dataId)
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
-                mocks: true,
-                secured: false,
-                url: '/getQuestion/' + dataId,
+                mocks: false,
+                secured: true,
+                data: data,
+                url: '/api/checkQuestion/' + dataId,
                 method: 'POST',
                 success: function (response) {
                     resolve(response);
@@ -52,19 +112,21 @@ $(function () {
             $form.bind('submit', function (e) {
                 e.preventDefault();
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
+                    console.log('reponse juste----->', response2)
                     let $taskList = $($targetContainer.find('ul.task-week').first());
                     let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
                     if (clone) {
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
-                        // $taskList.append();
                     } else {
                         $hook.replaceWith($element.addClass('done')[0])
                     }
                     $('#exampleModal').modal('hide')
                     dispatchGameChangeEvent();
                 }).catch(function (error) {
-                    $('#exampleModal').modal('hide')
+                    $('#exampleModal').find('p.question_text').each(function () {
+                        $(this).addClass('wrong-answer');
+                    })
                 })
 
             })

@@ -12,6 +12,46 @@ class Application {
                 element.classList.add('hide')
             }
         };
+        window.initPhase1 = function () {
+            window.hide('div.target-table[data-id="2"]')
+            window.show('#score_container')
+            let gameMainElement = document.querySelector('#gameMain');
+            let gameLevelElement = document.querySelector('#gameLevel');
+            gameLevelElement.innerHTML = '1'
+            if (!gameMainElement.classList.contains('level1_transformers')) {
+                gameMainElement.classList.add('level1_transformers')
+            }
+            if (gameMainElement.classList.contains('level2_transformers')) {
+                gameMainElement.classList.remove('level2_transformers')
+            }
+        };
+        window.initPhase2 = function () {
+            window.show('div.target-table[data-id="2"]')
+            window.hide('#score_container')
+            let gameMainElement = document.querySelector('#gameMain');
+            let gameLevelElement = document.querySelector('#gameLevel');
+            gameLevelElement.innerHTML = '2'
+            if (!gameMainElement.classList.contains('level2_transformers')) {
+                gameMainElement.classList.add('level2_transformers')
+            }
+            if (gameMainElement.classList.contains('level1_transformers')) {
+                gameMainElement.classList.remove('level1_transformers')
+            }
+        };
+        window.save = function (keyStore, campaign, remote) {
+            localStorage.setItem(keyStore, JSON.stringify(campaign));
+            if (remote) {
+                //post the data to the server;
+            }
+        };
+        window.reInitialize = function (keyStore) {
+            let storedCampaignString = localStorage.getItem(keyStore);
+            if (storedCampaignString) {
+                return JSON.parse(storedCampaignString);
+
+            }
+            return false;
+        };
         let steps = {
             '#login': {
                 '#login': 'show',
@@ -38,7 +78,8 @@ class Application {
                 '#result': 'show'
             },
         };
-
+        this._mainTime = 600;
+        this._elapsedTime = 0;
         this.applyStep = function (stepName) {
             for (let selector in  steps[stepName]) {
                 let fnstring = steps[stepName][selector];
@@ -72,46 +113,36 @@ class Application {
         this._teaserTerminateHandler = function () {
             this.applyStep('#gamePlay')
         };
-        this._gameStartHandler = function () {
+        this._gameStartHandler = () => {
             ajaxInterceptor({
-
                 secured: true,
                 mocks: false,
                 url: '/api/getGamePlay',
-                success: function (response) {
-                    console.log('heeeeeeere', response)
-                    document.querySelector('#teamName').innerHTML = response.player.equipe.libelle
-                    document.querySelector('#playerName').innerHTML = response.player.Nom
-                    console.log('api game play',response);
+                success: (response) => {
+                    document.querySelector('#team').innerHTML = response.player.equipe.libelle
+                    document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
+
+                    initPhase1();
 
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
-                            ///console.log('itemm',item)
-                            var drag = true;
-                            if (item.level == 2){
-                                var drag = false;
-                            }
                             return {
                                 id: item.id,
                                 text: item.nomAction,
-                                draggable: drag,
+                                draggable: true,
                                 level: item.level,
                                 color: item.color
                             };
                         })
                     }
-
-
-
-
-                    $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
-
                     const startWeek = 1;
-                    const endWeek = 8;
+                    const endWeek = 9;
                     let data = mockData()
-                    const game = new Game(1, startWeek, endWeek, data);
-                    const gameModel = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
-                    console.log('-------->here game model week1', gameModel)
+                    const game1 = new Game(1, startWeek, endWeek, data);
+                    const game2 = new Game(2, startWeek, endWeek, data);
+                    const gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
+                    const gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
+                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -180,14 +211,15 @@ class Application {
                                 id: item.id,
                                 text: item.text,
                                 level: item.level,
+                                color: item.color,
                                 draggable: item.draggable,
-                                color: item.color
                             }
                         }
                     })
                     $('.target-table[data-id="1"]').gameBoard({
                         startWeek: startWeek,
                         endWeek: endWeek,
+                        keystore: 'game1',
                         'ondragover': function (evt) {
                             console.log('dragover', evt);
                             evt.preventDefault();
@@ -195,7 +227,6 @@ class Application {
                         'ondrop': function (evt) {
                             evt.preventDefault();
                             let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
-                            let dataParent = evt.originalEvent.dataTransfer.getData('data-parent');
                             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
                             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
                             let level = evt.originalEvent.dataTransfer.getData('data-level');
@@ -223,7 +254,6 @@ class Application {
                                 $('#exampleModal').data('target-hook', $(evt.target).index());
                                 $('#exampleModal').modal('toggle')
                             } else {
-                                let $taskList = $($container.find('ul.task-week').first());
                                 let $hook = $(evt.target)
                                 let $clonedHook = $hook.clone(true);
                                 if ($source.parent().hasClass('tasker')) {
@@ -239,9 +269,62 @@ class Application {
 
 
                         }
-                    }, game);
-                    $('div.stopwatch').timer({'mainTime': 3000}, game)
-                    $('#myScore').score({}, gameModel, game);
+                    }, game1);
+                    $('.target-table[data-id="2"]').gameBoard({
+                        startWeek: startWeek,
+                        endWeek: endWeek,
+                        keystore:'game2',
+                        level: 2,
+                        'ondragover': function (evt) {
+                            console.log('dragover', evt);
+                            evt.preventDefault();
+                        },
+                        'ondrop': function (evt) {
+                            evt.preventDefault();
+                            let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
+                            let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
+                            let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
+                            let level = evt.originalEvent.dataTransfer.getData('data-level');
+                            if (level != 2) return;
+                            let $source = $('<div></div>');
+                            if (dataWeekIndex != "false") {
+                                $source = $($($($($(`.droppable-list[data-id="${dataWeekIndex}"]`).first()).find('.week-container').first()).find('.task-week').first()).find(`li:nth-child(${dataIndex + 1})`).first());
+                            } else {
+                                $source = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first())
+                            }
+
+                            let $target = $(evt.target);
+                            let $container = $('<div></div>')
+                            if ($target.hasClass('droppable-list')) {
+                                $container = $target;
+                            } else {
+                                $container = $($target.parents('.droppable-list').first())
+                            }
+                            let targetId = $container.attr('data-id');
+                            if (!$source.hasClass('done')) {
+                                $('#exampleModal').data('clone', true);
+                                $('#exampleModal').data('id', dataId);
+                                $('#exampleModal').data('target-id', targetId);
+                                $('#exampleModal').data('target-hook', $(evt.target).index());
+                                $('#exampleModal').modal('toggle')
+                            } else {
+                                let $hook = $(evt.target)
+                                let $clonedHook = $hook.clone(true);
+                                if ($source.parent().hasClass('tasker')) {
+                                    $hook.replaceWith($source.addClass('done').clone(true)[0])
+                                } else {
+                                    let cloned = $source.addClass('done').clone(true)[0];
+                                    $hook.replaceWith(cloned)
+                                    $source.replaceWith($clonedHook)
+                                }
+
+                                dispatchGameChangeEvent();
+                            }
+
+
+                        }
+                    }, game2);
+                    $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}
@@ -253,8 +336,12 @@ class Application {
                             return member
                         }
                     }, {});
+                    window.onbeforeunload = () => {
+                        dispatchMasterSaveEvent();
+                        return "Dude, are you sure you want to leave? Think of the kittens!";
+                    };
                 },
-                error: function (error) {
+                error: (error) => {
                     console.log(error);
                     alert('SORRY........');
                 }
@@ -295,12 +382,13 @@ class Application {
     }
 
     boot() {
+        this._mainTime = parseInt(localStorage.getItem('mainTime')) | 600;
+        this._elapsedTime = parseInt(localStorage.getItem('elapsedTime')) | 0;
         this.init();
     }
 
     next() {
         let next = this.getNextStep();
-        console.log(next)
         this.applyStep(next);
     }
 }

@@ -274,7 +274,7 @@ span.c4_prct_score {
 
 
 /***********************/
-.container_ipad_view#level1_transformers{
+.container_ipad_view.level1_transformers{
      background: url("../images/bg-lvl1.png") center no-repeat;
      background-size: 100% 100%;
 }
@@ -453,8 +453,8 @@ span.c4_prct_score {
     position: absolute;
     top: 158px;
     left: 205px;
-    width: 737px;
-    height: 315px;
+    width: 740px;
+    height: 270px;
     overflow: hidden;
     overflow-x: scroll;
 }
@@ -1160,15 +1160,15 @@ input:checked + .slider:before {
     cursor: pointer;
 }
 /***********************/
-.container_ipad_view#level2_transformers{
+.container_ipad_view.level2_transformers{
      background: url("../images/bg-lvl2.png") center no-repeat;
      background-size: 100% 100%;
 }
 .tableau_semaines_2 {
     position: absolute;
-    top: 442px;
+    top: 430px;
     left: 205px;
-    width: 737px;
+    width: 742px;
     height: 315px;
     overflow: hidden;
     overflow-x: scroll;

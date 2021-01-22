@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-footer" style="justify-content: center">
-                    <button type="submit" class="btn btn-primary w-100">VOTRE ADRESSE MAIL</button>
+                    <button type="submit" class="btn btn-primary w-100">Connéxion</button>
                 </div>
             </div>
         </form>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <div id="gamePlay" class="page-wrapper hide">
-    <div class="container_ipad_view" id="level1_transformers">
+    <div class="container_ipad_view level1_transformers" id="gameMain">
 
         <div class="row_transformers">
 
@@ -66,10 +66,12 @@
             </div>
 
             <div class="level1_team_box">
-                <h2 class="score_h2_title">Level 1</h2>
+                <h2 class="score_h2_title">Level <span id="gameLevel"></span></h2>
 
 
-                <h3 class="score_h3_title">équipe :<br><strong><div id="teamName"></div></strong></h3>
+                <h3 class="score_h3_title">équipe :<br><strong>
+                        <div id="team"></div>
+                    </strong></h3>
 
             </div>
 
@@ -93,13 +95,13 @@
             </div>
             <div class="box_timer_container">
                 <div id="ten-countdown"></div>
-            </div>
-            <div class="box_profile_container">
+            </div>+
+            <div id="profile_action" class="box_profile_container">
                 <div class="row_transformers center_content">
                     <div class="box_current_profile_header"></div>
                 </div>
 
-                <div class="profile_avatar_name" id="playerName"></div>
+                <div class="profile_avatar_name" id="nomPlayer"></div>
 
             </div>
 
@@ -112,10 +114,8 @@
         </div>
         <div class="scroll_down_list"></div>
         <div class="scroll_up_list"></div>
-
-        <div class="tableau_title" id="cible"> </div>
+        <div class="tableau_title" id="cible"></div>
         <div class="delete_lvl1" onclick="return prepareRemove(this);"></div>
-
         <div class="tableau_semaines">
             <div class="box_x_scrollabele">
                 <div class="game-container">
@@ -123,60 +123,67 @@
                 </div>
             </div>
         </div>
-        {#<div class="tableau_semaines_2">#}
-            {#<div class="box_x_scrollabele">#}
-                {#<div class="game-container">#}
-                    {#<div class="flex-container target-table" data-id="2"></div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
+
         <div class="right_arrow_scroller"></div>
         <div class="left_arrow_scroller"></div>
-        <div class="lvl1_score_circle1">
-            <p>Mon Score</p>
-            <p><strong><span class="score" id="myScore">15%</span></strong></p>
-        </div>
-        <div class="lvl1_score_circle2">
-            <p>Score équipe</p>
-            <p><strong>32%</strong></p>
-        </div>
-        <div class="lvl1_score_circle3">
-            <p>Meilleur score</p>
-            <p><strong>85%</strong></p>
+        <div class="tableau_semaines_2">
+            <div class="box_x_scrollabel_2">
+                <div class="game-container">
+                    <div class="flex-container target-table" data-id="2"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="impact-1">IMPACT SUR HCPs</div>
-        <div class="impact-2">FACE TO FACE</div>
-        <div class="impact-3">VISITE REMOTE</div>
-        <div class="impact-4">Trigger email</div>
-        <div class="impact-5">HQ email</div>
-        <div class="impact-6">Webinar</div>
-        <div class="impact-7">e-Event</div>
-        <div class="impact-8">Medeo</div>
+        <div class="right_arrow_scroller_2"></div>
+        <div class="left_arrow_scroller_2"></div>
+        <div id="score_container">
 
-        <div class="impact_progress_1">
-            <div style="width: 73%;"></div>
-        </div>
-        <div class="impact_progress_2">
-            <div style="width: 83%;"></div>
-        </div>
-        <div class="impact_progress_3">
-            <div style="width: 73%;"></div>
-        </div>
-        <div class="impact_progress_4">
-            <div style="width: 43%;"></div>
-        </div>
-        <div class="impact_progress_5">
-            <div style="width: 73%;"></div>
-        </div>
-        <div class="impact_progress_6">
-            <div style="width: 93%;"></div>
-        </div>
-        <div class="impact_progress_7">
-            <div style="width: 73%;"></div>
-        </div>
-        <div class="impact_progress_8">
-            <div style="width: 63%;"></div>
+            <div class="lvl1_score_circle1">
+                <p>Mon Score</p>
+                <p><strong><span class="score" id="myScore">15%</span></strong></p>
+            </div>
+            <div class="lvl1_score_circle2">
+                <p>Score équipe</p>
+                <p><strong>32%</strong></p>
+            </div>
+            <div class="lvl1_score_circle3">
+                <p>Meilleur score</p>
+                <p><strong>85%</strong></p>
+            </div>
+
+            <div class="impact-1">IMPACT SUR HCPs</div>
+            <div class="impact-2">FACE TO FACE</div>
+            <div class="impact-3">VISITE REMOTE</div>
+            <div class="impact-4">Trigger email</div>
+            <div class="impact-5">HQ email</div>
+            <div class="impact-6">Webinar</div>
+            <div class="impact-7">e-Event</div>
+            <div class="impact-8">Medeo</div>
+
+            <div class="impact_progress_1">
+                <div style="width: 73%;"></div>
+            </div>
+            <div class="impact_progress_2">
+                <div style="width: 83%;"></div>
+            </div>
+            <div class="impact_progress_3">
+                <div style="width: 73%;"></div>
+            </div>
+            <div class="impact_progress_4">
+                <div style="width: 43%;"></div>
+            </div>
+            <div class="impact_progress_5">
+                <div style="width: 73%;"></div>
+            </div>
+            <div class="impact_progress_6">
+                <div style="width: 93%;"></div>
+            </div>
+            <div class="impact_progress_7">
+                <div style="width: 73%;"></div>
+            </div>
+            <div class="impact_progress_8">
+                <div style="width: 63%;"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -199,6 +206,27 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+            <form name="enableLevelTwoForm">
+            <div class="modal-header">
+                <div class="modal-title modal-title" id="exampleModalLabel2">Félication vous ETES AU LEVEL II</div>
+            </div>
+            <div class="modal-body">
+                <div class="medeo_deloqued">
+                    Les action de la campagne <strong>MEDEO</strong> sont maintenant débloquées.Placez ces actions dans l'ordre pour gagné le jeu!
+                </div>
+            </div>
+            <div class="modal-footer center">
+                <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

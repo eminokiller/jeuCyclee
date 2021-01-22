@@ -178,8 +178,8 @@ li.task-hook{
     margin-top: 1vh;
     font-size: small;
     text-align: center;
-    min-height: 5vh;
-    border: darkgray dashed thin;
+    min-height: 4vh;
+    /*border: darkgray dashed thin;*/
 }
 li.draggable-task[draggable=false] {
     background: greenyellow;
@@ -187,14 +187,14 @@ li.draggable-task[draggable=false] {
 
 .flex-container {
     display: flex;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 .flex-container > div {
     display: flex;
     flex-direction: column;
     font-size: 16px;
-    flex: 0 0 13em;
+    flex: 0 0 11.6em;
 }
 
 div.droppable-list {
@@ -251,7 +251,7 @@ div.card-align {
 }
 div.kpi-flex-container {
     display: flex;
-    height: 22vh;
+    height: 20vh;
     flex-direction: row;
     justify-content: center;
 }
@@ -329,4 +329,7 @@ div.kpi-flex-container {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+.wrong-answer{
+    color: red;
 }
