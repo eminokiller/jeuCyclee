@@ -5,6 +5,7 @@
             containerClass: 'droppable-list column_tab_semaine',
             startWeek: 1,
             endWeek: 9,
+            level: 1,
             nbrOfHooks: 10,
             ondragover: function (evt) {
                 console.log(evt)
@@ -51,7 +52,8 @@
                     mois = 'MARS - S' + j;
                 }
                 $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
-                let $weekContainer = $('<div class="week-container zone_dragger zone_drg_1"><ul class="task-week"></ul></div>');
+                let extraClass = current['level'] == 1? 'zone_drg_1':'zone_drg_2';
+                let $weekContainer = $(`<div class="week-container zone_dragger ${extraClass}"><ul class="task-week"></ul></div>`);
                 prepareWeekHooks($weekContainer);
                 $div.append($weekContainer);
                 $(_that).append($div[0])

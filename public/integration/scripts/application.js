@@ -12,6 +12,32 @@ class Application {
                 element.classList.add('hide')
             }
         };
+        window.initPhase1 = function () {
+            window.hide('div.target-table[data-id="2"]')
+            window.show('#score_container')
+            let gameMainElement = document.querySelector('#gameMain');
+            let gameLevelElement = document.querySelector('#gameLevel');
+            gameLevelElement.innerHTML = '1'
+            if (!gameMainElement.classList.contains('level1_transformers')) {
+                gameMainElement.classList.add('level1_transformers')
+            }
+            if (gameMainElement.classList.contains('level2_transformers')) {
+                gameMainElement.classList.remove('level2_transformers')
+            }
+        };
+        window.initPhase2 = function () {
+            window.show('div.target-table[data-id="2"]')
+            window.hide('#score_container')
+            let gameMainElement = document.querySelector('#gameMain');
+            let gameLevelElement = document.querySelector('#gameLevel');
+            gameLevelElement.innerHTML = '2'
+            if (!gameMainElement.classList.contains('level2_transformers')) {
+                gameMainElement.classList.add('level2_transformers')
+            }
+            if (gameMainElement.classList.contains('level1_transformers')) {
+                gameMainElement.classList.remove('level1_transformers')
+            }
+        };
         let steps = {
             '#login': {
                 '#login': 'show',
@@ -38,7 +64,8 @@ class Application {
                 '#result': 'show'
             },
         };
-
+        this._mainTime = 600;
+        this._elapsedTime = 0;
         this.applyStep = function (stepName) {
             for (let selector in  steps[stepName]) {
                 let fnstring = steps[stepName][selector];
@@ -72,14 +99,20 @@ class Application {
         this._teaserTerminateHandler = function () {
             this.applyStep('#gamePlay')
         };
-        this._gameStartHandler = function () {
+        this._gameStartHandler = () => {
             ajaxInterceptor({
                 secured: true,
                 mocks: false,
                 url: '/api/getGamePlay',
-                success: function (response) {
+                success: (response) => {
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
-                    document.querySelector('#nomPlayer').innerHTML = response.player.Nom
+                    document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
+                    document.addEventListener('timeElapsedEvent', function (evt) {
+                        $('[draggable="true"]').each(function () {
+                            $(this).attr('draggable', false);
+                        })
+                    })
+                    initPhase1();
 
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
@@ -96,9 +129,10 @@ class Application {
                     const startWeek = 1;
                     const endWeek = 9;
                     let data = mockData()
-                    const game = new Game(1, startWeek, endWeek, data);
-                    const gameModel = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
-                    console.log('-------->here game model week1', gameModel)
+                    const game1 = new Game(1, startWeek, endWeek, data);
+                    const game2 = new Game(2, startWeek, endWeek, data);
+                    const gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
+                    const gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -224,9 +258,62 @@ class Application {
 
 
                         }
-                    }, game);
-                    $('div.stopwatch').timer({'mainTime': 3000}, game)
-                    $('#myScore').score({}, gameModel, game);
+                    }, game1);
+                    $('.target-table[data-id="2"]').gameBoard({
+                        startWeek: startWeek,
+                        endWeek: endWeek,
+                        level: 2,
+                        'ondragover': function (evt) {
+                            console.log('dragover', evt);
+                            evt.preventDefault();
+                        },
+                        'ondrop': function (evt) {
+                            evt.preventDefault();
+                            let dataId = parseInt(evt.originalEvent.dataTransfer.getData('data-id'));
+                            let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
+                            let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
+                            let level = evt.originalEvent.dataTransfer.getData('data-level');
+                            if (level != 2) return;
+                            let $source = $('<div></div>');
+                            if (dataWeekIndex != "false") {
+                                $source = $($($($($(`.droppable-list[data-id="${dataWeekIndex}"]`).first()).find('.week-container').first()).find('.task-week').first()).find(`li:nth-child(${dataIndex + 1})`).first());
+                            } else {
+                                $source = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first())
+                            }
+
+                            let $target = $(evt.target);
+                            let $container = $('<div></div>')
+                            if ($target.hasClass('droppable-list')) {
+                                $container = $target;
+                            } else {
+                                $container = $($target.parents('.droppable-list').first())
+                            }
+                            let targetId = $container.attr('data-id');
+                            if (!$source.hasClass('done')) {
+                                $('#exampleModal').data('clone', true);
+                                $('#exampleModal').data('id', dataId);
+                                $('#exampleModal').data('target-id', targetId);
+                                $('#exampleModal').data('target-hook', $(evt.target).index());
+                                $('#exampleModal').modal('toggle')
+                            } else {
+                                let $hook = $(evt.target)
+                                let $clonedHook = $hook.clone(true);
+                                if ($source.parent().hasClass('tasker')) {
+                                    $hook.replaceWith($source.addClass('done').clone(true)[0])
+                                } else {
+                                    let cloned = $source.addClass('done').clone(true)[0];
+                                    $hook.replaceWith(cloned)
+                                    $source.replaceWith($clonedHook)
+                                }
+
+                                dispatchGameChangeEvent();
+                            }
+
+
+                        }
+                    }, game2);
+                    $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
+                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}
@@ -238,8 +325,12 @@ class Application {
                             return member
                         }
                     }, {});
+                    window.onbeforeunload = () => {
+
+                        return "Dude, are you sure you want to leave? Think of the kittens!";
+                    };
                 },
-                error: function (error) {
+                error: (error) => {
                     console.log(error);
                     alert('SORRY........');
                 }
@@ -280,12 +371,13 @@ class Application {
     }
 
     boot() {
+        this._mainTime = parseInt(localStorage.getItem('mainTime')) | 600;
+        this._elapsedTime = parseInt(localStorage.getItem('elapsedTime')) | 0;
         this.init();
     }
 
     next() {
         let next = this.getNextStep();
-        console.log(next)
         this.applyStep(next);
     }
 }
