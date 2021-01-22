@@ -135,7 +135,6 @@ class Application {
                             };
                         })
                     }
-
                     const startWeek = 1;
                     const endWeek = 9;
                     let data = mockData()
@@ -143,7 +142,7 @@ class Application {
                     const game2 = new Game(2, startWeek, endWeek, data);
                     const gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
                     const gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
-
+                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -326,7 +325,6 @@ class Application {
                         }
                     }, game2);
                     $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
-                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}

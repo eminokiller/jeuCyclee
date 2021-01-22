@@ -18,7 +18,23 @@
             }
         }
         const current = $.extend(defaultConfig, config)
-
+        function getOrginalHook() {
+            let $li = $('<li class="task-hook"><span>&nbsp</span></li>');
+            $li.bind('dragover', function (evt) {
+                console.log(evt)
+                current['ondragover'](evt);
+            });
+            $li[0].addEventListener('touchmove', function (evt) {
+                console.log('touchmove', evt)
+            });
+            $li.bind('drop', function (evt) {
+                current['ondrop'](evt)
+            });
+            $li[0].addEventListener('touchcancel', function (evt) {
+                console.log('touchcancel', evt)
+            });
+            return $li;
+        }
         function getHook(savedGame, weekIndex, currentHookIndex) {
             console.log('heeere savedGme', savedGame, weekIndex)
             if (savedGame) {
@@ -42,23 +58,7 @@
                     }
                 }
             }
-            return () => {
-                let $li = $('<li class="task-hook"><span>&nbsp</span></li>');
-                $li.bind('dragover', function (evt) {
-                    console.log(evt)
-                    current['ondragover'](evt);
-                });
-                $li[0].addEventListener('touchmove', function (evt) {
-                    console.log('touchmove', evt)
-                });
-                $li.bind('drop', function (evt) {
-                    current['ondrop'](evt)
-                });
-                $li[0].addEventListener('touchcancel', function (evt) {
-                    console.log('touchcancel', evt)
-                });
-                return $li;
-            }
+            return getOrginalHook;
         }
 
         function prepareWeekHooks($weekContainer, savedGame, weekIndex) {
@@ -71,25 +71,9 @@
         this.each(function () {
             let _that = this;
             let savedGame = window.reInitialize(current.keystore);
-            for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
-                let mois = 'FÉVRIER - S' + i;
-                let $div = $('<div></div>', {'class': current['containerClass']})
-                $div.attr('data-id', `${i}_${$(_that).attr('data-id')}`)
-
-                if (i > 4) {
-                    let j = i - 4;
-                    mois = 'MARS - S' + j;
-                }
-                $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
-                let extraClass = current['level'] == 1 ? 'zone_drg_1' : 'zone_drg_2';
-                let $weekContainer = $(`<div class="week-container zone_dragger ${extraClass}"><ul class="task-week"></ul></div>`);
-                prepareWeekHooks($weekContainer, savedGame, i - 1);
-                $div.append($weekContainer);
-                $(_that).append($div[0])
-            }
             //global event listeners
-            document.addEventListener('gamechanged', function (evt) {
-                console.log(evt)
+            document.addEventListener('gamechanged',  (evt)=> {
+                console.log('here-------->game changedEvent')
                 let weeks = []
                 $(_that).find('.droppable-list').each(function () {
                     let weekIndex = $(this).index();
@@ -107,7 +91,8 @@
                 game1.weeks = weeks
                 current.saveCallback(current.keystore, game1);
                 dispatchScoreEvent();
-            })
+
+            });
             document.addEventListener('prepareRemove', function () {
                 $(this).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
@@ -115,9 +100,8 @@
                             let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
                             $trash[0].addEventListener('click', function (evt) {
                                 evt.preventDefault()
-                                console.log('ect---->', evt.target)
                                 let $node = $($(evt.target).parents('li').first())
-                                $node.replaceWith(getHook())
+                                $node.replaceWith(getOrginalHook())
                                 dispatchGameChangeEvent();
                             }, false)
                             $(this).prepend($trash[0])
@@ -136,6 +120,25 @@
                     $(this).attr('draggable', true);
                 })
             })
+            function initialize() {
+                for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
+                    let mois = 'FÉVRIER - S' + i;
+                    let $div = $('<div></div>', {'class': current['containerClass']})
+                    $div.attr('data-id', `${i}_${$(_that).attr('data-id')}`)
+                    if (i > 4) {
+                        let j = i - 4;
+                        mois = 'MARS - S' + j;
+                    }
+                    $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
+                    let extraClass = current['level'] == 1 ? 'zone_drg_1' : 'zone_drg_2';
+                    let $weekContainer = $(`<div class="week-container zone_dragger ${extraClass}"><ul class="task-week"></ul></div>`);
+                    prepareWeekHooks($weekContainer, savedGame, i - 1);
+                    $div.append($weekContainer);
+                    $(_that).append($div[0]);
+                }
+                dispatchGameChangeEvent();
+            }
+            initialize();
 
         });
     }
