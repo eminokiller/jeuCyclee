@@ -36,13 +36,13 @@
             return $li;
         }
         function getHook(savedGame, weekIndex, currentHookIndex) {
-            console.log('heeere savedGme', savedGame, weekIndex)
+            // console.log('heeere savedGme', savedGame, weekIndex)
             if (savedGame) {
                 if (savedGame._weeks) {
                     if (savedGame._weeks[weekIndex]) {
                         if (savedGame._weeks[weekIndex]._tasks) {
                             if (savedGame._weeks[weekIndex]._tasks[currentHookIndex]) {
-                                let currentId = savedGame._weeks[weekIndex]._tasks[currentHookIndex]._id;
+                                let currentId = savedGame._weeks[weekIndex]._tasks[currentHookIndex]._id?savedGame._weeks[weekIndex]._tasks[currentHookIndex]._id:false;
                                 if (currentId) {
                                     let $li = $($('ul.tasker').find(`li[data-id="${currentId}"]`).first()).addClass('done').clone(true);
                                     if($li){
@@ -70,7 +70,6 @@
 
         this.each(function () {
             let _that = this;
-            let savedGame = window.reInitialize(current.keystore);
             //global event listeners
             document.addEventListener('gamechanged',  (evt)=> {
                 console.log('here-------->game changedEvent')
@@ -88,7 +87,7 @@
                         })
                     })
                 })
-                game1.weeks = weeks
+                game1._weeks = weeks
                 current.saveCallback(current.keystore, game1);
                 dispatchScoreEvent();
 
@@ -121,6 +120,10 @@
                 })
             })
             function initialize() {
+                let savedGame = window.reInitialize(current.keystore);
+                if(savedGame){
+                    Game.refresh(game1,savedGame)
+                }
                 for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
                     let mois = 'FÉVRIER - S' + i;
                     let $div = $('<div></div>', {'class': current['containerClass']})
