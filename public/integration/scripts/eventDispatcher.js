@@ -29,3 +29,8 @@ function dispatchTeaserEnded() {
     event.initEvent('teaserEndedEvent', true, true);
     document.dispatchEvent(event);
 }
+function dispatchMasterSaveEvent() {
+    const event = document.createEvent('Event');
+    event.initEvent('masterSaveEvent', true, true);
+    document.dispatchEvent(event);
+}

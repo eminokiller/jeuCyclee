@@ -38,6 +38,20 @@ class Application {
                 gameMainElement.classList.remove('level1_transformers')
             }
         };
+        window.save = function (keyStore, campaign, remote) {
+            localStorage.setItem(keyStore, JSON.stringify(campaign));
+            if (remote) {
+                //post the data to the server;
+            }
+        };
+        window.reInitialize = function (keyStore) {
+            let storedCampaignString = localStorage.getItem(keyStore);
+            if (storedCampaignString) {
+                return JSON.parse(storedCampaignString);
+
+            }
+            return false;
+        };
         let steps = {
             '#login': {
                 '#login': 'show',
@@ -107,11 +121,7 @@ class Application {
                 success: (response) => {
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
                     document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
-                    document.addEventListener('timeElapsedEvent', function (evt) {
-                        $('[draggable="true"]').each(function () {
-                            $(this).attr('draggable', false);
-                        })
-                    })
+
                     initPhase1();
 
                     function mockData() {
@@ -133,6 +143,7 @@ class Application {
                     const game2 = new Game(2, startWeek, endWeek, data);
                     const gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
                     const gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
+
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -209,6 +220,7 @@ class Application {
                     $('.target-table[data-id="1"]').gameBoard({
                         startWeek: startWeek,
                         endWeek: endWeek,
+                        keystore: 'game1',
                         'ondragover': function (evt) {
                             console.log('dragover', evt);
                             evt.preventDefault();
@@ -262,6 +274,7 @@ class Application {
                     $('.target-table[data-id="2"]').gameBoard({
                         startWeek: startWeek,
                         endWeek: endWeek,
+                        keystore:'game2',
                         level: 2,
                         'ondragover': function (evt) {
                             console.log('dragover', evt);
@@ -326,7 +339,7 @@ class Application {
                         }
                     }, {});
                     window.onbeforeunload = () => {
-
+                        dispatchMasterSaveEvent();
                         return "Dude, are you sure you want to leave? Think of the kittens!";
                     };
                 },
