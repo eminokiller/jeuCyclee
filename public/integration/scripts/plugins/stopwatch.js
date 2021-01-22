@@ -2,7 +2,7 @@
     $.fn.timer = function (config, game1) {
         if (!game1 instanceof Game) throw  new Error('must have a game play instance');
         const defaultConfig = {
-            'minutes': 10,
+            'minutes': 20,
             'seconds': 0
         };
 

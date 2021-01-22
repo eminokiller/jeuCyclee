@@ -1,5 +1,5 @@
 (function ($) {
-    $.fn.score = function (config, model1, game1, model2, game2) {
+    $.fn.score = function (config, model1, game1,model2,game2) {
         let defaultConfig = {
             'event': 'score'
         }
@@ -12,7 +12,9 @@
                 if(score >= 70 && localStorage.getItem('level') == 1){
                     dispatchChangeLevelEvent();
                 }
+                score = ScoreManager.score(model1, game1,model2,game2)
                 $(_that).text(`${score} %`)
+                console.log(model1.weeks, game.weeks);
             })
             $(_that).text(`${score} %`)
 

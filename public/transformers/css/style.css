@@ -15,6 +15,10 @@ body{
      padding: 0;
      font-family: 'Montserrat', sans-serif;
      background: #16001f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 img{
      height: auto;
@@ -289,16 +293,17 @@ span.c4_prct_score {
     position: absolute;
     left: 325px;
     top: 10px;
+    width: 190px;
 }
-.container_ipad_view#level1_transformers h2.score_h2_title ,.container_ipad_view#level2_transformers h2.score_h2_title{
+.container_ipad_view#gameMain h2.score_h2_title ,.container_ipad_view#level2_transformers h2.score_h2_title{
     margin: 0;
     font-size: 23px;
 }
-.container_ipad_view#level1_transformers h3.score_h3_title,.container_ipad_view#level2_transformers h3.score_h3_title {
+.container_ipad_view#gameMain h3.score_h3_title,.container_ipad_view#level2_transformers h3.score_h3_title {
     margin: 0;
     color: #fff;
 }
-.container_ipad_view#level1_transformers h3.score_h3_title strong,.container_ipad_view#level2_transformers h3.score_h3_title strong {
+.container_ipad_view#gameMain h3.score_h3_title strong,.container_ipad_view#level2_transformers h3.score_h3_title strong {
     color: #fdbf2e;
 }
 .level1_transformer_signs_box {
@@ -437,26 +442,26 @@ span.c4_prct_score {
 	left: 205px;
 }
 .delete_lvl1{
-	background: url(../images/lvl1/delete.png) center no-repeat;	
+	background: url(../images/lvl1/delete.png) center no-repeat;
 	background-size: 100% 100%;
-	width: 23px;	
+	width: 23px;
 	height: 29px;
 	position: absolute;
 	left: 910px;
 	top: 120px;
 }
 .delete_lvl1.active{
-	background: url(../images/lvl1/delete_red.png) center no-repeat;	
+	background: url(../images/lvl1/delete_red.png) center no-repeat;
 	background-size: 100% 100%;
 }
 .tableau_semaines {
     position: absolute;
     top: 158px;
     left: 205px;
-    width: 740px;
-    height: 270px;
+    width: 737px;
+    height: 333px;
     overflow: hidden;
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
 }
 .column_tab_semaine {
     float: left;
@@ -469,13 +474,15 @@ span.c4_prct_score {
     color: #fff;
     text-align: center;
     padding: 11px;
+    width: 183.5px;
+    float: left;
 }
 .zone_dragger {
     width: 100%;
     float: left;
-    height: 270px;
-    overflow: hidden;
-    overflow-y: scroll;
+    height: auto;
+    min-height: 255px;
+    padding-bottom: 60px;
 }
 .project_in_queue {
     padding: 10px;
@@ -486,7 +493,7 @@ span.c4_prct_score {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px 0;
+    margin: 1px 0;
     width: calc(100% - 2px);
     margin-left: 1px;
 }
@@ -534,7 +541,7 @@ div#column_1_tab_month {
     width: 0;
 }
 .box_x_scrollabele {
-    width: 1471px;
+    width: 1490px;
     height: 100%;
     float: left;
     transition: all .5s;
@@ -1186,6 +1193,13 @@ input:checked + .slider:before {
     transition: all .5s;
     transform: translateX(0px);
 }
+.box_x_scrollabele_1 {
+    width: 1490px;
+    height: 100%;
+    float: left;
+    transition: all .5s;
+    transform: translateX(0px);
+}
 .right_arrow_scroller_2{
 	background: url(../images/lvl1/arrow-right.png) center no-repeat;
 	background-size: 100% 100%;
@@ -1265,4 +1279,24 @@ input:checked + .slider:before {
 	background-color: #ccc;
 	margin-right: 5px;
 	display: inline-block;
+}
+.table_titles_row {
+    float: left;
+    width: 100%;
+    height: 41px;
+}
+.in_queue_table_scroller {
+    float: left;
+    height: 276px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.in_queue_table_scroller::-webkit-scrollbar{
+    width: 0;
+}
+.in_queue_table_scroller::-webkit-scrollbar-thumb{
+    width: 0;
+}
+.box_x_scrollabele_1 .in_queue_table_scroller,.box_x_scrollabele_2 .in_queue_table_scroller {
+    height: 230px;
 }

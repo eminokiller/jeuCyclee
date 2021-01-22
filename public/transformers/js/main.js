@@ -28,11 +28,24 @@ $(document).ready(function () {
             $('.popup_lvl1_2').fadeOut();
             $('.popup_lvl1_3').fadeOut();
         });
+        $(".right_arrow_scroller").click(function(e){
+            $('.box_x_scrollabele_1').addClass('tred_month_table');
+        });
+        $(".left_arrow_scroller").click(function(e){
+            $('.box_x_scrollabele_1').removeClass('tred_month_table');
+        });
         $(".right_arrow_scroller_2").click(function (e) {
             $('.box_x_scrollabele_2').addClass('tred_month_table');
         });
         $(".left_arrow_scroller_2").click(function (e) {
             $('.box_x_scrollabele_2').removeClass('tred_month_table');
+        });
+        $('.scroll_up_list').click(function(){
+            $('html, .section_left_project_container').animate({scrollTop : 0},400);
+            return false;
+        });
+        $(".scroll_down_list").click(function() {
+            $('html,.section_left_project_container').animate({scrollTop: $(".project_waiting:last-child").offset().top},1200);
         });
     }
     initControl();

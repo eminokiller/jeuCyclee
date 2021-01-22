@@ -142,7 +142,7 @@ class Application {
                     }
 
                     const startWeek = 1;
-                    const endWeek = 9;
+                    const endWeek = 8;
                     let data = mockData()
                     let game1 = new Game(1, startWeek, endWeek, data);
                     let game2 = new Game(2, startWeek, endWeek, data);
