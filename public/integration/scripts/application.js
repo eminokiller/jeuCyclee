@@ -13,6 +13,7 @@ class Application {
             }
         };
         window.initPhase1 = function () {
+            if (localStorage.getItem('level') == 2) return;
             window.hide('div.target-table[data-id="2"]')
             window.show('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
@@ -26,6 +27,7 @@ class Application {
             }
         };
         window.initPhase2 = function () {
+            if (localStorage.getItem('level') == 1) return;
             window.show('div.target-table[data-id="2"]')
             window.hide('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
@@ -121,8 +123,11 @@ class Application {
                 success: (response) => {
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
                     document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
-
                     initPhase1();
+                    initPhase2();
+                    document.addEventListener('changeLevelEvent', function () {
+                        $('#exampleModal2').modal('toggle')
+                    });
 
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
@@ -135,14 +140,14 @@ class Application {
                             };
                         })
                     }
+
                     const startWeek = 1;
                     const endWeek = 8;
                     let data = mockData()
-                    const game1 = new Game(1, startWeek, endWeek, data);
-                    const game2 = new Game(2, startWeek, endWeek, data);
-                    const gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
-                    const gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
-                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
+                    let game1 = new Game(1, startWeek, endWeek, data);
+                    let game2 = new Game(2, startWeek, endWeek, data);
+                    let gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
+                    let gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -273,7 +278,7 @@ class Application {
                     $('.target-table[data-id="2"]').gameBoard({
                         startWeek: startWeek,
                         endWeek: endWeek,
-                        keystore:'game2',
+                        keystore: 'game2',
                         level: 2,
                         'ondragover': function (evt) {
                             console.log('dragover', evt);
@@ -325,6 +330,7 @@ class Application {
                         }
                     }, game2);
                     $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
+                    $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}
@@ -336,6 +342,7 @@ class Application {
                             return member
                         }
                     }, {});
+                    dispatchGameChangeEvent();
                     window.onbeforeunload = () => {
                         dispatchMasterSaveEvent();
                         return "Dude, are you sure you want to leave? Think of the kittens!";

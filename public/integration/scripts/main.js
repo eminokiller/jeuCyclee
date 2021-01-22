@@ -4,7 +4,6 @@ function showAsside(element) {
 }
 
 function prepareRemove(element) {
-    console.log(element);
     dispatchPrepareRemoveEvent();
 }
 
@@ -16,6 +15,7 @@ function prepareRemove(element) {
     })
     //teaserEndedEvent
     document.addEventListener('teaserEndedEvent', function () {
+        localStorage.setItem('level', '1');
         app.next();
     })
 })($);

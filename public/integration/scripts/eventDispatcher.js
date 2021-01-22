@@ -34,3 +34,8 @@ function dispatchMasterSaveEvent() {
     event.initEvent('masterSaveEvent', true, true);
     document.dispatchEvent(event);
 }
+function dispatchChangeLevelEvent() {
+    const event = document.createEvent('Event');
+    event.initEvent('changeLevelEvent', true, true);
+    document.dispatchEvent(event);
+}

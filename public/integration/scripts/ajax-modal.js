@@ -94,7 +94,12 @@ ${getResponsesTemplate(i, question, idTask)}
             })
         })
     }
-
+    $('#enableLevelTwoForm').on('submit',function (evt) {
+        evt.preventDefault();
+        localStorage.setItem('level', '2');
+        $('#exampleModal2').modal('hide');
+        initPhase2();
+    })
     //  ajax modal
     $('#exampleModal').on('shown.bs.modal', function () {
         let dataId = $(this).data('id');
