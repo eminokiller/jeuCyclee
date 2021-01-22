@@ -14,7 +14,6 @@
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
                 $(_that).text(`${score} %`)
-                console.log(model1.weeks, game.weeks);
             })
             $(_that).text(`${score} %`)
 
