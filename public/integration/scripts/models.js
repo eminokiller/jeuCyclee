@@ -289,7 +289,6 @@ class ScoreManager {
         let scoreGame = scoreGameModel1 + scoreGameModel2;
         console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
         let ratio = scorePerfect ? scoreGame / scorePerfect : 0;
-        console.log('ratio------->')
         return Math.round(ratio * 100)
 
 

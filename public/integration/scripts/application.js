@@ -13,6 +13,7 @@ class Application {
             }
         };
         window.initPhase1 = function () {
+            if (localStorage.getItem('level') == 2) return;
             window.hide('div.target-table[data-id="2"]')
             window.show('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
@@ -26,6 +27,7 @@ class Application {
             }
         };
         window.initPhase2 = function () {
+            if (localStorage.getItem('level') == 1) return;
             window.show('div.target-table[data-id="2"]')
             window.hide('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
@@ -121,8 +123,11 @@ class Application {
                 success: (response) => {
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
                     document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
-
                     initPhase1();
+                    initPhase2();
+                    document.addEventListener('changeLevelEvent', function () {
+                        $('#exampleModal2').modal('toggle')
+                    });
 
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
