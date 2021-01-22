@@ -8,6 +8,18 @@
          m-menu-vertical="1" m-menu-scrollable="1" m-menu-dropdown-timeout="500" style="position: relative;">
         <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
             <li class="m-menu__item" aria-haspopup="true">
+                <a href="{{ path('game_session_index') }}" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <span
+                {% if app.request.get('_route') == 'game_session_index' %}
+                    style="color: red;"
+                {% endif %}
+                class="m-menu__link-text">
+            {{ "Session"|trans }}
+        </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('action_marketing_index') }}" class="m-menu__link">
                     <i class="m-menu__link-icon flaticon-users"></i>
                     <span

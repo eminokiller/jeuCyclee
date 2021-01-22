@@ -168,17 +168,24 @@ ul.task-week {
 }
 
 li.draggable-task {
-    border: 1px solid lightgray;
-    margin-top: 1vh;
-    font-size: small;
+    /*float: left;*/
+    width: 90%;
+    margin: 3px 5%;
+    padding: 10px;
+    font-size: 12px;
     text-align: center;
-    min-height: 5vh;
+    color: #fff;
+    min-height: 50px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 li.task-hook{
     margin-top: 1vh;
     font-size: small;
     text-align: center;
-    min-height: 4vh;
+    min-height: 46px;
     /*border: darkgray dashed thin;*/
 }
 li.draggable-task[draggable=false] {
