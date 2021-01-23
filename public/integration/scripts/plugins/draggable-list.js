@@ -43,7 +43,23 @@
                 if(item.draggable){
                     $li.bind('dragstart', current['ondragstart'])
                     $li.bind('touchstart', function (evt) {
-                        console.log('touchstart', evt)
+                        console.log('touchstart',item.id)
+                        if (item.id == 1){
+                            wd = parseInt(document.getElementById('f2f').style.width);
+                            widthf = wd + 12.5;
+                            $('#f2f').width(widthf);
+                        }
+                        if (item.id == 3){
+                            wdV = parseInt(document.getElementById('vr').style.width);
+                            widthV = wdV + 12.5;
+                            $('#vr').width(widthV);
+                        }
+                        if(item.id == 4){
+                            wdt = parseInt(document.getElementById('triggerMail').style.width);
+                            widthT = wdt + 12.5;
+                            $('#triggerMail').width(widthT);
+                        }
+
                     })
                     $li.bind('dragend', current['ondragend'])
                     $li.bind('touchend', current['touchend'])
