@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title wyz</title>
+    <title>Plan My Campaign</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -91,12 +91,12 @@
             </div>
 
             <div class="level1_transformer_signs_box">
-                <div class="transformer_sign active"></div>
+                <div class="transformer_sign"></div>
                 <div class="transformer_sign"></div>
                 <div class="transformer_sign"></div>
 
                 <div class="transformer_bar_signs">
-                    <div class="bar_sign active"></div>
+                    <div class="bar_sign"></div>
                     <div class="bar_sign"></div>
                     <div class="bar_sign"></div>
                     <div class="bar_sign"></div>
@@ -127,8 +127,7 @@
             <div class="draggable-list card-body">
             </div>
         </div>
-        <div class="scroll_down_list"></div>
-        <div class="scroll_up_list"></div>
+
         <div class="tableau_title" id="cible"></div>
         <div class="delete_lvl1" onclick="return prepareRemove(this);"></div>
         <div class="tableau_semaines">
@@ -156,14 +155,14 @@
                 <p>Mon Score</p>
                 <p><strong><span class="score" id="myScore">15%</span></strong></p>
             </div>
-            <div class="lvl1_score_circle2">
-                <p>Score équipe</p>
-                <p><strong>32%</strong></p>
-            </div>
-            <div class="lvl1_score_circle3">
-                <p>Meilleur score</p>
-                <p><strong>85%</strong></p>
-            </div>
+{#            <div class="lvl1_score_circle2">#}
+{#                <p>Score équipe</p>#}
+{#                <p><strong>32%</strong></p>#}
+{#            </div>#}
+{#            <div class="lvl1_score_circle3">#}
+{#                <p>Meilleur score</p>#}
+{#                <p><strong>85%</strong></p>#}
+{#            </div>#}
 
             <div class="impact-1">IMPACT SUR HCPs</div>
             <div class="impact-2">FACE TO FACE</div>
@@ -174,11 +173,11 @@
             <div class="impact-7">e-Event</div>
             <div class="impact-8">Medeo</div>
 
-            <div class="impact_progress_1">
+            <div class="impact_progress_1" >
                 <div style="width: 73%;"></div>
             </div>
             <div class="impact_progress_2">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;"  id="f2f"></div>
             </div>
             <div class="impact_progress_3">
                 <div style="width: 0%;"></div>

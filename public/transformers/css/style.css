@@ -461,7 +461,7 @@ span.c4_prct_score {
     width: 737px;
     height: 333px;
     overflow: hidden;
-    /*overflow-x: scroll;*/
+    overflow-y: scroll;
 }
 .column_tab_semaine {
     float: left;
@@ -1178,7 +1178,7 @@ input:checked + .slider:before {
     width: 742px;
     height: 315px;
     overflow: hidden;
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
 }
 .tableau_semaines_2::-webkit-scrollbar{
     width: 0;
