@@ -173,42 +173,29 @@ class Application {
                             evt.preventDefault();
                             let target = $(evt.target).hasClass('draggable-task') ? evt.target : $(evt.target).parent()[0]
                             let changedTouch = event.changedTouches[0];
-                            let elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
-                            let $target = $(elem)
-                            let $container = $('<div></div>');
-                            if ($target.hasClass('droppable-list')) {
-                                $container = $target;
-                            } else {
-                                $container = $($target.parents('.droppable-list').first())
-
-                            }
-                            if (!$container.length) {
-                                evt.stopPropagation();
-                                return;
-                            }
-                            let targetId = $container.data('id');
-                            let dataId = $(target).data('id');
-                            if (!$(target).hasClass('done')) {
-                                $('#exampleModal').data('clone', true)
-                                $('#exampleModal').data('id', dataId);
-                                $('#exampleModal').data('target-id', targetId);
-                                $('#exampleModal').data('target-hook', $(elem).index());
-                                $('#exampleModal').modal('toggle')
-                            } else {
-                                //here we displace the element
-                                let $taskList = $($container.find('ul.task-week').first());
-                                if ($(target).parent().hasClass('tasker')) {
-                                    $target.replaceWith($(target).addClass('done').clone(true)[0]);
-                                } else {
-                                    //we swap
-                                    let $targetCloned = $target.clone(true)
-                                    let $$target = $(target).clone(true);
-                                    $(target).replaceWith($targetCloned);
-                                    $target.replaceWith($$target);
+                            let touchedElement = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
+                            if ($(touchedElement).parents('.target-table').length) {
+                                let $touchedParent = $($(touchedElement).parents('.target-table').first());
+                                if ($touchedParent.attr('data-id') != $(target).data('level')) return;
+                                if ($(touchedElement).hasClass('task-hook')) {
+                                    if ($(target).hasClass('done')) {
+                                        if ($(target).parents('.target-table').length) {
+                                            let $li = $('<li></li>', {'class': 'task-hook'});
+                                            $(touchedElement).replaceWith($(target).clone(true));
+                                            $(target).replaceWith($li[0])
+                                        } else if($(target).parents('.tasker').length){
+                                            $(touchedElement).replaceWith($(target).addClass('done').clone(true));
+                                        }
+                                    } else {
+                                        $('#exampleModal').data('clone', true);
+                                        $('#exampleModal').data('id', $(target).attr('data-id'));
+                                        $('#exampleModal').data('target-id', $($(evt.target).parents('.droppable-list').first()).attr('data-id'));
+                                        $('#exampleModal').data('target-hook', $(touchedElement).index());
+                                        $('#exampleModal').modal('toggle')
+                                    }
                                 }
-
-                                dispatchGameChangeEvent();
                             }
+
 
                         },
                         mapFn: function (item) {

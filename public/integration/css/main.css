@@ -163,6 +163,8 @@ ul.tasker {
 }
 
 ul.task-week {
+    max-height: 40vh;
+    overflow-y: scroll;
     padding-left: 0px;
     list-style: none;
 }
@@ -220,13 +222,13 @@ div.week-header {
     border: 1px solid lightgray;
 }
 
-/*div.week-container {*/
-    /*!*display: flex;*!*/
-    /*min-height: 55vh;*/
+div.week-container {
+    /*display: flex;*/
+    min-height: 40vh;
     /*border: 1px solid lightgray;*/
     /*background-color: #8644d3;*/
-    /*!*opacity: 0.5;*!*/
-/*}*/
+    /*opacity: 0.5;*/
+}
 .task-week > .draggable-task{
     padding-top: 3px;
     color: white;

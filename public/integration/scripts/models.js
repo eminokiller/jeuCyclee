@@ -231,6 +231,7 @@ class ScoreManager {
             let weekMap = {
                 _id:week._id,
                 _taskMap:week._tasks.reduce(function (s,currentTask) {
+                    console.log('current----->task', currentTask)
                     if(currentTask._id){
                         s.push(currentTask.id)
                     }
@@ -244,21 +245,21 @@ class ScoreManager {
     static calculateGameScore(game, model) {
         let scoreGameModel = 0;
         let modelMap = ScoreManager.getTaskMap(model);
+        console.log('model map----->',modelMap)
         game.weeks.forEach((week, i) => {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
                     if (task._id == model._weeks[i]._tasks[j]._id) {
                         scoreGameModel += 2;
-                        const indexRef = modelMap[i]._taskMap.indexOf(task._id);
+                        let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if(indexRef>-1){
                             modelMap[i]._taskMap.splice(indexRef,1);
                         }
-                    } else {
-                        const indexRef = modelMap[j]._taskMap.indexOf(task._id);
-                        if(indexRef> -1){
-                            scoreGameModel += 1;
-                            modelMap[i]._taskMap.splice(indexRef,1);
-                        }
+                    }
+                    let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
+                    if(indexRef2> -1){
+                        scoreGameModel += 1;
+                        modelMap[i]._taskMap.splice(indexRef2,1);
                     }
                 }
 
@@ -289,7 +290,8 @@ class ScoreManager {
         let scoreGame = scoreGameModel1 + scoreGameModel2;
         console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
         let ratio = scorePerfect ? scoreGame / scorePerfect : 0;
-        return Math.round(ratio * 100)
+        let score = Math.round(ratio * 100);
+        return score <=100?score:100;
 
 
     }
