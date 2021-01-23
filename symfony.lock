@@ -1,4 +1,24 @@
 {
+    "api-platform/api-pack": {
+        "version": "v1.3.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
+    "asprega/breadcrumb-bundle": {
+        "version": "0.6.0"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },
@@ -99,11 +119,17 @@
     "egulias/email-validator": {
         "version": "2.1.25"
     },
+    "fig/link-util": {
+        "version": "1.1.1"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.2"
     },
     "gedmo/doctrine-extensions": {
         "version": "v3.0.0"
+    },
+    "kartik-v/bootstrap-star-rating": {
+        "version": "4.0.x-dev"
     },
     "laminas/laminas-code": {
         "version": "4.0.0"
@@ -114,14 +140,47 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
+    "lcobucci/jwt": {
+        "version": "4.0.0"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
     "monolog/monolog": {
         "version": "2.2.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -157,6 +216,21 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "symfony/amqp-messenger": {
+        "version": "v5.2.1"
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
+        },
+        "files": [
+            "public/.htaccess"
         ]
     },
     "symfony/asset": {
@@ -211,6 +285,9 @@
         "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
+        "version": "v5.2.1"
+    },
+    "symfony/doctrine-messenger": {
         "version": "v5.2.1"
     },
     "symfony/dom-crawler": {
@@ -308,6 +385,33 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mercure": {
+        "version": "v0.4.1"
+    },
+    "symfony/mercure-bundle": {
+        "version": "0.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "0.2",
+            "ref": "a37d3438e4bd4f9f924c516996bc29e25f66b07e"
+        },
+        "files": [
+            "config/packages/mercure.yaml"
+        ]
+    },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v5.2.1"
     },
@@ -377,6 +481,9 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.20.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
+    },
     "symfony/polyfill-php73": {
         "version": "v1.20.0"
     },
@@ -396,6 +503,9 @@
         "version": "v5.2.1"
     },
     "symfony/proxy-manager-bridge": {
+        "version": "v5.2.1"
+    },
+    "symfony/redis-messenger": {
         "version": "v5.2.1"
     },
     "symfony/routing": {
@@ -537,5 +647,11 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "webonyx/graphql-php": {
+        "version": "v14.4.0"
+    },
+    "willdurand/negotiation": {
+        "version": "3.0.0"
     }
 }
