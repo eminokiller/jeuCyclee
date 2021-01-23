@@ -113,7 +113,7 @@
             </div>+
             <div id="profile_action" class="box_profile_container">
                 <div class="row_transformers center_content">
-                    <div class="box_current_profile_header"></div>
+                    <button onclick="return logout()" class="btn btn-danger">LOGOUT</button>
                 </div>
 
                 <div class="profile_avatar_name" id="nomPlayer"></div>
@@ -129,6 +129,7 @@
         </div>
 
         <div class="tableau_title" id="cible"></div>
+
         <div class="delete_lvl1" onclick="return prepareRemove(this);"></div>
         <div class="tableau_semaines">
             <div class="box_x_scrollabele">
@@ -180,22 +181,22 @@
                 <div style="width: 0%;"  id="f2f"></div>
             </div>
             <div class="impact_progress_3">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="visiteRemote"></div>
             </div>
             <div class="impact_progress_4">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="triggerMail"></div>
             </div>
             <div class="impact_progress_5">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="Hqemail"></div>
             </div>
             <div class="impact_progress_6">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="webinar"></div>
             </div>
             <div class="impact_progress_7">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="event"></div>
             </div>
             <div class="impact_progress_8">
-                <div style="width: 0%;"></div>
+                <div style="width: 0%;" id="medeo"></div>
             </div>
         </div>
     </div>
@@ -272,5 +273,11 @@
 
 <!-- tranformers template plug -->
 <script src="{{ asset('transformers/js/main.js') }}"></script>
+<script>
+    function logout(){
+        window.localStorage.clear();
+        window.location.reload();
+            }
+</script>
 </body>
 </html>

@@ -19,3 +19,6 @@ function prepareRemove(element) {
         app.next();
     })
 })($);
+
+
+

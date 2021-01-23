@@ -167,8 +167,10 @@ class Application {
                         },
                         ondragend: function (evt) {
                             let clonable = $(evt.target).parent().hasClass('tasker');
-                            console.log('clooooooooooone vers',evt.target);
+                            console.log('clooooooooooone vers',evt.target.id);
+
                             $('#exampleModal').data('clone', clonable);
+
                         },
                         touchend: function (evt) {
                             evt.preventDefault();

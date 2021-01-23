@@ -9,7 +9,7 @@
             let score = 0;
             document.addEventListener(current['event'], function () {
                 score = ScoreManager.score(model1, game1, model2, game2)
-                if(score >= 70 && localStorage.getItem('level') == 1){
+                if(score >= 30 && localStorage.getItem('level') == 1){
                     dispatchChangeLevelEvent();
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
