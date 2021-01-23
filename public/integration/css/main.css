@@ -164,7 +164,7 @@ ul.tasker {
 
 ul.task-week {
     max-height: 40vh;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     padding-left: 0px;
     list-style: none;
 }

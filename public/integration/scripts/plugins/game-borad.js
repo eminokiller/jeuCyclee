@@ -72,7 +72,10 @@
             let _that = this;
             //global event listeners
             document.addEventListener('gamechanged',  (evt)=> {
-                console.log('here-------->game changedEvent')
+                console.log('here-------->game changedEvent',this)
+                wd = parseInt(document.getElementById('f2f').style.width);
+                widthf = wd + 5;
+                $('#f2f').width(widthf);
                 let weeks = []
                 $(_that).find('.droppable-list').each(function () {
                     let weekIndex = $(this).index();
@@ -124,6 +127,7 @@
                 if(savedGame){
                     Game.refresh(game1,savedGame)
                 }
+                $(".task-week").css("max-height", ($(".parent").height()-$(".title_column_tab_semaine").height()));
                 for (let i = current['startWeek']; i < current['endWeek'] + 1; i++) {
                     let mois = 'FÉVRIER - S' + i;
                     let $div = $('<div></div>', {'class': current['containerClass']})

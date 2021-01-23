@@ -46,6 +46,10 @@ ${getResponsesTemplate(i, question, idTask)}
                 </button>
             </div>
             <div class="modal-body">
+            <div class="alert alert-danger" role="alert" id="ques" style="display: none">
+            Mauvaise réponse!  Essayez encore de trouver la bonne réponse.<br>
+Attention ! Il y a une seule réponse correcte.
+</div>
                 <!---------->
                     <input type="hidden" name="task[id]" value="${resp.task.id}"/>
                     ${getQuestionsTemplate(resp.task)}
@@ -118,6 +122,7 @@ ${getResponsesTemplate(i, question, idTask)}
                 e.preventDefault();
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
                     console.log('reponse juste----->', response2)
+
                     let $taskList = $($targetContainer.find('ul.task-week').first());
                     let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
@@ -131,6 +136,8 @@ ${getResponsesTemplate(i, question, idTask)}
                 }).catch(function (error) {
                     $('#exampleModal').find('p.question_text').each(function () {
                         $(this).addClass('wrong-answer');
+                        $('div#ques').show();
+
                     })
                 })
 

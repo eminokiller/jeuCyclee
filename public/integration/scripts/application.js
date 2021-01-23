@@ -140,7 +140,7 @@ class Application {
                             };
                         })
                     }
-
+                    $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
                     const startWeek = 1;
                     const endWeek = 8;
                     let data = mockData()
@@ -167,6 +167,7 @@ class Application {
                         },
                         ondragend: function (evt) {
                             let clonable = $(evt.target).parent().hasClass('tasker');
+                            console.log('clooooooooooone vers',evt.target);
                             $('#exampleModal').data('clone', clonable);
                         },
                         touchend: function (evt) {
@@ -199,6 +200,7 @@ class Application {
 
                         },
                         mapFn: function (item) {
+                            console.log('item app',item)
                             return {
                                 id: item.id,
                                 text: item.text,
