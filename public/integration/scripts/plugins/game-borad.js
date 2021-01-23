@@ -75,33 +75,9 @@
                 console.log('here-------->game changedEvent',this)
 
                 console.log('datatattata',this['data-id']);
-                wd = parseInt(document.getElementById('f2f').style.width);
-                widthf = wd + 12.5;
-                $('#f2f').width(widthf);
 
-                wd = parseInt(document.getElementById('visiteRemote').style.width);
-                widthf = wd + 12.5;
-                $('#visiteRemote').width(widthf);
 
-                wd = parseInt(document.getElementById('triggerMail').style.width);
-                widthf = wd + 12.5;
-                $('#triggerMail').width(widthf);
 
-                wd = parseInt(document.getElementById('Hqemail').style.width);
-                widthf = wd + 12.5;
-                $('#Hqemail').width(widthf);
-
-                wd = parseInt(document.getElementById('webinar').style.width);
-                widthf = wd + 12.5;
-                $('#webinar').width(widthf);
-
-                wd = parseInt(document.getElementById('event').style.width);
-                widthf = wd + 12.5;
-                $('#event').width(widthf);
-
-                wd = parseInt(document.getElementById('medeo').style.width);
-                widthf = wd + 12.5;
-                $('#medeo').width(widthf);
 
                 let weeks = []
                 $(_that).find('.droppable-list').each(function () {
