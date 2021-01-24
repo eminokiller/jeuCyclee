@@ -36,8 +36,8 @@ class GameSessionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            foreach ($gameSession->getEquipes() as $item){
-                $gameSession->addEquipe($item);
+            foreach ($gameSession->getCampagnes() as $item){
+                $gameSession->addCampagne($item);
             }
             $entityManager->persist($gameSession);
             $entityManager->flush();
@@ -70,6 +70,9 @@ class GameSessionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($gameSession->getCampagnes() as $item){
+                $gameSession->addCampagne($item);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('game_session_index');

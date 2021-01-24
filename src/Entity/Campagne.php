@@ -44,6 +44,11 @@ class Campagne extends EntityRef
      */
     private $cible;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=GameSession::class, inversedBy="campagnes")
+     */
+    private $session;
+
     public function __construct()
     {
 
@@ -174,6 +179,18 @@ class Campagne extends EntityRef
     public function setCible(?string $cible): self
     {
         $this->cible = $cible;
+
+        return $this;
+    }
+
+    public function getSession(): ?GameSession
+    {
+        return $this->session;
+    }
+
+    public function setSession(?GameSession $session): self
+    {
+        $this->session = $session;
 
         return $this;
     }
