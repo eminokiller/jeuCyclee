@@ -45,7 +45,7 @@ $(document).ready(function () {
             return false;
         });
         $(".scroll_down_list").click(function() {
-            $('html,.section_left_project_container').animate({scrollTop: $(".project_waiting:last-child").offset().top},1200);
+            $('html,.section_left_project_container').animate({scrollTop: $(".section_left_project_container li:last-child").offset().top},1200);
         });
     }
     initControl();
