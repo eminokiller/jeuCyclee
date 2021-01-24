@@ -129,14 +129,13 @@ Attention ! Il y a une seule réponse correcte.
                     let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
                     if (clone) {
+                        console.log('cloone')
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
                         list.forEach(ie => {
                             let $element_ = $($('.tasker > li.draggable-task[data-id="' + ie + '"]').first());
                             $hook.replaceWith($element_.addClass('done').clone(true)[0])
+
                         })
-
-
-
                     } else {
                         console.log('2')
                         $hook.replaceWith($element.addClass('done')[0])

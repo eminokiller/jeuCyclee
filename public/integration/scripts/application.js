@@ -192,6 +192,7 @@ class Application {
                                 if ($(touchedElement).hasClass('task-hook')) {
                                     if ($(target).hasClass('done')) {
                                         if ($(target).parents('.target-table').length) {
+                                            console.log('here grag ono');
                                             let $li = $('<li></li>', {'class': 'task-hook'});
                                             $(touchedElement).replaceWith($(target).clone(true));
                                             $(target).replaceWith($li[0])

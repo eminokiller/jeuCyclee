@@ -10,9 +10,9 @@
             document.addEventListener(current['event'], function () {
                 score = ScoreManager.score(model1, game1, model2, game2)
 
-                if (score >= 20 ){
-                    $("#badge1").css("display", "block");
-                }
+                // if (score >= 20 ){
+                //     $("#badge1").css("display", "block");
+                // }
 
 
 
@@ -20,6 +20,7 @@
                     dispatchChangeLevelEvent();
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
+                console.log(score);
                 $(_that).text(`${score} %`)
             })
             $(_that).text(`${score} %`)

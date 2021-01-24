@@ -40,13 +40,13 @@ $(document).ready(function () {
         $(".left_arrow_scroller_2").click(function (e) {
             $('.box_x_scrollabele_2').removeClass('tred_month_table');
         });*/
-        $('.scroll_up_list').click(function(){
-            $('html, .section_left_project_container').animate({scrollTop : 0},400);
-            return false;
-        });
-        $(".scroll_down_list").click(function() {
-            $('html,.section_left_project_container').animate({scrollTop: $(".section_left_project_container li:last-child").offset().top},1200);
-        });
+        // $('.scroll_up_list').click(function(){
+        //     $('html, .section_left_project_container').animate({scrollTop : 0},400);
+        //     return false;
+        // });
+        // $(".scroll_down_list").click(function() {
+        //     $('html,.section_left_project_container').animate({scrollTop: $(".section_left_project_container li:last-child").offset().top},1200);
+        // });
     }
     initControl();
 
@@ -87,6 +87,19 @@ $(document).ready(function () {
     });
     $(".left_arrow_scroller_2").on("click", function(){
         $(".cata-sub-nav2").animate( { scrollLeft: '-=183.5' }, 200);
+    });
+
+})(jQuery);
+
+(function($) {
+
+    $('.scroll_up_list').click(function(){
+        $('html, .section_left_project_container').animate({scrollTop : '-=40'},200);
+        return false;
+    });
+
+    $(".scroll_down_list").click(function() {
+        $('html,.section_left_project_container').animate({scrollTop: '+=40'},200);
     });
 
 })(jQuery);
