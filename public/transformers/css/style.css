@@ -287,15 +287,15 @@ span.c4_prct_score {
     top: 10px;
     width: 190px;
 }
-.container_ipad_view#level1_transformers h2.score_h2_title ,.container_ipad_view#level2_transformers h2.score_h2_title{
+.container_ipad_view.level1_transformers h2.score_h2_title ,.container_ipad_view.level2_transformers h2.score_h2_title{
     margin: 0;
     font-size: 23px;
 }
-.container_ipad_view#level1_transformers h3.score_h3_title,.container_ipad_view#level2_transformers h3.score_h3_title {
+.container_ipad_view.level1_transformers h3.score_h3_title,.container_ipad_view.level2_transformers h3.score_h3_title {
     margin: 0;
     color: #fff;
 }
-.container_ipad_view#level1_transformers h3.score_h3_title strong,.container_ipad_view#level2_transformers h3.score_h3_title strong {
+.container_ipad_view.level1_transformers h3.score_h3_title strong,.container_ipad_view.level2_transformers h3.score_h3_title strong {
     color: #fdbf2e;
 }
 .level1_transformer_signs_box {

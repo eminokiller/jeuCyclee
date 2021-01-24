@@ -94,26 +94,22 @@
 
             });
             document.addEventListener('prepareRemove', function () {
-                console.log('heheh');
                 $(this).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
-                        console.log('1')
                         if ($(this).find('i.fa.fa-trash').length === 0) {
-                            console.log('2')
-                            let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
-                            $trash[0].click(function(evt)
-                            {
-                                console.log('hh')
+                            let $trash = $('<li></li>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
+                            $trash[0].addEventListener('touchstart', function (evt) {
+
                                 evt.preventDefault()
                                 let $node = $($(evt.target).parents('li').first())
-                                $node.replaceWith(getOrginalHook())
+                                $node.replaceWith(getHook())
                                 dispatchGameChangeEvent();
                             }, false)
                             $(this).prepend($trash[0])
                         }
 
                     })
-                });
+                })
             })
             document.addEventListener('timeElapsedEvent', function (evt) {
                 $('[draggable="true"]').each(function () {
