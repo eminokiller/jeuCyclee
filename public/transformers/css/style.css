@@ -38,14 +38,10 @@ img{
 
 .container_ipad_view {
     position: relative;
-    left: 50%;
-    top: 50%;
-    max-width: 1024px;
-    max-height: 768px;
     width: 1024px;
     height: 768px;
     overflow: hidden;
-    transform: translate3d(-50%, -50%, 0px);
+    margin: auto;
 }
 .container_ipad_view#login_transformers{
     background: url("../images/bg-login.png") center no-repeat;
@@ -1176,7 +1172,7 @@ input:checked + .slider:before {
     cursor: pointer;
 }
 /***********************/
-.container_ipad_view#level2_transformers{
+.container_ipad_view.level2_transformers{
     background: url("../images/bg-lvl2.png") center no-repeat;
     background-size: 100% 100%;
 }

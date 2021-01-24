@@ -37,6 +37,10 @@
 
         }
 
+
+
+
+
         const current = $.extend(defaultConfig, config)
         this.each(function () {
             let _that = this;
