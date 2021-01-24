@@ -149,6 +149,7 @@ header {
 div.draggable-list {
     max-height: 60vh;
     overflow-y: scroll;
+    padding: 0;
 }
 
 div.target-table {
@@ -164,7 +165,7 @@ ul.tasker {
 
 ul.task-week {
     max-height: 40vh;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     padding-left: 0px;
     list-style: none;
 }
@@ -182,6 +183,7 @@ li.draggable-task {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: break-spaces;
 }
 li.task-hook{
     margin-top: 1vh;
@@ -233,7 +235,7 @@ div.week-container {
     padding-top: 3px;
     color: white;
     font-weight: bold;
-    box-shadow: 1px 1px #f1f1f1;
+    /* box-shadow: 1px 1px #f1f1f1; */
 }
 
 .subtitle-1 {
