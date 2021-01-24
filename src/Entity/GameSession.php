@@ -19,14 +19,17 @@ class GameSession extends EntityRef
      */
     private $duree;
 
+
+
     /**
-     * @ORM\OneToMany(targetEntity=Equipe::class, mappedBy="gameSession")
+     * @ORM\OneToMany(targetEntity=Campagne::class, mappedBy="session")
      */
-    private $equipes;
+    private $campagnes;
 
     public function __construct()
     {
-        $this->equipes = new ArrayCollection();
+
+        $this->campagnes = new ArrayCollection();
     }
 
 
@@ -43,32 +46,34 @@ class GameSession extends EntityRef
         return $this;
     }
 
+
+
     /**
-     * @return Collection|Equipe[]
+     * @return Collection|Campagne[]
      */
-    public function getEquipes(): Collection
+    public function getCampagnes(): Collection
     {
-        return $this->equipes;
+        return $this->campagnes;
     }
 
-    public function addEquipe(Equipe $equipe): self
+    public function addCampagne(Campagne $campagne): self
     {
-        $this->equipes->add($equipe);
-        $equipe->setGameSession($this);
-//        if (!$this->equipes->contains($equipe)) {
-//            $this->equipes[] = $equipe;
-//            $equipe->setGameSession($this);
+        $this->campagnes->add($campagne);
+        $campagne->setSession($this);
+//        if (!$this->campagnes->contains($campagne)) {
+//            $this->campagnes[] = $campagne;
+//            $campagne->setSession($this);
 //        }
 
         return $this;
     }
 
-    public function removeEquipe(Equipe $equipe): self
+    public function removeCampagne(Campagne $campagne): self
     {
-        if ($this->equipes->removeElement($equipe)) {
+        if ($this->campagnes->removeElement($campagne)) {
             // set the owning side to null (unless already changed)
-            if ($equipe->getGameSession() === $this) {
-                $equipe->setGameSession(null);
+            if ($campagne->getSession() === $this) {
+                $campagne->setSession(null);
             }
         }
 

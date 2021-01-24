@@ -15,7 +15,7 @@
         <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
                 <li class="m-portlet__nav-item">
-                    <a href="{{ path('equipe_new') }}" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                    <a href="{{ path('game_session_new') }}" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
 												<span>
 													<i class="la la-plus"></i>
 													<span>Ajouter une session</span>
@@ -33,7 +33,7 @@
             <tr>
                 <th>Nom de la session</th>
                 <th>Duree - minute</th>
-                <th>Equipes</th>
+                <th>Campagne</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -44,8 +44,8 @@
                 <td>{{ game_session.duree }}</td>
                 <td>
                     <ul>
-                        {% for equipe in game_session.equipes  %}
-                            <li>{{ equipe }}</li>
+                        {% for campagne in game_session.campagnes  %}
+                            <li>{{ campagne }}</li>
                         {% endfor %}
                     </ul>
 
