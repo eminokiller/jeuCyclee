@@ -1,4 +1,5 @@
 class Application {
+
     constructor() {
         window.show = function (selector) {
             let element = document.querySelector(selector);
@@ -121,6 +122,7 @@ class Application {
                 mocks: false,
                 url: '/api/getGamePlay',
                 success: (response) => {
+                    // console.log('all',response);
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
                     document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
                     initPhase1();
@@ -136,7 +138,9 @@ class Application {
                                 text: item.nomAction,
                                 draggable: true,
                                 level: item.level,
-                                color: item.color
+                                color: item.color,
+                                task: item.task,
+                                impact: item.impact
                             };
                         })
                     }
@@ -154,6 +158,7 @@ class Application {
                         itemClass: 'draggable-task',
                         ondragstart: function (evt) {
                             evt.originalEvent.dataTransfer.setData('data-id', $(evt.target).data('id'))
+                            evt.originalEvent.dataTransfer.setData('type', $(evt.target).data('type'))
                             evt.originalEvent.dataTransfer.setData('data-parent', $(evt.target).parent().attr('class'))
                             evt.originalEvent.dataTransfer.setData('data-index', $(evt.target).index())
                             console.log('drag start data level---->', $(evt.target).attr('data-level'))
@@ -167,7 +172,8 @@ class Application {
                         },
                         ondragend: function (evt) {
                             let clonable = $(evt.target).parent().hasClass('tasker');
-                            
+                            console.log('drag end en principe')
+
 
                             $('#exampleModal').data('clone', clonable);
 
@@ -186,15 +192,37 @@ class Application {
                                             let $li = $('<li></li>', {'class': 'task-hook'});
                                             $(touchedElement).replaceWith($(target).clone(true));
                                             $(target).replaceWith($li[0])
+                                            console.log('dragged esper');
                                         } else if($(target).parents('.tasker').length){
+                                            console.log('not done en principe')
                                             $(touchedElement).replaceWith($(target).addClass('done').clone(true));
+                                            console.log('somme des task',getTask(data,$(target).attr('data-id')));
+                                            let query = getTask(data,$(target).attr('data-id'));
+                                            let wdV = parseInt(document.getElementById(query[0]).style.width);
+                                            let wid = 100/query[1];
+                                            let widthV = wdV + wid;
+                                            $('div#'+query[0]).width(widthV+'%');
+                                            let wImpact = parseInt(document.getElementById(0).style.width);
+                                            let som = wImpact + query[2];
+                                            $('div#0').width(som+'%');
+
+
                                         }
                                     } else {
+                                        var liste = getElement(data,$(target).attr('data-id'))
                                         $('#exampleModal').data('clone', true);
                                         $('#exampleModal').data('id', $(target).attr('data-id'));
                                         $('#exampleModal').data('target-id', $($(evt.target).parents('.droppable-list').first()).attr('data-id'));
                                         $('#exampleModal').data('target-hook', $(touchedElement).index());
+                                        $('#exampleModal').data('lalist', liste);
+
                                         $('#exampleModal').modal('toggle')
+                                        // console.log('apres le modal enregistre',$(target).attr('data-id'));
+                                        // let
+                                        // console.log(liste);
+                                        // let $element = $($('.tasker > li.draggable-task[data-id="' + $(target).attr('data-id') + '"]').first());
+                                        //
+                                        // console.log($element.getClass);
                                     }
                                 }
                             }
@@ -202,7 +230,7 @@ class Application {
 
                         },
                         mapFn: function (item) {
-                            console.log('item app',item)
+                           // console.log('item app',item)
                             return {
                                 id: item.id,
                                 text: item.text,
@@ -389,4 +417,6 @@ class Application {
         let next = this.getNextStep();
         this.applyStep(next);
     }
+
+
 }

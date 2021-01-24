@@ -110,6 +110,8 @@ Attention ! Il y a une seule réponse correcte.
         let targetId = $(this).data('target-id');
         let clone = $(this).data('clone');
         let hookIndex = $(this).data('target-hook');
+        let list = $(this).data('lalist')
+        console.log('---> la liste',list);
         console.log('hooke---->', hookIndex);
         let $element = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first());
         if (!clone) {
@@ -128,7 +130,15 @@ Attention ! Il y a une seule réponse correcte.
                     $hook.css('background-color', 'red');
                     if (clone) {
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
+                        list.forEach(ie => {
+                            let $element_ = $($('.tasker > li.draggable-task[data-id="' + ie + '"]').first());
+                            $hook.replaceWith($element_.addClass('done').clone(true)[0])
+                        })
+
+
+
                     } else {
+                        console.log('2')
                         $hook.replaceWith($element.addClass('done')[0])
                     }
                     $('#exampleModal').modal('hide')

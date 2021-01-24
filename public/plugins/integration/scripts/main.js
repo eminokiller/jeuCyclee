@@ -34,6 +34,7 @@ function prepareRemove(element) {
             $('#exampleModal').data('clone', clonable);
         },
         touchend: function (evt) {
+            console.log('touch end');
             evt.preventDefault();
             let target = $(evt.target).hasClass('draggable-task') ? evt.target : $(evt.target).parent()[0]
             let changedTouch = event.changedTouches[0];
