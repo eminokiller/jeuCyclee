@@ -302,7 +302,6 @@ class ScoreManager {
 
 function getTask(data,ide){
 
-
     let action =  getElByPropVal(data,'id',ide)
     let find = 0;
     for (var j = 0,length = data.length; j < length;j++){
@@ -331,4 +330,16 @@ function getElement(data,id){
         }
     }
     return ids
+}
+
+function upHandler(event) {
+
+    var dX = fX - iX;
+    var dY = fY - iY;
+
+    var tg = dY / dX;
+    if (tg < 0) tg = -tg;
+
+    if (tg <= 0.5 && fX > iX) rightSwipe()
+    else if (tg <= 0.5 && fX < iX) leftSwipe()
 }

@@ -90,7 +90,8 @@
                     $(this).find('li.draggable-task').each(function () {
                         if($(this).find('i.fa.fa-trash').length ===0){
                             let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float','right');
-                            $trash[0].addEventListener('click', function (evt) {
+                            $trash[0].addEventListener('touchstart', upHandler,false, function (evt) {
+                                console.log('heres')
                                 evt.preventDefault()
                                 console.log('ect---->', evt.target)
                                 let $node = $($(evt.target).parents('li').first())

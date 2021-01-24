@@ -152,6 +152,9 @@ class Application {
                     let game2 = new Game(2, startWeek, endWeek, data);
                     let gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
                     let gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
+
+                    console.log('this is gamemodel',gameModel1);
+
                     $('.draggable-list').draggableList({
                         data: data,
                         containerClass: 'tasker',
@@ -194,21 +197,28 @@ class Application {
                                             $(target).replaceWith($li[0])
                                             console.log('dragged esper');
                                         } else if($(target).parents('.tasker').length){
-                                            console.log('not done en principe')
-                                            $(touchedElement).replaceWith($(target).addClass('done').clone(true));
-                                            console.log('somme des task',getTask(data,$(target).attr('data-id')));
+
+
+
                                             let query = getTask(data,$(target).attr('data-id'));
                                             let wdV = parseInt(document.getElementById(query[0]).style.width);
                                             let wid = 100/query[1];
-                                            let widthV = wdV + wid;
-                                            $('div#'+query[0]).width(widthV+'%');
+
+                                            let widthJauges = query[2] * 20;
+                                            //div jauges
+                                            if ($('div#'+query[0]).width() === 0){
+                                                $('div#'+query[0]).width(widthJauges+'%');
+                                            }
+
                                             let wImpact = parseInt(document.getElementById(0).style.width);
                                             let som = wImpact + query[2];
+                                            //div impact
                                             $('div#0').width(som+'%');
 
-
+                                            $(touchedElement).replaceWith($(target).addClass('done').clone(true));
                                         }
                                     } else {
+
                                         var liste = getElement(data,$(target).attr('data-id'))
                                         $('#exampleModal').data('clone', true);
                                         $('#exampleModal').data('id', $(target).attr('data-id'));

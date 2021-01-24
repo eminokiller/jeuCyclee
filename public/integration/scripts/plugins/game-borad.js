@@ -72,12 +72,6 @@
             let _that = this;
             //global event listeners
             document.addEventListener('gamechanged',  (evt)=> {
-                // console.log('here-------->game changedEvent',this)
-                //
-                // console.log('datatattata',this['data-id']);
-
-
-
 
                 let weeks = []
                 $(_that).find('.droppable-list').each(function () {
@@ -103,9 +97,13 @@
                 console.log('heheh');
                 $(this).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
+                        console.log('1')
                         if ($(this).find('i.fa.fa-trash').length === 0) {
+                            console.log('2')
                             let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
-                            $trash[0].addEventListener('click', function (evt) {
+                            $trash[0].click(function(evt)
+                            {
+                                console.log('hh')
                                 evt.preventDefault()
                                 let $node = $($(evt.target).parents('li').first())
                                 $node.replaceWith(getOrginalHook())
@@ -142,7 +140,7 @@
                         let j = i - 4;
                         mois = 'MARS - S' + j;
                     }
-                    $div.append(`<div class="title_column_tab_semaine"> ${mois}  </div>`);
+                    $div.append(`<div class="title_column_tab_semaine" hidden> ${mois}  </div>`);
                     let extraClass = current['level'] == 1 ? 'zone_drg_1' : 'zone_drg_2';
                     let $weekContainer = $(`<div class="week-container zone_dragger ${extraClass}"><ul class="task-week"></ul></div>`);
                     prepareWeekHooks($weekContainer, savedGame, i - 1);
