@@ -8,13 +8,13 @@
             ondragend: function(evt){},
             touchend: function(evt){},
             mapFn:function (item) {
-                console.log('imm',item)
+                // console.log('imm',item)
                 return {
                     id: item.id,
                     text: item.text,
                     draggable: true,
-                    color: item.color
-
+                    color: item.color,
+                    type: '1'
                 }
             }
         };
@@ -31,9 +31,9 @@
             let _that = this;
             let $ul = $('<ul></ul>', {'class': current['containerClass']});
             let data = current['data'].map(current['mapFn']);
-            console.log('data',data)
+            // console.log('data',data)
             data.forEach(function (item) {
-                console.log('here item',item)
+                // console.log('here item',item)
                 let $li = $('<li></li>', {'class':current['itemClass']}).append(`<span>${item.text}</span>`)
                 $li.data('id', item.id)
                 $li.attr('data-id', item.id)
@@ -43,29 +43,17 @@
                 if(item.draggable){
                     $li.bind('dragstart', current['ondragstart'])
                     $li.bind('touchstart', function (evt) {
-                        console.log('touchstart',item.id)
-                        if (item.id == 1){
-                            wd = parseInt(document.getElementById('f2f').style.width);
-                            widthf = wd + 12.5;
-                            $('#f2f').width(widthf);
-                        }
-                        if (item.id == 3){
-                            wdV = parseInt(document.getElementById('vr').style.width);
-                            widthV = wdV + 12.5;
-                            $('#vr').width(widthV);
-                        }
-                        if(item.id == 4){
-                            wdt = parseInt(document.getElementById('triggerMail').style.width);
-                            widthT = wdt + 12.5;
-                            $('#triggerMail').width(widthT);
-                        }
+
+
 
                     })
+                    //console.log('jjdh')
+                    //console.log('elem',$li.bind('touchend', current['touchend']))
                     $li.bind('dragend', current['ondragend'])
                     $li.bind('touchend', current['touchend'])
                 }
 
-                console.log('la liiiiiiiiiiiiiiiste',$li[0]);
+                // console.log('la liiiiiiiiiiiiiiiste',$li[0]);
                 $ul.append($li[0])
             })
             $(_that).append($ul)

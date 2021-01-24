@@ -19,7 +19,10 @@ class Task {
         this._id = id;
         this._text = text;
     }
+
+
 }
+
 
 class Week {
     set tasks(value) {
@@ -169,8 +172,8 @@ class Game {
     }
 
     static refresh(instance, savedInstance) {
-        console.log('instance------->', instance)
-        console.log('instance saved------->', savedInstance)
+        // console.log('instance------->', instance)
+        // console.log('instance saved------->', savedInstance)
         if(!instance._weeks) return;
         instance._weeks.forEach(function (week, index) {
             if (savedInstance) {
@@ -231,7 +234,7 @@ class ScoreManager {
             let weekMap = {
                 _id:week._id,
                 _taskMap:week._tasks.reduce(function (s,currentTask) {
-                    console.log('current----->task', currentTask)
+                    //console.log('current----->task', currentTask)
                     if(currentTask._id){
                         s.push(currentTask.id)
                     }
@@ -245,7 +248,7 @@ class ScoreManager {
     static calculateGameScore(game, model) {
         let scoreGameModel = 0;
         let modelMap = ScoreManager.getTaskMap(model);
-        console.log('model map----->',modelMap)
+        //console.log('model map----->',modelMap)
         game.weeks.forEach((week, i) => {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
@@ -278,21 +281,54 @@ class ScoreManager {
     }
 
     static score(model1, game1, model2, game2) {
-        console.log('model1', model1)
-        console.log('game1', game1)
-        console.log('model2', model2)
-        console.log('game2', game2)
+        // console.log('model1', model1)
+        // console.log('game1', game1)
+        // console.log('model2', model2)
+        // console.log('game2', game2)
         let scorePerfect1 = ScoreManager.calculatePerfectScore(model1)
         let scorePerfect2 = ScoreManager.calculatePerfectScore(model2)
         let scoreGameModel1 = ScoreManager.calculateGameScore(game1, model1)
         let scoreGameModel2 = ScoreManager.calculateGameScore(game2, model2)
         let scorePerfect = scorePerfect1 + scorePerfect2;
         let scoreGame = scoreGameModel1 + scoreGameModel2;
-        console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
+        //console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
         let ratio = scorePerfect ? scoreGame / scorePerfect : 0;
         let score = Math.round(ratio * 100);
         return score <=100?score:100;
 
 
     }
+}
+
+function getTask(data,ide){
+
+
+    let action =  getElByPropVal(data,'id',ide)
+    let find = 0;
+    for (var j = 0,length = data.length; j < length;j++){
+            if (data[j]['task']['id'] === action['task']['id']){
+                    find++
+            }
+    }
+
+    return [action['task']['id'],find,action['impact']] ;
+}
+
+function getElByPropVal(myArray, prop, val){
+    for (var i = 0, length = myArray.length; i < length; i++) {
+        if (myArray[i][prop] == val){
+            return myArray[i];
+        }
+    }
+
+}
+function getElement(data,id){
+    let action = getElByPropVal(data,'id',id);
+    let ids = [];
+    for (var j = 0,length = data.length; j < length;j++){
+        if (data[j]['task']['id'] === action['task']['id']){
+            ids.push(data[j]['id'])
+        }
+    }
+    return ids
 }

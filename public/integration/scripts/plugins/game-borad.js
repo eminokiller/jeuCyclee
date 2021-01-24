@@ -72,9 +72,9 @@
             let _that = this;
             //global event listeners
             document.addEventListener('gamechanged',  (evt)=> {
-                console.log('here-------->game changedEvent',this)
-
-                console.log('datatattata',this['data-id']);
+                // console.log('here-------->game changedEvent',this)
+                //
+                // console.log('datatattata',this['data-id']);
 
 
 
@@ -88,6 +88,7 @@
                             weeks[weekIndex] = weeks[weekIndex] ? weeks[weekIndex] : new Week(weekIndex)
                             weeks[weekIndex].tasks[taskIndex] = new Task($(this).attr('data-id'), $(this).text())
                             $(this).find('i.fa-trash').each(function () {
+                                console.log('tra');
                                 $(this).remove()
                             })
                         })
@@ -99,6 +100,7 @@
 
             });
             document.addEventListener('prepareRemove', function () {
+                console.log('heheh');
                 $(this).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
                         if ($(this).find('i.fa.fa-trash').length === 0) {
@@ -125,6 +127,7 @@
                     $(this).attr('draggable', true);
                 })
             })
+
             function initialize() {
                 let savedGame = window.reInitialize(current.keystore);
                 if(savedGame){

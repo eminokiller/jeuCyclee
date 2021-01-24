@@ -41,12 +41,14 @@
                 if(item.draggable){
                     $li.bind('dragstart', current['ondragstart'])
                     $li.bind('touchstart', function (evt) {
-                        console.log('touchstart', evt)
+                        console.log('touchstart pb', evt)
                     })
                     $li.bind('dragend', current['ondragend'])
                     $li.bind('touchend', current['touchend'])
                 }
+                console.log('here')
                 $ul.append($li[0])
+                console.log($li[0])
             })
             $(_that).append($ul)
         })
