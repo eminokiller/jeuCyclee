@@ -13,6 +13,11 @@ function dispatchPrepareRemoveEvent() {
     event.initEvent('prepareRemove', true, true);
     document.dispatchEvent(event);
 }
+function dispatchDismissRemoveEvent(){
+    const event = document.createEvent('Event');
+    event.initEvent('dismissRemove', true, true);
+    document.dispatchEvent(event);
+}
 function dispatchTimeElapsedEvent() {
     const event = document.createEvent('Event');
     event.initEvent('timeElapsedEvent', true, true);

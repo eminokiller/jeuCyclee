@@ -196,11 +196,8 @@ class Application {
                                             let $li = $('<li></li>', {'class': 'task-hook'});
                                             $(touchedElement).replaceWith($(target).clone(true));
                                             $(target).replaceWith($li[0])
-                                            console.log('dragged esper');
+                                            dispatchGameChangeEvent();
                                         } else if($(target).parents('.tasker').length){
-
-
-
                                             let query = getTask(data,$(target).attr('data-id'));
                                             let wdV = parseInt(document.getElementById(query[0]).style.width);
                                             let wid = 100/query[1];
@@ -215,25 +212,18 @@ class Application {
                                             let som = wImpact + query[2];
                                             //div impact
                                             $('div#0').width(som+'%');
-
                                             $(touchedElement).replaceWith($(target).addClass('done').clone(true));
+                                            dispatchGameChangeEvent();
                                         }
                                     } else {
-
-                                        var liste = getElement(data,$(target).attr('data-id'))
+                                        //target-id'
                                         $('#exampleModal').data('clone', true);
                                         $('#exampleModal').data('id', $(target).attr('data-id'));
-                                        $('#exampleModal').data('target-id', $($(evt.target).parents('.droppable-list').first()).attr('data-id'));
+                                        $('#exampleModal').data('target-id', $($(touchedElement).parents('.droppable-list').first()).attr('data-id'));
                                         $('#exampleModal').data('target-hook', $(touchedElement).index());
+                                        let liste = getElement(data,$(target).attr('data-id'))
                                         $('#exampleModal').data('lalist', liste);
-
                                         $('#exampleModal').modal('toggle')
-                                        // console.log('apres le modal enregistre',$(target).attr('data-id'));
-                                        // let
-                                        // console.log(liste);
-                                        // let $element = $($('.tasker > li.draggable-task[data-id="' + $(target).attr('data-id') + '"]').first());
-                                        //
-                                        // console.log($element.getClass);
                                     }
                                 }
                             }
