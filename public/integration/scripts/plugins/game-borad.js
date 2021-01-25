@@ -93,16 +93,25 @@
                 dispatchScoreEvent();
 
             });
-            document.addEventListener('prepareRemove', function () {
-                $(this).find('.week-container > ul.task-week').each(function () {
+            document.addEventListener('dismissRemove', function () {
+                $(_that).find('.week-container > ul.task-week').each(function () {
+                    $(this).find('li.draggable-task').each(function () {
+                        $(this).find('i.fa.fa-trash').each(function () {
+                            $(this).remove();
+                        })
+                    })
+                });
+            })
+            document.addEventListener('prepareRemove', function (e) {
+                console.log('event remove dispatched', e);
+                $(_that).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
                         if ($(this).find('i.fa.fa-trash').length === 0) {
-                            let $trash = $('<li></li>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
+                            let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float', 'right');
                             $trash[0].addEventListener('touchstart', function (evt) {
-
                                 evt.preventDefault()
                                 let $node = $($(evt.target).parents('li').first())
-                                $node.replaceWith(getHook())
+                                $node.replaceWith(getOrginalHook())
                                 dispatchGameChangeEvent();
                             }, false)
                             $(this).prepend($trash[0])

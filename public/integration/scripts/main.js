@@ -4,7 +4,11 @@ function showAsside(element) {
 }
 
 function prepareRemove(element) {
-    dispatchPrepareRemoveEvent();
+    if($(element).hasClass('active')){
+        dispatchDismissRemoveEvent();
+    } else {
+        dispatchPrepareRemoveEvent();
+    }
 }
 
 (function ($) {
