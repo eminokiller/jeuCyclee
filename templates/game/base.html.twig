@@ -91,9 +91,9 @@
             </div>
 
             <div class="level1_transformer_signs_box">
-                <div class="transformer_sign"></div>
-                <div class="transformer_sign"></div>
-                <div class="transformer_sign"></div>
+                <div class="transformer_sign" id="b1"></div>
+                <div class="transformer_sign" id="b2"></div>
+                <div class="transformer_sign" id="b3"></div>
 
                 <div class="transformer_bar_signs">
                     <div class="bar_sign"></div>
@@ -224,6 +224,7 @@
 <!------------->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
+    <div class="close_popup">X</div>
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -242,73 +243,8 @@
         </div>
     </div>
 </div>
-<div class="popup_lvl1_1" id="badge1" style="display: none;">
-    <div class="boxer_popup">
-        <div class="close_popup">X</div>
-        <div class="tile_popup">Action délégué et quiz</div>
-        <div class="txt_popup">
-            <form id="" class="form_project_options">
-                <p><strong>Veuillez selectionner les actions à mener pour « eADV » :</strong></p>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Suivre la formation pour présenter l’eadv</div>
-                </div>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">M’entrainer à le présenter</div>
-                </div>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Réaliser les présentations</div>
-                </div>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Partager des feedback</div>
-                </div>
-                <p><strong>Quand un HCPs pose des questions très spécifiques, je :</strong></p>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Partage la question à nos experts</div>
-                </div>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Répond au HCP</div>
-                </div>
-                <div class="row_transformers">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <div class="option_txt">Je met en contact l’expert avec le HCP</div>
-                </div>
 
 
-                <div class="row_transformers center_content">
-                    <input type="submit" value="soumettre">
-                </div>
-            </form>
-        </div>
-    </div>
-
-</div>
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
      aria-hidden="true">
@@ -327,6 +263,139 @@
             <div class="modal-footer center">
                 <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
             </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div class="modal-title modal-title" id="exampleModalLabel5">BADGE 3</div>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" id="patt" style="display: none">
+                    Mauvaise réponse!  Essayez encore de trouver la bonne réponse.<br>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="partenaire" value="0">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">Les canaux digitaux nous permettent d’être en contacte avec nos HCP et répondre à leurs attentes en information médicale, à tout moment.</div>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="orch" value="1">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">Les canaux digitaux ne sont pas disponibles, et sont difficiles à mette en place</div>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="orch" value="2">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">Les canaux digitaux ne concernent pas l’industrie pharmaceutique.</div>
+                </div>
+
+            </div>
+            <div class="modal-footer center">
+                <button onclick="verifPartenaire()" class="btn btn-primary btn-lg">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div class="modal-title modal-title" id="exampleModalLabel4">BADGE 2</div>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" id="orche" style="display: none">
+                    Mauvaise réponse!  Essayez encore de trouver la bonne réponse.<br>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="orch" value="0">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">La Customer Journey, traduit nos messages via tous les canaux. Elle est essentielle à notre stratégie.</div>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="orch" value="1">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">La Customer Journey traduit la feuille de route de l’eadv</div>
+                </div>
+                <div class="row_transformers">
+                    <label class="switch">
+                        <input type="radio" name="orch" value="2">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="option_txt">La Customer Journey n’est pas importante.</div>
+                </div>
+
+            </div>
+            <div class="modal-footer center">
+                <button onclick="verifOrchestrateur()" class="btn btn-primary btn-lg">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+
+                <div class="modal-header">
+                    <div class="modal-title modal-title" id="exampleModalLabel3">BADGE 1</div>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" id="promo" style="display: none">
+                        Mauvaise réponse!  Essayez encore de trouver la bonne réponse.<br>
+                    </div>
+                    <div class="row_transformers">
+                        <label class="switch">
+                            <input type="radio" name="promoteur" value="0">
+                            <span class="slider"></span>
+                        </label>
+                        <div class="option_txt">Proposer et avoir plus de consentement POA et hors POA, est un élément clés pour être au niveau Promoteur.</div>
+                    </div>
+                    <div class="row_transformers">
+                        <label class="switch">
+                            <input type="radio" name="promoteur" value="1">
+                            <span class="slider"></span>
+                        </label>
+                        <div class="option_txt">Les consentements ne sont pas nécessaires pour notre stratégie</div>
+                    </div>
+                    <div class="row_transformers">
+                        <label class="switch">
+                            <input type="radio" name="promoteur" value="2">
+                            <span class="slider"></span>
+                        </label>
+                        <div class="option_txt">Les consentements ne peuvent être proposés qu’aux MG</div>
+                    </div>
+
+                </div>
+                <div class="modal-footer center">
+                    <button onclick="verifPromoteur()" class="btn btn-primary btn-lg">Save changes</button>
+                </div>
             </form>
         </div>
     </div>
@@ -365,6 +434,36 @@
         window.localStorage.clear();
         window.location.reload();
             }
+     function verifPromoteur(){
+        let choix = $('input[name=promoteur]:checked').val();
+        if (choix != 0){
+            $('#promo').show();
+        }else{
+            $('div#b1').addClass('active');
+            $('#exampleModal3').modal('toggle');
+        }
+
+
+            }
+
+    function verifPartenaire(){
+        let choix = $('input[name=partenaire]:checked').val();
+        if (choix != 0){
+            $('#patt').show();
+        }else{
+            $('div#b3').addClass('active');
+            $('#exampleModal5').modal('toggle');
+        }
+    }
+    function verifOrchestrateur(){
+        let choix = $('input[name=orch]:checked').val();
+        if (choix != 0){
+            $('#orche').show();
+        }else{
+            $('div#b2').addClass('active');
+            $('#exampleModal4').modal('toggle');
+        }
+    }
 </script>
 </body>
 </html>
