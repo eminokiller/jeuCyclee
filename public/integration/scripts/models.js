@@ -253,6 +253,7 @@ class ScoreManager {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
                     if (task._id == model._weeks[i]._tasks[j]._id) {
+                        console.log('crrect')
                         scoreGameModel += 2;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if(indexRef>-1){
@@ -261,6 +262,7 @@ class ScoreManager {
                     }
                     let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if(indexRef2> -1){
+                        console.log('1/2 corrcet')
                         scoreGameModel += 1;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
@@ -268,7 +270,8 @@ class ScoreManager {
 
             });
         });
-        return scoreGameModel;
+
+        return scoreGameModel*2;
     }
 
     static calculatePerfectScore(model) {
