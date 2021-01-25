@@ -124,6 +124,10 @@
                 $('[draggable="true"]').each(function () {
                     $(this).attr('draggable', false);
                 })
+                const app = new Application();
+                app.boot();
+                app.next();
+
             });
             document.addEventListener('gameRefreshEvent', function () {
                 $('li.draggable-task').each(function () {

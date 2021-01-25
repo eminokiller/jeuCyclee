@@ -15,7 +15,9 @@ class Application {
         };
         window.initPhase1 = function () {
             if (localStorage.getItem('level') == 2) return;
-            window.hide('div.target-table[data-id="2"]')
+            window.hide('div.right_arrow_scroller_2');
+            window.hide('div.left_arrow_scroller_2');
+            window.hide('div.cata-sub-nav2[data-id="2"]')
             window.show('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
             let gameLevelElement = document.querySelector('#gameLevel');
@@ -29,7 +31,9 @@ class Application {
         };
         window.initPhase2 = function () {
             if (localStorage.getItem('level') == 1) return;
-            window.show('div.target-table[data-id="2"]')
+            window.show('div.right_arrow_scroller_2');
+            window.show('div.left_arrow_scroller_2');
+            window.show('div.cata-sub-nav2[data-id="2"]')
             window.hide('#score_container')
             let gameMainElement = document.querySelector('#gameMain');
             let gameLevelElement = document.querySelector('#gameLevel');
@@ -351,6 +355,7 @@ class Application {
                     }, game2);
                     $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
                     $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
+                    $('#myScoreUp').score({}, gameModel1, game1, gameModel2, game2);
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}

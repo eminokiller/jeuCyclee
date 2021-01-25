@@ -19,6 +19,7 @@ function dispatchDismissRemoveEvent(){
     document.dispatchEvent(event);
 }
 function dispatchTimeElapsedEvent() {
+    console.log('tile elepset')
     const event = document.createEvent('Event');
     event.initEvent('timeElapsedEvent', true, true);
     document.dispatchEvent(event);
@@ -44,3 +45,4 @@ function dispatchChangeLevelEvent() {
     event.initEvent('changeLevelEvent', true, true);
     document.dispatchEvent(event);
 }
+
