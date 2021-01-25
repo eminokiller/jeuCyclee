@@ -10,9 +10,7 @@
             document.addEventListener(current['event'], function () {
                 score = ScoreManager.score(model1, game1, model2, game2)
 
-                // if (score >= 20 ){
-                //     $("#badge1").css("display", "block");
-                // }
+
 
 
 
@@ -21,6 +19,23 @@
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
                 console.log(score);
+
+                if (score > 10 && !($('#b1').hasClass('active'))){
+                    $('#exampleModal3').modal('toggle');
+                }
+
+                if (score > 20 && !($('#b2').hasClass('active'))){
+                    $('#exampleModal4').modal('toggle');
+                }
+
+                if (score > 40 && !($('#b3').hasClass('active'))){
+                    $('#exampleModal4').modal('toggle');
+                }
+
+
+
+
+
                 $(_that).text(`${score} %`)
             })
             $(_that).text(`${score} %`)

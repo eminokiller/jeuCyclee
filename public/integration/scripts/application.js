@@ -349,8 +349,10 @@ class Application {
 
                         }
                     }, game2);
+
                     $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
                     $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
+
                     $('#chat-component').chat({
                         'chatTeam': [
                             {id: 1, username: 'XYZ', 'picUrl': '/css/image/me.png'}

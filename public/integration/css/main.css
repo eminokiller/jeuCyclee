@@ -298,16 +298,65 @@ div.kpi-flex-container {
     background-color: #9a23d3;
     text-shadow:1px 1px 0 #2c6c88;
 }
+.modal{
+    margin: auto;
+    width: 500px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    height: max-content;
+}
 .modal-header{
-    background-color: #9d7ed3;
+    background-color: #5c07c7;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+}
+.modal-title{
+    text-transform: uppercase;
+    font-family: 'Transformers Movie';
+    letter-spacing: 1px;
+    font-size: 30px;
+    text-align: center;
+}
+.modal-content{
+    background-color: initial;
+    float: left;
+    width: 100%;
+    /*background: #fff;*/
+    border-radius: 0px 0px 10px 10px;
+    /*padding: 15px;*/
 }
 .modal-body{
     background-color: #f1f1f1;
     color: black;
 }
 .modal-footer{
-    background-color: #925dd3;
+    background-color: #d0ced2;
     color: black;
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+.form-group question-container{
+    font-size: 14px;
+    color: #270257;
+}
+.transformerstype{
+    font-family: 'Transformers Movie';
+    background: #6a4cdd;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 21px;
+    text-align: center;
+    width: 230px;
+    transition: all.3s;
+    cursor: pointer;
+    border: 0;
+    padding: 6px 10px;
+    margin-top: 15px;
+    margin: 0 auto;
 }
 .team-wrapper{
     font-size: 24px;

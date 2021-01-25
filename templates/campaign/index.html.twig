@@ -33,6 +33,7 @@
         <tr>
             <th>Id</th>
             <th>Libelle</th>
+            <th>Equipes</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -41,6 +42,14 @@
             <tr>
                 <td>{{ campagne.id }}</td>
                 <td>{{  campagne.libelle}}</td>
+                <td>
+                    <lu>
+                        {% for equipe in campagne.equipes %}
+                            <li>{{ equipe }}</li>
+                        {% endfor %}
+                    </lu>
+
+                </td>
                 <td>
 
 

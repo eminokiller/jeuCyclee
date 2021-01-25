@@ -16,6 +16,7 @@
             function updateTimer() {
                 msLeft = endTime - (+new Date);
                 if (msLeft < 1000) {
+                    console.log(msLeft)
                     element.innerHTML = "<span style='font-size:30px;display: inline-block; line-height: initial;'>temps écoulé!</span>";
                     $(".popup_lvl1_3").fadeIn();
                     dispatchTimeElapsedEvent()
@@ -46,6 +47,7 @@
             let _that = this;
             let minuteStored = localStorage.getItem('minutes');
             let secondStored = localStorage.getItem('seconds');
+            console.log(minuteStored,secondStored);
             if (minuteStored !== null) {
                 let currentMinute = parseInt(minuteStored);
                 let currentSeconds = parseInt(secondStored);

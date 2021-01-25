@@ -2,7 +2,9 @@ $(function () {
     function getResponseTemplate(i, j, response, idQuestion, idTask) {
         return `<div class="form-check">
 <input type="hidden" name="task[questions][${i}][reponses][${j}][id]" value="${response.id}">
+ 
   <input class="form-check-input" type="checkbox" name="task[questions][${i}][reponses][${j}][status]" id="exampleRadios_${response.id}_${idQuestion}_${idTask}">
+
   <label class="form-check-label" for="exampleRadios_${response.id}_${idQuestion}_${idTask}">
     ${response.libelle}
   </label>
@@ -20,7 +22,7 @@ $(function () {
 
     function getQuestionTemplate(i, question, idTask) {
         return `<div class="form-group question-container">
-<p class="question_text">${question.libelle}</p>
+<p class="question_text"><strong>${question.libelle}</strong></p>
 <input type="hidden" name="task[questions][${i}][id]" value="${question.id}">
 <div class="response-container">
 ${getResponsesTemplate(i, question, idTask)}
@@ -56,8 +58,8 @@ Attention ! Il y a une seule réponse correcte.
                 <!------------>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                
+                <button type="submit" class="transformerstype">SOUMETTRE</button>
             </div>
             </form>`;
     }
