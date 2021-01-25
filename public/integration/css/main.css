@@ -191,7 +191,7 @@ li.task-hook{
     font-size: small;
     text-align: center;
     min-height: 70px;
-    /* border: darkgray dashed thin; */
+    border: darkgray dashed thin;
 }
 li.draggable-task[draggable=false] {
     background: greenyellow;
