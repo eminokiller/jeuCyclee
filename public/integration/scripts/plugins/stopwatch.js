@@ -2,7 +2,7 @@
     $.fn.timer = function (config, game1) {
         if (!game1 instanceof Game) throw  new Error('must have a game play instance');
         const defaultConfig = {
-            'minutes': 20,
+            'minutes': 30,
             'seconds': 0
         };
 
@@ -16,7 +16,7 @@
             function updateTimer() {
                 msLeft = endTime - (+new Date);
                 if (msLeft < 1000) {
-                    console.log(msLeft)
+
                     element.innerHTML = "<span style='font-size:30px;display: inline-block; line-height: initial;'>temps écoulé!</span>";
                     $(".popup_lvl1_3").fadeIn();
                     dispatchTimeElapsedEvent()
