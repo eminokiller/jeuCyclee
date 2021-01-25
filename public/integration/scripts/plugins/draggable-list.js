@@ -8,7 +8,7 @@
             ondragend: function(evt){},
             touchend: function(evt){},
             mapFn:function (item) {
-                // console.log('imm',item)
+                console.log('imm',item)
                 return {
                     id: item.id,
                     text: item.text,
@@ -31,9 +31,9 @@
             let _that = this;
             let $ul = $('<ul></ul>', {'class': current['containerClass']});
             let data = current['data'].map(current['mapFn']);
-            // console.log('data',data)
+            console.log('data',data)
             data.forEach(function (item) {
-                // console.log('here item',item)
+                console.log('here item',item)
                 let $li = $('<li></li>', {'class':current['itemClass']}).append(`<span>${item.text}</span>`)
                 $li.data('id', item.id)
                 $li.attr('data-id', item.id)
@@ -53,7 +53,7 @@
                     $li.bind('touchend', current['touchend'])
                 }
 
-                // console.log('la liiiiiiiiiiiiiiiste',$li[0]);
+                console.log('la liiiiiiiiiiiiiiiste',$li[0]);
                 $ul.append($li[0])
             })
             $(_that).append($ul)

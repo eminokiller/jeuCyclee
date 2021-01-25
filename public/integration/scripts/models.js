@@ -253,7 +253,7 @@ class ScoreManager {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
                     if (task._id == model._weeks[i]._tasks[j]._id) {
-                        scoreGameModel += 10;
+                        scoreGameModel += 2;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if(indexRef>-1){
                             modelMap[i]._taskMap.splice(indexRef,1);
@@ -261,7 +261,7 @@ class ScoreManager {
                     }
                     let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if(indexRef2> -1){
-                        scoreGameModel += 5;
+                        scoreGameModel += 1;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
                 }
@@ -302,6 +302,7 @@ class ScoreManager {
 
 function getTask(data,ide){
 
+
     let action =  getElByPropVal(data,'id',ide)
     let find = 0;
     for (var j = 0,length = data.length; j < length;j++){
@@ -330,16 +331,4 @@ function getElement(data,id){
         }
     }
     return ids
-}
-
-function upHandler(event) {
-
-    var dX = fX - iX;
-    var dY = fY - iY;
-
-    var tg = dY / dX;
-    if (tg < 0) tg = -tg;
-
-    if (tg <= 0.5 && fX > iX) rightSwipe()
-    else if (tg <= 0.5 && fX < iX) leftSwipe()
 }
