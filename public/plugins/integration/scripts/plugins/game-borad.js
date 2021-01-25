@@ -33,6 +33,23 @@
             });
             return $li;
         }
+        function getOrginalHook() {
+            let $li = $('<li class="task-hook"><span>&nbsp</span></li>');
+            $li.bind('dragover', function (evt) {
+                console.log(evt)
+                current['ondragover'](evt);
+            });
+            $li[0].addEventListener('touchmove', function (evt) {
+                console.log('touchmove', evt)
+            });
+            $li.bind('drop', function (evt) {
+                current['ondrop'](evt)
+            });
+            $li[0].addEventListener('touchcancel', function (evt) {
+                console.log('touchcancel', evt)
+            });
+            return $li;
+        }
         function prepareWeekHooks($weekContainer) {
             let $taskWeek = $($weekContainer.find('.task-week').first());
             for(let i =0; i<current['nbrOfHooks'];i++){
@@ -90,14 +107,12 @@
                     $(this).find('li.draggable-task').each(function () {
                         if($(this).find('i.fa.fa-trash').length ===0){
                             let $trash = $('<i></i>', {'class': 'fa fa-trash fa-2x'}).css('float','right');
-                            $trash[0].addEventListener('touchstart', upHandler,false, function (evt) {
-                                console.log('heres')
+                            $trash[0].addEventListener('click', function (evt) {
                                 evt.preventDefault()
-                                console.log('ect---->', evt.target)
                                 let $node = $($(evt.target).parents('li').first())
-                                $node.replaceWith(getHook())
+                                $node.replaceWith(getOrginalHook())
                                 dispatchGameChangeEvent();
-                            },false)
+                            }, false)
                             $(this).prepend($trash[0])
                         }
 
