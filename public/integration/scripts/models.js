@@ -253,7 +253,7 @@ class ScoreManager {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
                     if (task._id == model._weeks[i]._tasks[j]._id) {
-                        scoreGameModel += 2;
+                        scoreGameModel += 10;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if(indexRef>-1){
                             modelMap[i]._taskMap.splice(indexRef,1);
@@ -261,7 +261,7 @@ class ScoreManager {
                     }
                     let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if(indexRef2> -1){
-                        scoreGameModel += 1;
+                        scoreGameModel += 5;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
                 }
