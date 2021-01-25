@@ -115,7 +115,6 @@
                             }, false)
                             $(this).prepend($trash[0])
                         }
-
                     })
                 });
             })

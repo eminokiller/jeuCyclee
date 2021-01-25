@@ -271,7 +271,7 @@ class ScoreManager {
             });
         });
 
-        return scoreGameModel*2;
+        return scoreGameModel;
     }
 
     static calculatePerfectScore(model) {

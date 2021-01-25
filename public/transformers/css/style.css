@@ -9,6 +9,8 @@
 }
 *{
     box-sizing: border-box;
+    list-style: none !important;
+    white-space: normal !important;
 }
 body{
     margin: 0;
@@ -1357,4 +1359,12 @@ ul.project_in_queue_list {
 .page-wrapper {
     width: 100%;
     height: 100%;
+}
+.score_individuelle {
+    color: #fff;
+    font-weight: 700;
+    padding: 8px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
 }

@@ -22,6 +22,7 @@ function prepareRemove(element) {
         localStorage.setItem('level', '1');
         app.next();
     })
+
 })($);
 
 
