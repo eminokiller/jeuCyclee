@@ -12,30 +12,10 @@
 
 
 
-
-
-                if(score >= 60 && localStorage.getItem('level') == 1){
+                if(score >= 70 && localStorage.getItem('level') == 1){
                     dispatchChangeLevelEvent();
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
-                console.log(score);
-
-                if (score > 10 && !($('#b1').hasClass('active'))){
-                    $('#exampleModal3').modal('toggle');
-                }
-
-                if (score > 20 && !($('#b2').hasClass('active'))){
-                    $('#exampleModal4').modal('toggle');
-                }
-
-                if (score > 40 && !($('#b3').hasClass('active'))){
-                    $('#exampleModal4').modal('toggle');
-                }
-
-
-
-
-
                 $(_that).text(`${score} %`)
             })
             $(_that).text(`${score} %`)
