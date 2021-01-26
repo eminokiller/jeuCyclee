@@ -252,6 +252,7 @@ class ScoreManager {
         game.weeks.forEach((week, i) => {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
+                    let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if (task._id == model._weeks[i]._tasks[j]._id) {
 
                         scoreGameModel += 2;
@@ -260,9 +261,8 @@ class ScoreManager {
                             modelMap[i]._taskMap.splice(indexRef,1);
                         }
                     }
-                    let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
-                    if(indexRef2> -1){
-
+                    }else if(indexRef2> -1){
+                        console.log('1/2 corrcet')
                         scoreGameModel += 1;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
