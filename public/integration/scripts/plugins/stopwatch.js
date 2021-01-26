@@ -2,8 +2,8 @@
     $.fn.timer = function (config, game1) {
         if (!game1 instanceof Game) throw  new Error('must have a game play instance');
         const defaultConfig = {
-            'minutes': 59,
-            'seconds': 20
+            'minutes': 30,
+            'seconds': 10
         };
 
         function countdown(element, minutes, seconds) {
@@ -47,7 +47,7 @@
             let _that = this;
             let minuteStored = localStorage.getItem('minutes');
             let secondStored = localStorage.getItem('seconds');
-            console.log(minuteStored,secondStored);
+
             if (minuteStored !== null) {
                 let currentMinute = parseInt(minuteStored);
                 let currentSeconds = parseInt(secondStored);

@@ -31,9 +31,9 @@
             let _that = this;
             let $ul = $('<ul></ul>', {'class': current['containerClass']});
             let data = current['data'].map(current['mapFn']);
-            console.log('data',data)
+
             data.forEach(function (item) {
-                console.log('here item',item)
+
                 let $li = $('<li></li>', {'class':current['itemClass']}).append(`<span>${item.text}</span>`)
                 $li.data('id', item.id)
                 $li.attr('data-id', item.id)
@@ -47,13 +47,12 @@
 
 
                     })
-                    //console.log('jjdh')
-                    //console.log('elem',$li.bind('touchend', current['touchend']))
+
                     $li.bind('dragend', current['ondragend'])
                     $li.bind('touchend', current['touchend'])
                 }
 
-                console.log('la liiiiiiiiiiiiiiiste',$li[0]);
+
                 $ul.append($li[0])
             })
             $(_that).append($ul)

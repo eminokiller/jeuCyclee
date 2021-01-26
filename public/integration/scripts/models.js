@@ -248,27 +248,24 @@ class ScoreManager {
     static calculateGameScore(game, model) {
         let scoreGameModel = 0;
         let modelMap = ScoreManager.getTaskMap(model);
-        //console.log('model map----->',modelMap)
-        console.log('Model Map');
-        console.log(modelMap);
+
         game.weeks.forEach((week, i) => {
             week._tasks.forEach((task, j) => {
                 if (model._weeks[i]._tasks[j]) {
                     let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if (task._id == model._weeks[i]._tasks[j]._id) {
-                        console.log('crrect')
+
                         scoreGameModel += 2;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if(indexRef>-1){
                             modelMap[i]._taskMap.splice(indexRef,1);
                         }
+                    }
                     }else if(indexRef2> -1){
                         console.log('1/2 corrcet')
                         scoreGameModel += 1;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
-
-
                 }
 
             });
@@ -310,6 +307,7 @@ function getTask(data,ide){
 
 
     let action =  getElByPropVal(data,'id',ide)
+
     let find = 0;
     for (var j = 0,length = data.length; j < length;j++){
             if (data[j]['task']['id'] === action['task']['id']){

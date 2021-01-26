@@ -11,32 +11,32 @@
             saveCallback: save,
             refreshCallback: reInitialize,
             ondragover: function (evt) {
-                console.log(evt)
+
             },
             ondrop: function (evt) {
-                console.log(evt)
+
             }
         }
         const current = $.extend(defaultConfig, config)
         function getOrginalHook() {
             let $li = $('<li class="task-hook"><span>&nbsp</span></li>');
             $li.bind('dragover', function (evt) {
-                console.log(evt)
+
                 current['ondragover'](evt);
             });
             $li[0].addEventListener('touchmove', function (evt) {
-                console.log('touchmove', evt)
+
             });
             $li.bind('drop', function (evt) {
                 current['ondrop'](evt)
             });
             $li[0].addEventListener('touchcancel', function (evt) {
-                console.log('touchcancel', evt)
+
             });
             return $li;
         }
         function getHook(savedGame, weekIndex, currentHookIndex) {
-            // console.log('heeere savedGme', savedGame, weekIndex)
+
             if (savedGame) {
                 if (savedGame._weeks) {
                     if (savedGame._weeks[weekIndex]) {
@@ -82,7 +82,7 @@
                             weeks[weekIndex] = weeks[weekIndex] ? weeks[weekIndex] : new Week(weekIndex)
                             weeks[weekIndex].tasks[taskIndex] = new Task($(this).attr('data-id'), $(this).text())
                             $(this).find('i.fa-trash').each(function () {
-                                console.log('tra');
+
                                 $(this).remove()
                             })
                         })
@@ -90,6 +90,7 @@
                 })
                 game1._weeks = weeks
                 current.saveCallback(current.keystore, game1);
+
                 dispatchScoreEvent();
 
             });
@@ -103,7 +104,6 @@
                 });
             })
             document.addEventListener('prepareRemove', function (e) {
-                console.log('event remove dispatched', e);
                 $(_that).find('.week-container > ul.task-week').each(function () {
                     $(this).find('li.draggable-task').each(function () {
                         if ($(this).find('i.fa.fa-trash').length === 0) {

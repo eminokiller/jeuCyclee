@@ -65,7 +65,7 @@ ${getResponsesTemplate(i, question, idTask)}
     }
 
     function loadQuestionForm(dataId) {
-        console.log('data id ------->', dataId)
+
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
                 mocks: false,
@@ -83,7 +83,7 @@ ${getResponsesTemplate(i, question, idTask)}
     }
 
     function submitQuestionForm(data, dataId) {
-        console.log('data id ------->', dataId)
+
         return new Promise((resolve, reject) => {
             ajaxInterceptor({
                 mocks: false,
@@ -110,12 +110,11 @@ ${getResponsesTemplate(i, question, idTask)}
     $('#exampleModal').on('shown.bs.modal', function () {
         let dataId = $(this).data('id');
         let targetId = $(this).data('target-id');
-        console.log('here the game bord drop zone-->',targetId)
+
         let clone = $(this).data('clone');
         let hookIndex = $(this).data('target-hook');
         let list = $(this).data('lalist')
-        console.log('---> la liste',list);
-        console.log('hooke---->', hookIndex);
+
         let $element = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first());
         if (!clone) {
             $element = $($('.task-week > li.draggable-task[data-id="' + dataId + '"]').first());
@@ -126,28 +125,21 @@ ${getResponsesTemplate(i, question, idTask)}
             $form.bind('submit', function (e) {
                 e.preventDefault();
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
-                    console.log('reponse juste----->', response2)
-                    console.log($targetContainer[0])
                     let $taskList = $($targetContainer.find('ul.task-week').first());
-                    console.log('hook index', hookIndex)
                     let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
                     if (clone) {
-                        console.log('cloone')
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
                         list.forEach(ie => {
                             let $element_ = $($('.tasker > li.draggable-task[data-id="' + ie + '"]').first());
                             $hook.replaceWith($element_.addClass('done').clone(true)[0])
-
                         })
                     } else {
-                        console.log('2')
                         $hook.replaceWith($element.addClass('done')[0])
                     }
                     $('#exampleModal').modal('hide')
                     dispatchGameChangeEvent();
                 }).catch(function (error) {
-                    console.log('error---------->',error)
                     $('#exampleModal').find('p.question_text').each(function () {
                         $(this).addClass('wrong-answer');
                         $('div#ques').show();
