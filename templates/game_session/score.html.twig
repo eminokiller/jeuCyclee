@@ -79,10 +79,17 @@
                         </div>
 
                         <div class="row_transformers">
-                            {% for  member in scorEquipe.members%}
-                                <div class="col_1_score">
+                            {% for  index, member in scorEquipe.members%}
+                                {% if index % 2 == 0 %}
+                                    <div class="col_1_score">
+                                        <p>{{ member.name }} : {{ member.score }}%</p>
+
+                                {% endif %}
+                                {% if index % 2 == 1 %}
                                     <p>{{ member.name }} : {{ member.score }}%</p>
-                                </div>
+                                    </div>
+                                {% endif %}
+
                             {% endfor %}
 
                         </div>
