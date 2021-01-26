@@ -27,27 +27,21 @@
         <div class="row_transformers">
             <div class="left_score">
                 <div class="row_transformers">
-<<<<<<< HEAD
+
                     <h2 class="score_h2_title">Meilleur score: <span class="c1_prct_score">{{ topScore }}%</span></h2>
-=======
-                    <h2 class="score_h2_title">Meilleur score: <span class="c1_prct_score">%</span></h2>
->>>>>>> cdeec8a9fb693966fe174b9cd0b79f3ecf6689a5
+
+
                     <div class="row_transformers">
                         <div class="top_star_score">
                             <img src="{{ asset('AdminScore/images/top_1_1.png')}}">
                         </div>
                         <div class="equipe_top_score">
-<<<<<<< HEAD
+
                             <h3 class="score_h3_title">équipe :<br><strong>{{ bestEquipe }}</strong></h3>
                             {% for member in  dataBestEquipe%}
                                 <p>{{ member.name }} : {{ member.score }}%</p>
                             {% endfor %}
-=======
-                            <h3 class="score_h3_title">équipe :<br><strong></strong></h3>
-                            <p></p>
 
-
->>>>>>> cdeec8a9fb693966fe174b9cd0b79f3ecf6689a5
                         </div>
                     </div>
                 </div>
@@ -55,7 +49,7 @@
                     <h2 class="score_h2_title">Top 3 membres</h2>
                 </div>
                 <div class="row_transformers">
-<<<<<<< HEAD
+
                     {% for key, bestScore in dataTopThreeScore %}
                             {% set assetImg = asset('AdminScore/images/top_1_2.png') %}
                             {% if key == 1 %}
@@ -66,17 +60,13 @@
                         <div class="top1_3_members_line"><img src="{{ assetImg}}">{{ bestScore.name }} : {{ bestScore.score }}% : <span class="c2_team_name">équipe {{  bestScore.equipe}}</span></div>
                     {% endfor %}
 
-=======
-                    <div class="top1_3_members_line"><img src="{{ asset('AdminScore/images/top_1_2.png')}}">Membre 1 :  : <span class="c2_team_name">équipe </span></div>
-                    <div class="top1_3_members_line"><img src="{{ asset('AdminScore/images/top_2_1.png')}}">Membre 2 :  : <span class="c2_team_name">équipe </span></div>
-                    <div class="top1_3_members_line"><img src="{{ asset('AdminScore/images/top_3_1.png')}}">Membre 3 :  : <span class="c2_team_name">équipe </span></div>
->>>>>>> cdeec8a9fb693966fe174b9cd0b79f3ecf6689a5
+
                 </div>
 
 
             </div>
             <div class="right_score">
-<<<<<<< HEAD
+
                 {% for scorEquipe in dataAllScoresEquipe %}
                     <div class="row_transformers">
                         <div class="row_transformers">
@@ -94,81 +84,14 @@
                                     <p>{{ member.name }} : {{ member.score }}%</p>
                                 </div>
                             {% endfor %}
-=======
-
-                <div class="row_transformers">
-                    <div class="row_transformers">
-                        <div class="col_2_score">
-                            <h3 class="score_h3_title">équipe : <strong></strong></h3>
-                        </div>
-                        <div class="col_1_score">
-                            <h3 class="score_h3_title"><span class="c4_prct_score">%</span></h3>
-                        </div>
-                    </div>
-
-                    <div class="row_transformers">
-                        <div class="col_1_score">
 
                         </div>
 
                     </div>
-                </div>
-                <div class="row_transformers">
-                    <div class="row_transformers">
-                        <div class="col_2_score">
-                            <h3 class="score_h3_title">équipe : <strong></strong></h3>
-                        </div>
-                        <div class="col_1_score">
-                            <h3 class="score_h3_title"><span class="c4_prct_score">%</span></h3>
-                        </div>
-                    </div>
 
-                    <div class="row_transformers">
-                        <div class="col_1_score">
-
->>>>>>> cdeec8a9fb693966fe174b9cd0b79f3ecf6689a5
-                        </div>
-
-                    </div>
-<<<<<<< HEAD
                 {% endfor %}
-=======
-                </div>
-                <div class="row_transformers">
-                    <div class="row_transformers">
-                        <div class="col_2_score">
-                            <h3 class="score_h3_title">équipe : <strong></strong></h3>
-                        </div>
-                        <div class="col_1_score">
-                            <h3 class="score_h3_title"><span class="c4_prct_score">%</span></h3>
-                        </div>
-                    </div>
 
-                    <div class="row_transformers">
-                        <div class="col_1_score">
 
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row_transformers">
-                    <div class="row_transformers">
-                        <div class="col_2_score">
-                            <h3 class="score_h3_title">équipe : <strong></strong></h3>
-                        </div>
-                        <div class="col_1_score">
-                            <h3 class="score_h3_title"><span class="c4_prct_score">%</span></h3>
-                        </div>
-                    </div>
-
-                    <div class="row_transformers">
-                        <div class="col_1_score">
-
-                        </div>
-
-                    </div>
-                </div>
->>>>>>> cdeec8a9fb693966fe174b9cd0b79f3ecf6689a5
 
             </div>
 
