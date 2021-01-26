@@ -157,7 +157,7 @@ class Application {
                     let gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
                     let gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
 
-                    console.log('this is gamemodel',gameModel1);
+                    // console.log('this is gamemodel',gameModel1);
 
                     $('.draggable-list').draggableList({
                         data: data,
@@ -168,7 +168,7 @@ class Application {
                             evt.originalEvent.dataTransfer.setData('type', $(evt.target).data('type'))
                             evt.originalEvent.dataTransfer.setData('data-parent', $(evt.target).parent().attr('class'))
                             evt.originalEvent.dataTransfer.setData('data-index', $(evt.target).index())
-                            console.log('drag start data level---->', $(evt.target).attr('data-level'))
+                            // console.log('drag start data level---->', $(evt.target).attr('data-level'))
                             evt.originalEvent.dataTransfer.setData('data-level', $(evt.target).attr('data-level'))
                             if (!$(evt.target).parent().hasClass('tasker')) {
                                 let weekIndex = $(evt.target).parents('.droppable-list').first().data('id')
@@ -179,7 +179,7 @@ class Application {
                         },
                         ondragend: function (evt) {
                             let clonable = $(evt.target).parent().hasClass('tasker');
-                            console.log('drag end en principe')
+                            // console.log('drag end en principe')
 
 
                             $('#exampleModal').data('clone', clonable);

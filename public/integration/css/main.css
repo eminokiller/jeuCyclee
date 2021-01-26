@@ -9,7 +9,7 @@
 body {
     margin: 0;
     height: 100%;
-    padding: 0 ;
+    padding: 0;
     color: white;
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(105, 74, 121) 35%, rgb(182, 133, 255) 100%);
     opacity: 0.85;
@@ -179,7 +179,7 @@ li.draggable-task {
     font-size: 12px;
     text-align: center;
     color: #fff;
-    min-height: 70px;
+    min-height: 85px;
     border-radius: 7px;
     display: flex;
     justify-content: center;
@@ -190,8 +190,8 @@ li.task-hook{
     margin-top: 3px;
     font-size: small;
     text-align: center;
-    min-height: 70px;
-    border: darkgray dashed thin;
+    min-height: 85px;
+    border: #7e4280 dashed thin;
 }
 li.draggable-task[draggable=false] {
     background: greenyellow;

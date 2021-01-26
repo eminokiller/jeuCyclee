@@ -26,6 +26,11 @@ class Joueur extends User
      */
     private $equipe;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score = 0;
+
     public function getNom(): ?string
     {
         return $this->Nom;
@@ -70,6 +75,18 @@ class Joueur extends User
     {
         return $this->email;
         // TODO: Implement __toString() method.
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): self
+    {
+        $this->score = $score;
+
+        return $this;
     }
 
 }

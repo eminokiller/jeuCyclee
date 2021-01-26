@@ -15,9 +15,11 @@ use App\Entity\Equipe;
 use App\Entity\Joueur;
 use App\Entity\Reponse;
 use App\Exception\GameNotFoundException;
+use App\Exception\PersistScoreException;
 use App\Exception\PlayerNotFoundException;
 use App\Exception\TeamNotFoundException;
 use App\Repository\CampagneRepository;
+use App\Repository\JoueurRepository;
 use App\Repository\ReponseRepository;
 use App\Service\SerializerManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -142,6 +144,33 @@ class ApiGameController extends AbstractController
         }, true);
         $status = $testAll ? 201 : 422;
         return new JsonResponse(['status' => 1, 'answer' => $answerBody], $status);
+    }
+
+    /**
+     * @Route("/setScore",name="set_score",options={"expose"=true})
+     * @param SerializerManager $serializerManager
+     *
+     * @return JsonResponse
+     */
+    public function setScore(SerializerManager $serializerManager,Request $request)
+    {
+
+        $user = $this->getUser();
+        try {
+            if ($user instanceof Joueur) {
+                $user->setScore($request->get('score'));
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->getDoctrine()->getRepository(JoueurRepository::class)->getBestScore($user);
+            }
+
+        } catch (\Exception $exception) {
+                throw new PersistScoreException();
+        }
+
+        return new JsonResponse (['status' => 1]);
     }
 
 }
