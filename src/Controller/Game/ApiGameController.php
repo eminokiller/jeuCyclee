@@ -154,23 +154,28 @@ class ApiGameController extends AbstractController
      */
     public function setScore(SerializerManager $serializerManager,Request $request)
     {
-
         $user = $this->getUser();
+        $bestScore = 0;
         try {
+
             if ($user instanceof Joueur) {
+
                 $user->setScore($request->get('score'));
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-
-                $this->getDoctrine()->getRepository(JoueurRepository::class)->getBestScore($user);
+                //dump($user->getEquipe()->getId());die;
+                $bestScore = $this->getDoctrine()->getRepository(Joueur::class)->getBestScore($user->getEquipe()->getId());
+                //getMoyenneScoreParEquipe
+                $moyenne = $this->getDoctrine()->getRepository(Joueur::class)->getMoyenneScoreParEquipe($user->getEquipe()->getId());
             }
 
+
         } catch (\Exception $exception) {
+
                 throw new PersistScoreException();
         }
-
-        return new JsonResponse (['status' => 1]);
+        return new JsonResponse (['status' => 1,'bestScore' => $bestScore,'moyenne' => number_format($moyenne[1],1)]);
     }
 
 }

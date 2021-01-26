@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipe;
 use App\Entity\GameSession;
 use App\Entity\Joueur;
 use App\Form\GameSessionType;
 use App\Repository\GameSessionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,18 +24,75 @@ class GameSessionController extends AbstractController
      * @Route("/score/{id}", name="game_session_score", methods={"GET","POST"}, requirements={"id"="\d+"})
      *
      */
-    public function score(GameSession $gameSession): Response
+    public function score(GameSession $gameSession, GameSessionRepository $gameSessionRepository, EntityManagerInterface $em): Response
     {
+        $topScore = $gameSessionRepository->getBestScoreBySession($gameSession);
+        $dataBestEquipe = [];
+        $dataTopThreeScore = [];
+        $dataAllScoresEquipe = [];
+        $bestEquipe = '';
+        if($topScore && count($topScore))
+        {
+            $equipe = $em->getRepository(Equipe::class)->find($topScore[0]['id']);
+            if($equipe && $equipe instanceof  Equipe)
+            {
+                $bestEquipe = $equipe->getLibelle();
+                foreach ($equipe->getJoueurs() as $joueur)
+                {
+                    /** @var Joueur $joueur */
+                    $dataBestEquipe[] = [
+                        'name' => $joueur->getNom(),
+                        'score' => (int)$joueur->getScore()
+                    ];
+                }
+            }
+        }
+        $topThreeScores = $gameSessionRepository->getThreeBestScoreBySession($gameSession);
+        if($topThreeScores && count($topThreeScores))
+        {
+            foreach ($topThreeScores as $topScorePlayer)
+            {
+                /** @var Joueur $joueur */
+                $joueur = $em->getRepository(Joueur::class)->find($topScorePlayer['id']);
+                $dataTopThreeScore[] = [
+                    'name' => $joueur->getNom(),
+                    'score' => (int)$topScorePlayer['moyenneScore'],
+                    'equipe' => $joueur->getEquipe()->getLibelle()
+                ];
+            }
 
-//        $joueur = $this->getDoctrine()
-//            ->getRepository(Joueur::class)->findPlayersBySession($gameSession->getId());
-//        dump($joueur);die;
-
-
-
+        }
+        $allResults = $gameSessionRepository->getAllScoresBySession($gameSession);
+        if($allResults && count($allResults))
+        {
+            foreach ($allResults as $result)
+            {
+                /** @var Equipe $equipe */
+                $equipe = $em->getRepository(Equipe::class)->find($result['id']);
+                $members = [];
+                foreach ($equipe->getJoueurs() as $joueur)
+                {
+                    $members[] = [
+                        'name' => $joueur->getNom(),
+                        'score' => (int)$joueur->getScore()
+                    ];
+                }
+                $dataAllScoresEquipe[] = [
+                    'moyenneScore' => (int)$result['moyenneScore'],
+                    'equipe' => $equipe->getLibelle(),
+                    'members' => $members
+                ];
+            }
+        }
 
         return $this->render('game_session/score.html.twig', [
             'game_session' => $gameSession,
+            'topScore' => $topScore && count($topScore) ? (int)$topScore[0]['moyenneScore'] : 0,
+            'bestEquipe' => $bestEquipe,
+            'dataBestEquipe' => $dataBestEquipe,
+            'dataTopThreeScore' => $dataTopThreeScore,
+            'dataAllScoresEquipe' => $dataAllScoresEquipe
+
         ]);
     }
 
