@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\GameSession;
+use App\Entity\Joueur;
 use App\Form\GameSessionType;
 use App\Repository\GameSessionRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class GameSessionController extends AbstractController
 {
+
+    /**
+     * @Route("/score/{id}", name="game_session_score", methods={"GET","POST"}, requirements={"id"="\d+"})
+     *
+     */
+    public function score(GameSession $gameSession): Response
+    {
+
+//        $joueur = $this->getDoctrine()
+//            ->getRepository(Joueur::class)->findPlayersBySession($gameSession->getId());
+//        dump($joueur);die;
+
+
+
+
+        return $this->render('game_session/score.html.twig', [
+            'game_session' => $gameSession,
+        ]);
+    }
+
     /**
      * @Route("/", name="game_session_index", methods={"GET"})
      */
@@ -97,4 +119,6 @@ class GameSessionController extends AbstractController
 
         return $this->redirectToRoute('game_session_index');
     }
+
+
 }

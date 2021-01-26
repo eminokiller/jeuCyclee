@@ -18,7 +18,7 @@ class EntityRef
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"ref"})
+     * @Groups({"ref","gamesession"})
      */
     private $id;
 

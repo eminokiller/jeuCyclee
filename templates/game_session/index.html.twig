@@ -54,7 +54,7 @@
                     <a href="{{ path('game_session_edit', {'id': game_session.id}) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="Mettre à jour">
                         <i class="la la-edit"></i>
                     </a>
-                    <button class="btn alert-success">START GAME</button>
+                    <a href="{{ path('game_session_score', {'id': game_session.id}) }}"> <button class="btn alert-success">Carte score</button></a>
                 </td>
             </tr>
         {% else %}
