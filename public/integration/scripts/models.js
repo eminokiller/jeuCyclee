@@ -266,7 +266,7 @@ class ScoreManager {
                         scoreGameModel += 1;
                         modelMap[i]._taskMap.splice(indexRef2,1);
                     }
-                }
+
 
             });
         });
