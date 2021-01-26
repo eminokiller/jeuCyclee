@@ -25,6 +25,8 @@ class GameSessionController extends AbstractController
     public function score(GameSession $gameSession): Response
     {
 
+
+
 //        $joueur = $this->getDoctrine()
 //            ->getRepository(Joueur::class)->findPlayersBySession($gameSession->getId());
 //        dump($joueur);die;

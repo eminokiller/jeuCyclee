@@ -257,16 +257,16 @@ class ScoreManager {
 
                         scoreGameModel += 2;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
-                        if(indexRef>-1){
-                            modelMap[i]._taskMap.splice(indexRef,1);
+                        if (indexRef > -1) {
+                            modelMap[i]._taskMap.splice(indexRef, 1);
                         }
-                    }
-                    }else if(indexRef2> -1){
+
+                    } else if (indexRef2 > -1) {
                         console.log('1/2 corrcet')
                         scoreGameModel += 1;
-                        modelMap[i]._taskMap.splice(indexRef2,1);
+                        modelMap[i]._taskMap.splice(indexRef2, 1);
                     }
-
+                }
 
             });
         });

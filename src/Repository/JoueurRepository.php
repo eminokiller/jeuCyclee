@@ -39,9 +39,28 @@ class JoueurRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function getBestScore($user){
+    public function getBestScore($idEquipe){
+        return $this->createQueryBuilder('j')
+            ->select('Max(j.score)')
+            ->where('j.equipe = :id')
+            ->setParameter('id',$idEquipe)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
 
     }
+    public function getMoyenneScoreParEquipe($idEquipe){
+        return $this->createQueryBuilder('j')
+            ->select('AVG(j.score)')
+            ->where('j.equipe = :id')
+            ->setParameter('id',$idEquipe)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+
+    }
+
+
 
     public function findOneBySomeField($value): ?Joueur
     {

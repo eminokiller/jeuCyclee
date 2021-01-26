@@ -48,9 +48,9 @@ ${getResponsesTemplate(i, question, idTask)}
                 </button>
             </div>
             <div class="modal-body">
-            <div class="alert alert-danger" role="alert" id="ques" style="display: none">
-            Mauvaise réponse!  Essayez encore de trouver la bonne réponse.<br>
-            Attention ! Il y a une seule réponse correcte.
+            <div class="alert alert-success" role="alert">
+            Attention il ne peut y avoir qu'une bonne réponse!<br>
+            Seule une bonne réponse vous permet de placer l'action.
 </div>
                 <!---------->
                     <input type="hidden" name="task[id]" value="${resp.task.id}"/>
