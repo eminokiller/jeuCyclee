@@ -9,25 +9,23 @@
             let _that = this;
             let score = 0;
             document.addEventListener(current['event'], function () {
-                console.log(game1);
+
                 score = ScoreManager.score(model1, game1, model2, game2)
-
-
 
                 if(score >= 60 && localStorage.getItem('level') == 1){
                     dispatchChangeLevelEvent();
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
-                console.log(score);
+
                 ajaxInterceptor({
                     secured: true,
                     mocks: false,
                     data: {'score':score},
                     url: '/api/setScore',
                     success: (response) => {
-                        console.log(response);
-                        $('span#bestscore').text(response['bestScore'][1]+' %');
-                        $('span#moyenne').text(response['moyenne']+' %');
+
+                        $('span#bestscore').text(response['bestScore'][1]);
+                        $('span#moyenne').text(response['moyenne']);
                     },
                     error: (error) => {
 
