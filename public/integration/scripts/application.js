@@ -30,6 +30,7 @@ class Application {
             }
         };
         window.initPhase2 = function () {
+            console.log('')
             if (localStorage.getItem('level') == 1) return;
             window.show('div.right_arrow_scroller_2');
             window.show('div.left_arrow_scroller_2');
@@ -102,19 +103,19 @@ class Application {
         };
         this._teaserStartHandler = function () {
             (function () {
-                let myVideo = document.getElementById("video1");
-                myVideo.addEventListener('ended', function () {
-                    dispatchTeaserEnded();
-                }, false)
-
-                function playPause() {
-                    if (myVideo.paused)
-                        myVideo.play();
-                    else
-                        myVideo.pause();
-                }
-
-                playPause();
+                // let myVideo = document.getElementById("video1");
+                // myVideo.addEventListener('ended', function () {
+                //     dispatchTeaserEnded();
+                // }, false)
+                //
+                // function playPause() {
+                //     if (myVideo.paused)
+                //         myVideo.play();
+                //     else
+                //         myVideo.pause();
+                // }
+                //
+                // playPause();
             })();
         };
         this._teaserTerminateHandler = function () {
@@ -202,24 +203,12 @@ class Application {
                                             $(target).replaceWith($li[0])
                                             dispatchGameChangeEvent();
                                         } else if($(target).parents('.tasker').length){
-                                            let query = getTask(data,$(target).attr('data-id'));
-                                            //let wdV = parseInt(document.getElementById(query[0]).style.width);
-                                            //let wid = 100/query[1];
 
-                                            let widthJauges = query[2] * 20;
-                                            //div jauges
-                                            if ($('div#'+query[0]).width() === 0){
-                                                $('div#'+query[0]).width(widthJauges+'%');
-                                            }
-
-                                            let wImpact = parseInt(document.getElementById(0).style.width);
-                                            let som = wImpact + query[2];
-                                            //div impact
-                                            $('div#0').width(som+'%');
                                             $(touchedElement).replaceWith($(target).addClass('done').clone(true));
                                             dispatchGameChangeEvent();
                                         }
                                     } else {
+
                                         //target-id'
                                         $('#exampleModal').data('clone', true);
                                         $('#exampleModal').data('id', $(target).attr('data-id'));
@@ -229,6 +218,21 @@ class Application {
                                         $('#exampleModal').data('lalist', liste);
                                         $('#exampleModal').modal('toggle')
                                     }
+                                    let query = getTask(data,$(target).attr('data-id'));
+                                    console.log('le queeery',query);
+                                    //let wdV = parseInt(document.getElementById(query[0]).style.width);
+                                    //let wid = 100/query[1];
+
+                                    let widthJauges = query[2] * 20;
+                                    //div jauges
+                                    if ($('div#'+query[0]).width() === 0){
+                                        $('div#'+query[0]).width(widthJauges+'%');
+                                    }
+
+                                    let wImpact = parseInt(document.getElementById(0).style.width);
+                                    let som = wImpact + query[2];
+                                    //div impact
+                                    $('div#0').width(som+'%');
                                 }
                             }
 
@@ -423,6 +427,5 @@ class Application {
         let next = this.getNextStep();
         this.applyStep(next);
     }
-
 
 }

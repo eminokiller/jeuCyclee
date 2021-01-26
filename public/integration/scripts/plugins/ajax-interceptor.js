@@ -6,13 +6,15 @@ ajaxInterceptor = function (config) {
         url: '',
         method: 'GET',
         success: function (response) {
-
+        console.log('succ')
         },
         error: function (error) {
-
+        console.log('err')
         }
     };
+    console.log('default config',defaultConfig);
     let current = $.extend(defaultConfig, config);
+    console.log('moooooooooooooock',current['mocks']);
     if(current['mocks']){
         let routes = [
             {
@@ -99,13 +101,14 @@ ajaxInterceptor = function (config) {
         }
     } else {
         let payload = $.extend({}, current)
+        console.log(payload)
         payload['url'] = getApi(payload['url']);
         if(current['secured']){
             payload['beforeSend'] = function (xhr) {
                 xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
             }
         }
-    
+
         $.ajax(payload);
     }
 
