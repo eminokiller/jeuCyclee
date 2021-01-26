@@ -14,7 +14,7 @@
 
 
 
-                if(score >= 40 && localStorage.getItem('level') == 1){
+                if(score >= 60 && localStorage.getItem('level') == 1){
                     dispatchChangeLevelEvent();
                 }
                 score = ScoreManager.score(model1, game1,model2,game2)
@@ -25,11 +25,13 @@
                     data: {'score':score},
                     url: '/api/setScore',
                     success: (response) => {
-
+                        console.log(response);
+                        $('span#bestscore').text(response['bestScore'][1]+' %');
+                        $('span#moyenne').text(response['moyenne']+' %');
                     },
                     error: (error) => {
 
-                        alert('SORRY........');
+                        //alert('SORRY........');
                     }
                 })
                 $(_that).text(`${score} %`)

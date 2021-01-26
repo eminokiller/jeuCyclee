@@ -84,6 +84,7 @@ class GameSessionController extends AbstractController
                 ];
             }
         }
+
         return $this->render('game_session/score.html.twig', [
             'game_session' => $gameSession,
             'topScore' => $topScore && count($topScore) ? (int)$topScore[0]['moyenneScore'] : 0,
