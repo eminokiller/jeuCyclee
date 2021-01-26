@@ -37,10 +37,10 @@
         }
 
         function search(element, term) {
-            console.log('trying to the search the term', term)
+
         }
         function sendMessage(message) {
-            console.log('trying to publish the message', message)
+
         }
 
         this.each(function () {
@@ -60,7 +60,7 @@
             })
             $(current['chatConsole']).bind('submit', function (evt) {
                 evt.preventDefault();
-                console.log(evt)
+
                 let $target = $(evt.target);
                 let data = $target.serialize();
                 let urlString = `/test/me.html?${data}`;

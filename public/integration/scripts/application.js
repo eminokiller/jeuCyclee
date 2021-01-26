@@ -196,15 +196,15 @@ class Application {
                                 if ($(touchedElement).hasClass('task-hook')) {
                                     if ($(target).hasClass('done')) {
                                         if ($(target).parents('.target-table').length) {
-                                            console.log('here grag ono');
+
                                             let $li = $('<li></li>', {'class': 'task-hook'});
                                             $(touchedElement).replaceWith($(target).clone(true));
                                             $(target).replaceWith($li[0])
                                             dispatchGameChangeEvent();
                                         } else if($(target).parents('.tasker').length){
                                             let query = getTask(data,$(target).attr('data-id'));
-                                            let wdV = parseInt(document.getElementById(query[0]).style.width);
-                                            let wid = 100/query[1];
+                                            //let wdV = parseInt(document.getElementById(query[0]).style.width);
+                                            //let wid = 100/query[1];
 
                                             let widthJauges = query[2] * 20;
                                             //div jauges
@@ -235,7 +235,7 @@ class Application {
 
                         },
                         mapFn: function (item) {
-                           // console.log('item app',item)
+
                             return {
                                 id: item.id,
                                 text: item.text,
@@ -250,7 +250,7 @@ class Application {
                         endWeek: endWeek,
                         keystore: 'game1',
                         'ondragover': function (evt) {
-                            console.log('dragover', evt);
+
                             evt.preventDefault();
                         },
                         'ondrop': function (evt) {
@@ -259,7 +259,7 @@ class Application {
                             let dataIndex = parseInt(evt.originalEvent.dataTransfer.getData('data-index'));
                             let dataWeekIndex = evt.originalEvent.dataTransfer.getData('data-week-index');
                             let level = evt.originalEvent.dataTransfer.getData('data-level');
-                            console.log('level------->', level)
+
                             if (level != 1) return;
                             let $source = $('<div></div>');
                             if (dataWeekIndex != "false") {
@@ -305,7 +305,7 @@ class Application {
                         keystore: 'game2',
                         level: 2,
                         'ondragover': function (evt) {
-                            console.log('dragover', evt);
+
                             evt.preventDefault();
                         },
                         'ondrop': function (evt) {
@@ -374,7 +374,7 @@ class Application {
                     };
                 },
                 error: (error) => {
-                    console.log(error);
+
                     alert('SORRY........');
                 }
             })
