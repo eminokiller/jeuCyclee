@@ -100,16 +100,23 @@ ajaxInterceptor = function (config) {
             current['error'](new Error())
         }
     } else {
-        let payload = $.extend({}, current)
-        console.log(payload)
-        payload['url'] = getApi(payload['url']);
-        if(current['secured']){
-            payload['beforeSend'] = function (xhr) {
-                xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
+        try{
+            let payload = $.extend({}, current)
+            console.log(payload)
+            payload['url'] = getApi(payload['url']);
+            if(current['secured']){
+                payload['beforeSend'] = function (xhr) {
+                    xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
+                }
             }
+
+            $.ajax(payload);
+        }catch (e) {
+            console.log('this is exception',e)
         }
 
-        $.ajax(payload);
+
     }
 
 
