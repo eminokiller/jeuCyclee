@@ -41,12 +41,12 @@
                     return item.jauge == current['type']
                 }).reduce(function (s, item) {
                     console.log('item---->', item)
-                    s += parseInt(item.impact);
+                    s = parseInt(item.impact);
                     return s;
                 }, 0);
 
                // if ($($(_that).find('div').first()).css('width') == 0){
-                $($(_that).find('div').first()).css('width', `${0}%`)
+                    $($(_that).find('div').first()).css('width', `${0}%`)
                     $($(_that).find('div').first()).css('width', `${a * 20}%`)
 
                 //}
