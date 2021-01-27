@@ -312,6 +312,105 @@
         </div>
     </div>
 </div>
+<!----Modal question badge------>
+<div class="modal fade" id="exampleModalBadge1" tabindex="-1" role="dialog" aria-labelledby="exampleModalBadge1Label"
+     aria-hidden="true">
+    <div class="close_popup">X</div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form name="badge1">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalBadge1Label">Promoteur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="promoteur" value="1"> <label class="form-label-class">Proposer et avoir plus de consentement POA et hors POA, est un élément clés pour être au niveau Promoteur.</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="promoteur" value="2"> <label class="form-label-class">Les consentements ne sont pas nécessaires pour notre stratégie</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="promoteur" value="3"> <label class="form-label-class">Les consentements ne peuvent être proposés qu’aux MG</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalBadge2" tabindex="-1" role="dialog" aria-labelledby="exampleModalBadge2Label"
+     aria-hidden="true">
+    <div class="close_popup">X</div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form name="badge2">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalBadge2Label">ORCHESTRATEUR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="orchestrateur" value="1"> <label class="form-label-class">La Customer Journey, traduit nos messages via tous les canaux. Elle est essentielle à notre stratégie.</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="orchestrateur" value="2"> <label class="form-label-class">La Customer Journey traduit la feuille de route de l’eadv</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="orchestrateur" value="3"> <label class="form-label-class">La Customer Journey n’est pas importante.</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModalBadge3" tabindex="-1" role="dialog" aria-labelledby="exampleModalBadge3Label"
+     aria-hidden="true">
+    <div class="close_popup">X</div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form name="badge3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalBadge3Label">PARTENAIRE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="partenaire" value="1"> <label class="form-label-class">Les canaux digitaux nous permettent d’être en contacte avec nos HCP et répondre à leurs attentes en information médicale, à tout moment.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="partenaire" value="2"> <label class="form-label-class">Les canaux digitaux ne sont pas disponibles, et sont difficiles à mette en place.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="partenaire" value="3"> <label class="form-label-class">Les canaux digitaux ne concernent pas l’industrie pharmaceutique.</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -333,6 +432,7 @@
 <script src="{{ asset('integration/scripts/plugins/ajax-interceptor.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/stopwatch.js') }}"></script>
 <script src="{{ asset('integration/scripts/plugins/score.js') }}"></script>
+<script src="{{ asset('integration/scripts/plugins/flag.js') }}"></script>
 <script src="{{ asset('integration/scripts/ajax-modal.js') }}"></script>
 <script src="{{ asset('integration/scripts/models.js') }}"></script>
 <script src="{{ asset('integration/scripts/eventDispatcher.js') }}"></script>

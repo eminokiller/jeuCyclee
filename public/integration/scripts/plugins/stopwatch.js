@@ -5,6 +5,15 @@
             'minutes': 59,
             'seconds': 59
         };
+        //badge1
+        const TM1 = 45
+        const TS1 = 0;
+        //badge2
+        const TM2 = 30
+        const TS2 = 0;
+        //badge3
+        const TM3 = 15
+        const TS3 = 0;
 
         function countdown(element, minutes, seconds) {
             let endTime, hours, mins, msLeft, time;
@@ -26,8 +35,20 @@
                     mins = time.getUTCMinutes();
                     element.innerHTML = (hours ? hours + ':' + twoDigits(mins) : mins) + ':' + twoDigits(time.getUTCSeconds());
                     setTimeout(() => {
-                        localStorage.setItem('minutes', twoDigits(mins))
-                        localStorage.setItem('seconds', twoDigits(time.getUTCSeconds()))
+                        let twdm = twoDigits(mins)
+                        localStorage.setItem('minutes', twdm)
+                        let tds = twoDigits(time.getUTCSeconds());
+                        localStorage.setItem('seconds', tds)
+                        //
+                        if(twdm==TM1 && tds==TS1){
+                            showBage1Modal()
+                        }
+                        if(twdm==TM2 && tds==TS2){
+                            showBage2Modal()
+                        }
+                        if(twdm==TM3 && tds==TS3){
+                            showBage3Modal()
+                        }
                         updateTimer()
                     }, time.getUTCMilliseconds() + 500);
                 }

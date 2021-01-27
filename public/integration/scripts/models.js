@@ -1,3 +1,8 @@
+class Flag {
+    constructor(){
+
+    }
+}
 class Task {
     get text() {
         return this._text;
@@ -255,7 +260,7 @@ class ScoreManager {
                     let indexRef2 = modelMap[j]._taskMap.indexOf(task._id);
                     if (task._id == model._weeks[i]._tasks[j]._id) {
 
-                        scoreGameModel += 2;
+                        scoreGameModel += 10;
                         let indexRef = modelMap[i]._taskMap.indexOf(task._id);
                         if (indexRef > -1) {
                             modelMap[i]._taskMap.splice(indexRef, 1);
@@ -263,7 +268,7 @@ class ScoreManager {
 
                     } else if (indexRef2 > -1) {
                         console.log('1/2 corrcet')
-                        scoreGameModel += 1;
+                        scoreGameModel += 5;
                         modelMap[i]._taskMap.splice(indexRef2, 1);
                     }
                 }
@@ -277,7 +282,7 @@ class ScoreManager {
     static calculatePerfectScore(model) {
         return model._weeks.reduce((s, week) => {
             week._tasks.map((item) => {
-                s += item._id ? 2 : 0;
+                s += item._id ? 10 : 0;
             })
             return s;
         }, 0);
@@ -294,9 +299,9 @@ class ScoreManager {
         let scoreGameModel2 = ScoreManager.calculateGameScore(game2, model2)
         let scorePerfect = scorePerfect1 + scorePerfect2;
         let scoreGame = scoreGameModel1 + scoreGameModel2;
-        //console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
+        console.log('here-------->score', scorePerfect1, scorePerfect2, scoreGameModel1, scoreGameModel2, scoreGame)
         let ratio = scorePerfect ? scoreGame / scorePerfect : 0;
-        let score = Math.round(ratio * 100);
+        let score = Math.ceil(ratio * 100) >= 100?100:Math.ceil(ratio * 100) ;
         return score <=100?score:100;
 
 
@@ -321,6 +326,7 @@ function getTask(data,ide){
 function getElByPropVal(myArray, prop, val){
     for (var i = 0, length = myArray.length; i < length; i++) {
         if (myArray[i][prop] == val){
+            console.log('xyz',myArray[i])
             return myArray[i];
         }
     }

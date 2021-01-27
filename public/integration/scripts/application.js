@@ -129,14 +129,17 @@ class Application {
                     // console.log('all',response);
                     document.querySelector('#team').innerHTML = response.player.equipe.libelle
                     document.querySelector('#nomPlayer').innerHTML = response.player.Nom;
+                    if(localStorage.getItem('badge1')) activateBadge1();
+                    if(localStorage.getItem('badge2')) activateBadge2();
+                    if(localStorage.getItem('badge3')) activateBadge3();
                     initPhase1();
                     initPhase2();
                     document.addEventListener('changeLevelEvent', function () {
                         $('#exampleModal2').modal('toggle')
                     });
-
                     function mockData() {
                         return response.gamePlayModel.actionMarketings.map(function (item) {
+                            console.log('mockData', item)
                             return {
                                 id: item.id,
                                 text: item.nomAction,
@@ -144,11 +147,12 @@ class Application {
                                 level: item.level,
                                 color: item.color,
                                 task: item.task,
-                                impact: item.impact
+                                impact: item.impact,
+                                jauge: item.task.id
                             };
                         })
                     }
-                    $('div#cible').text('tableau trimestriel '+response.gamePlayModel.cible)
+                    $('div#cible').text('tableau trimestriel ' + response.gamePlayModel.cible)
                     const startWeek = 1;
                     const endWeek = 8;
                     let data = mockData()
@@ -156,7 +160,6 @@ class Application {
                     let game2 = new Game(2, startWeek, endWeek, data);
                     let gameModel1 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel1);
                     let gameModel2 = Game.loadInstance(1, startWeek, endWeek, data, response.gamePlayModel.weeksLevel2);
-
                     // console.log('this is gamemodel',gameModel1);
 
                     $('.draggable-list').draggableList({
@@ -201,21 +204,8 @@ class Application {
                                             $(touchedElement).replaceWith($(target).clone(true));
                                             $(target).replaceWith($li[0])
                                             dispatchGameChangeEvent();
-                                        } else if($(target).parents('.tasker').length){
-                                            let query = getTask(data,$(target).attr('data-id'));
-                                            //let wdV = parseInt(document.getElementById(query[0]).style.width);
-                                            //let wid = 100/query[1];
+                                        } else if ($(target).parents('.tasker').length) {
 
-                                            let widthJauges = query[2] * 20;
-                                            //div jauges
-                                            if ($('div#'+query[0]).width() === 0){
-                                                $('div#'+query[0]).width(widthJauges+'%');
-                                            }
-
-                                            let wImpact = parseInt(document.getElementById(0).style.width);
-                                            let som = wImpact + query[2];
-                                            //div impact
-                                            $('div#0').width(som+'%');
                                             $(touchedElement).replaceWith($(target).addClass('done').clone(true));
                                             dispatchGameChangeEvent();
                                         }
@@ -225,7 +215,7 @@ class Application {
                                         $('#exampleModal').data('id', $(target).attr('data-id'));
                                         $('#exampleModal').data('target-id', $($(touchedElement).parents('.droppable-list').first()).attr('data-id'));
                                         $('#exampleModal').data('target-hook', $(touchedElement).index());
-                                        let liste = getElement(data,$(target).attr('data-id'))
+                                        let liste = getElement(data, $(target).attr('data-id'))
                                         $('#exampleModal').data('lalist', liste);
                                         $('#exampleModal').modal('toggle')
                                     }
@@ -335,6 +325,9 @@ class Application {
                                 $('#exampleModal').data('id', dataId);
                                 $('#exampleModal').data('target-id', targetId);
                                 $('#exampleModal').data('target-hook', $(evt.target).index());
+                                let liste = getElement(data, $(target).attr('data-id'))
+                                console.log('la list drop--->', liste)
+                                $('#exampleModal').data('lalist', liste);
                                 $('#exampleModal').modal('toggle')
                             } else {
                                 let $hook = $(evt.target)
@@ -353,7 +346,7 @@ class Application {
 
                         }
                     }, game2);
-                    $('#ten-countdown').timer({'minute': 10, 'seconds': 0}, game1)
+                    $('#ten-countdown').timer({'minute': 59, 'seconds': 59}, game1)
                     $('#myScore').score({}, gameModel1, game1, gameModel2, game2);
                     $('#myScoreUp').score({}, gameModel1, game1, gameModel2, game2);
                     $('#chat-component').chat({
@@ -367,6 +360,23 @@ class Application {
                             return member
                         }
                     }, {});
+                    // $('.impact-1').flag({type: 1}, gameModel1, game1, gameModel2, game2, data)
+                    let accumlateur = {}
+                    $('.impact_progress_2').flag({type: 1}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_3').flag({type: 2}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_6').flag({type: 3}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_5').flag({type: 4}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_4').flag({type: 5}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_7').flag({type: 8}, gameModel1, game1, gameModel2, game2, data, accumlateur)
+                    $('.impact_progress_8').flag({type: 9}, gameModel1, game1, gameModel2, game2, data, accumlateur);
+                    document.addEventListener('gamechanged', function () {
+                        let xy = 0;
+                        for(let pro in accumlateur){
+                            xy += parseInt(accumlateur[pro])
+                        }
+                        $('.impact_progress_1').find('div').first().css('width', `${100*xy/35}`)
+                    })
+
                     dispatchGameChangeEvent();
                     window.onbeforeunload = () => {
                         dispatchMasterSaveEvent();

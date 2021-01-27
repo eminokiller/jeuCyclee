@@ -100,7 +100,8 @@ ${getResponsesTemplate(i, question, idTask)}
             })
         })
     }
-    $('#enableLevelTwoForm').on('submit',function (evt) {
+
+    $('#enableLevelTwoForm').on('submit', function (evt) {
         evt.preventDefault();
         localStorage.setItem('level', '2');
         $('#exampleModal2').modal('hide');
@@ -110,10 +111,10 @@ ${getResponsesTemplate(i, question, idTask)}
     $('#exampleModal').on('shown.bs.modal', function () {
         let dataId = $(this).data('id');
         let targetId = $(this).data('target-id');
-
         let clone = $(this).data('clone');
         let hookIndex = $(this).data('target-hook');
         let list = $(this).data('lalist')
+        console.log('here--------->laliste', list)
 
         let $element = $($('.tasker > li.draggable-task[data-id="' + dataId + '"]').first());
         if (!clone) {
@@ -132,7 +133,7 @@ ${getResponsesTemplate(i, question, idTask)}
                         $hook.replaceWith($element.addClass('done').clone(true)[0])
                         list.forEach(ie => {
                             let $element_ = $($('.tasker > li.draggable-task[data-id="' + ie + '"]').first());
-                            $hook.replaceWith($element_.addClass('done').clone(true)[0])
+                            $element_.addClass('done');
                         })
                     } else {
                         $hook.replaceWith($element.addClass('done')[0])
@@ -148,7 +149,7 @@ ${getResponsesTemplate(i, question, idTask)}
                 })
 
             })
-            let $container = $('#exampleModal').find('div.modal-content').first()
+            let $container = $($('#exampleModal').find('div.modal-content').first())
             $($container).html('');
             $form.appendTo($container[0]);
             $('#exampleModalLabel').text($element.text())
@@ -188,5 +189,43 @@ ${getResponsesTemplate(i, question, idTask)}
             if ($('#emailHelp').hasClass('fade')) $('#emailHelp').toggleClass('fade');
         })
 
+    })
+
+    $('form[name="badge1"]').on('submit', function (e) {
+        e.preventDefault();
+        let paramsString = $(this).serialize()
+        let searchParams = new URLSearchParams(paramsString);
+        if (searchParams.get('promoteur') == '1') {
+            activateBadge1()
+            $('#exampleModalBadge1').modal('toggle')
+            localStorage.setItem('badge1', '1')
+        } else {
+
+            $(this).find('label').addClass('wrong-answer')
+        }
+    })
+    $('form[name="badge2"]').on('submit', function (e) {
+        e.preventDefault();
+        let paramsString = $(this).serialize()
+        let searchParams = new URLSearchParams(paramsString);
+        if (searchParams.get('orchestrateur') == '1') {
+            activateBadge2()
+            $('#exampleModalBadge2').modal('toggle')
+            localStorage.setItem('badge2', '1')
+        } else {
+            $(this).find('label').addClass('wrong-answer')
+        }
+    })
+    $('form[name="badge3"]').on('submit', function (e) {
+        e.preventDefault();
+        let paramsString = $(this).serialize()
+        let searchParams = new URLSearchParams(paramsString);
+        if (searchParams.get('partenaire') == '1') {
+            activateBadge3()
+            $('#exampleModalBadge3').modal('toggle')
+            localStorage.setItem('badge3', '1')
+        } else {
+            $(this).find('label').addClass('wrong-answer')
+        }
     })
 })
