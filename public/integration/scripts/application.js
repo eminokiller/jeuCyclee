@@ -102,19 +102,19 @@ class Application {
         };
         this._teaserStartHandler = function () {
             (function () {
-                let myVideo = document.getElementById("video1");
-                myVideo.addEventListener('ended', function () {
-                    dispatchTeaserEnded();
-                }, false)
-
-                function playPause() {
-                    if (myVideo.paused)
-                        myVideo.play();
-                    else
-                        myVideo.pause();
-                }
-
-                playPause();
+                // let myVideo = document.getElementById("video1");
+                // myVideo.addEventListener('ended', function () {
+                //     dispatchTeaserEnded();
+                // }, false)
+                //
+                // function playPause() {
+                //     if (myVideo.paused)
+                //         myVideo.play();
+                //     else
+                //         myVideo.pause();
+                // }
+                //
+                // playPause();
             })();
         };
         this._teaserTerminateHandler = function () {

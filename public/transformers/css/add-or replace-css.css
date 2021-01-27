@@ -1,0 +1,44 @@
+.htp_logo {
+    text-align: center;
+    margin-top: 50px;
+}
+a.htp_link_play_t {
+    font-family: 'Transformers Movie';
+    background: #6a4cdd;
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 23px;
+    text-align: center;
+    width: 280px;
+    transition: all.3s;
+    -webkit-transition: all.3s;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    text-decoration: none;
+    clip-path: polygon(0 40%, 0 17%, 0 0, 100% 0, 100% 18%, 100% 44%, 100% 85%, 100% 100%, 79% 100%, 26% 100%, 0 100%, 0% 85%);
+}
+.htp_tranformer_image {
+    position: absolute;
+    transition: all .3s;
+    -webkit-transition: all.3s;
+    margin-left: 0;
+    right: 30px;
+    bottom: -5px;
+}
+.htp_tranformer_image:hover{
+    right: 15px;
+    bottom: -10px;
+}
+.htp_tranformer_image2 {
+    transition: all .3s;
+    -webkit-transition: all.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+.htp_tranformer_image2:hover{
+    left: -15px;
+    bottom: -15px;
+}

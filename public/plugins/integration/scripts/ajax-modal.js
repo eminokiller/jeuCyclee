@@ -54,6 +54,7 @@ $(function () {
                     $('#exampleModal').modal('hide')
                     dispatchGameChangeEvent();
                 }).catch(function (error) {
+                    console.log(error)
                     $('#exampleModal').modal('hide')
                 })
 

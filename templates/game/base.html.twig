@@ -50,26 +50,49 @@
 </div>
 <div id="videoTeaser">
 
+
+
     <div class="container_ipad_view" id="htp_transformers">
-        <div class="left_col">
-            <div class="row_transformers">
-                <div class="htp_logo"><img src="{{ asset('transformers/images/logo.png') }}"></div>
-            </div>
-            <div class="row_transformers">
-                <h2 class="htp_h2_title">DÉMONSTRATION DE JEU</h2>
-            </div>
-            <div class="row_transformers">
-                <video id="video1" class="video_htp" controls>
-                    <source src="{{ asset('integration/media/aa_bb.mp4') }}" type="video/mp4">
-                </video>
-            </div>
+
+        <div class="row_transformers">
+            <div class="htp_logo"><img src="{{ asset('transformers/images/logo.png') }}"></div>
+        </div>
+        <div class="row_transformers">
+            <div class="htp_link_play_t" onclick="return dispatchTeaserEnded();">Jouer</div>
+        </div>
 
 
-        </div>
-        <div class="right_col">
-            <div class="htp_tranformer_image"><img src="{{ asset('transformers/images/tranformer_image.png')}}"></div>
-        </div>
+        <div class="htp_tranformer_image2"><img src="{{ asset('transformers/images/tranformer_image2.png') }}"></div>
+
+
+        <div class="htp_tranformer_image"><img src="{{ asset('transformers/images/tranformer_image.png') }}"></div>
+
     </div>
+
+
+
+
+
+{#    <div class="container_ipad_view" id="htp_transformers">#}
+{#        <div class="left_col">#}
+{#            <div class="row_transformers">#}
+{#                <div class="htp_logo"><img src="{{ asset('transformers/images/logo.png') }}"></div>#}
+{#            </div>#}
+{#            <div class="row_transformers">#}
+{#                <h2 class="htp_h2_title">DÉMONSTRATION DE JEU</h2>#}
+{#            </div>#}
+{#            <div class="row_transformers">#}
+{#                <video id="video1" class="video_htp" controls>#}
+{#                    <source src="{{ asset('integration/media/aa_bb.mp4') }}" type="video/mp4">#}
+{#                </video>#}
+{#            </div>#}
+
+
+{#        </div>#}
+{#        <div class="right_col">#}
+{#            <div class="htp_tranformer_image"><img src="{{ asset('transformers/images/tranformer_image.png')}}"></div>#}
+{#        </div>#}
+{#    </div>#}
 </div>
 <div id="gamePlay" class="page-wrapper hide">
     <div class="container_ipad_view level1_transformers" id="gameMain">
