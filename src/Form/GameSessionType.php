@@ -14,7 +14,11 @@ class GameSessionType extends AbstractType
         $builder
             ->add('libelle')
             ->add('duree')
-            ->add('campagnes')
+            ->add('campagnes',null,[
+                'attr' => [
+                    'class' => 'select2'
+                ]
+            ])
         ;
     }
 
