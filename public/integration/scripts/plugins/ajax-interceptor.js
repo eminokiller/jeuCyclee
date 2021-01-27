@@ -103,7 +103,6 @@ ajaxInterceptor = function (config) {
 
         try{
             let payload = $.extend({}, current)
-            console.log(payload)
             payload['url'] = getApi(payload['url']);
             if(current['secured']){
                 payload['beforeSend'] = function (xhr) {

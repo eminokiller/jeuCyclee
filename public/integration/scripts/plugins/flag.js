@@ -44,7 +44,12 @@
                     s += parseInt(item.impact);
                     return s;
                 }, 0);
-                $($(_that).find('div').first()).css('width', `${a * 20}%`)
+
+               // if ($($(_that).find('div').first()).css('width') == 0){
+                $($(_that).find('div').first()).css('width', `${0}%`)
+                    $($(_that).find('div').first()).css('width', `${a * 20}%`)
+
+                //}
                 ac[current['type']] = a;
 
 
