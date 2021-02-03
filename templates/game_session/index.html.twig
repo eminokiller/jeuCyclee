@@ -28,6 +28,16 @@
         </div>
     </div>
     <div class="m-portlet__body">
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        {% for msg in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger">
+                {{ msg }}
+            </div>
+        {% endfor %}
         <table class="table table-striped- table-bordered table-hover table-checkable" >
         <thead>
             <tr>
@@ -55,6 +65,7 @@
                         <i class="la la-edit"></i>
                     </a>
                     <a href="{{ path('game_session_score', {'id': game_session.id}) }}"> <button class="btn alert-success">Carte score</button></a>
+                    <a href="{{ path('game_session_reset', {'id': game_session.id}) }}" onclick="return confirm('Voulez vous mettre les scores à zéro ?')"> <button class="btn alert-danger">Réinitialiser</button></a>
                 </td>
             </tr>
         {% else %}
