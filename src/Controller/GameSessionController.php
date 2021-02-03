@@ -179,5 +179,27 @@ class GameSessionController extends AbstractController
         return $this->redirectToRoute('game_session_index');
     }
 
+    /**
+     * @Route("/{id}/toZero", name="game_session_reset", methods={"GET","POST"})
+     */
+    public function remiseZero(GameSession $gameSession): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        try{
+            foreach ($gameSession->getCampagnes() as $campagne){
+                foreach ($campagne->getEquipes() as $equipe){
+                    foreach ($equipe->getJoueurs() as $joueur){
+                        $joueur->setScore(0);
+                        $entityManager->persist($joueur);
+                    }
+                }
+            }
+            $entityManager->flush();
+            $this->addFlash('success','La session '. $gameSession->getLibelle() .' est mise à zéro');
+        }catch (\Exception $e){
+            $this->addFlash('error', $e->getMessage());
+        }
+        return $this->redirectToRoute('game_session_index');
 
+    }
 }
