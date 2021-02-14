@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "api-platform/core": "^2.5",
         "asprega/breadcrumb-bundle": "^0.6.0",
+        "cboden/ratchet": "^0.4.3",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.11",
         "doctrine/doctrine-bundle": "^2.2",
@@ -107,5 +108,9 @@
             "allow-contrib": true,
             "require": "5.2.*"
         }
-    }
+    },
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/simPod/Ratchet.git"
+    }]
 }
