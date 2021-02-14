@@ -109,7 +109,6 @@ ajaxInterceptor = function (config) {
                     xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
                 }
             }
-
             $.ajax(payload);
         }catch (e) {
             console.log('this is exception',e)

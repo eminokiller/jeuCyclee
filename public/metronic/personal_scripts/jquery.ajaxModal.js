@@ -1,6 +1,3 @@
-/**
- * @Author <mohamed.chehimi@tritux.com>
- */
 (function ($) {
     $.fn.ajaxModal = function (config) {
         return this.each(function () {

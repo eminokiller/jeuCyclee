@@ -37,10 +37,10 @@
                 });
 
                 let a = filterData.filter(function (item) {
-                    console.log('test filtred  ', item)
+                    // console.log('test filtred  ', item)
                     return item.jauge == current['type']
                 }).reduce(function (s, item) {
-                    console.log('item---->', item)
+                    // console.log('item---->', item)
                     s = parseInt(item.impact);
                     return s;
                 }, 0);

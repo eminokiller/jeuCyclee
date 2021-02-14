@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('integration/node_modules/mobile-drag-drop/default.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="{{ asset('integration/node_modules/mobile-drag-drop/index.min.js') }}"></script>
-
+    <link rel="shortcut icon" href="{{ asset('transformers/images/favicon.ico') }}"/>
     <!--optional import of scroll behaviour-->
     <script src="{{ asset('integration/node_modules/mobile-drag-drop/scroll-behaviour.min.js') }}"></script>
     <script>
@@ -124,7 +124,7 @@
             </div>
             <div class="box_timer_container">
                 <div id="ten-countdown"></div>
-            </div>+
+            </div>
             <div id="profile_action" class="box_profile_container">
                 <div class="row_transformers center_content">
                     <button onclick="return logout()" class="btn btn-danger">LOGOUT</button>
@@ -207,12 +207,12 @@
             </div>
             <div class="lvl1_score_circle2">
                 <p>Score équipe</p>
-                <p><strong><span class="score" id="moyenne">0%</span></strong></p>
+                <p><strong><span class="score" id="moyenne">0</span> %</strong></p>
             </div>
 
             <div class="lvl1_score_circle3">
                 <p>Meilleur score</p>
-                <p><strong><span class="best" id="bestscore">0%</span> </strong></p>
+                <p><strong><span class="best" id="bestscore">0</span> %</strong></p>
             </div>
 
             <div class="impact-1">IMPACT SUR HCPs</div>
@@ -270,12 +270,9 @@
         </div>
         <div class="scoll-box">
             <div class="row_transformers">
-                <
                     <div class="row_transformers">
                         <h2 class="score_h2_title"><center style="font-size: 63px;">Jeu terminé ! </center></h2>
                         <div class="row_transformers">
-
-
                         </div>
                     </div>
 
@@ -329,7 +326,7 @@
                 </div>
             </div>
             <div class="modal-footer center">
-                <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+                <button type="submit" class="btn btn-primary btn-lg">OK</button>
             </div>
             </form>
         </div>
@@ -361,7 +358,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Soumettre</button>
                 </div>
             </form>
         </div>
@@ -393,7 +390,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Soumettre</button>
                 </div>
             </form>
         </div>
@@ -427,7 +424,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Soumettre</button>
                 </div>
             </form>
         </div>
