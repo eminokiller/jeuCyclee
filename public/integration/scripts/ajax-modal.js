@@ -125,7 +125,9 @@ ${getResponsesTemplate(i, question, idTask)}
             let $form = $(response);
             $form.bind('submit', function (e) {
                 e.preventDefault();
+                console.log('here the form', $form);
                 submitQuestionForm($form.serialize(), dataId).then(function (response2) {
+                    console.log('form submitted', response2);
                     let $taskList = $($targetContainer.find('ul.task-week').first());
                     let $hook = $taskList.find(`li:nth-child(${hookIndex + 1})`);
                     $hook.css('background-color', 'red');
@@ -138,7 +140,7 @@ ${getResponsesTemplate(i, question, idTask)}
                     } else {
                         $hook.replaceWith($element.addClass('done')[0])
                     }
-                    $('#exampleModal').modal('hide')
+                    $('#exampleModal').modal('toggle')
                     dispatchGameChangeEvent();
                 }).catch(function (error) {
                     $('#exampleModal').find('p.question_text').each(function () {
@@ -154,7 +156,7 @@ ${getResponsesTemplate(i, question, idTask)}
             $form.appendTo($container[0]);
             $('#exampleModalLabel').text($element.text())
         }).catch(function (error) {
-            $('#exampleModal').modal('hide')
+            $('#exampleModal').modal('toggle')
         })
     });
 

@@ -182,9 +182,6 @@ class Application {
                         },
                         ondragend: function (evt) {
                             let clonable = $(evt.target).parent().hasClass('tasker');
-                            // console.log('drag end en principe')
-
-
                             $('#exampleModal').data('clone', clonable);
 
                         },
@@ -271,6 +268,9 @@ class Application {
                                 $('#exampleModal').data('id', dataId);
                                 $('#exampleModal').data('target-id', targetId);
                                 $('#exampleModal').data('target-hook', $(evt.target).index());
+                                let liste = getElement(data, $source.attr('data-id'))
+                                console.log(liste)
+                                $('#exampleModal').data('lalist', liste);
                                 $('#exampleModal').modal('toggle')
                             } else {
                                 let $hook = $(evt.target)
@@ -325,8 +325,8 @@ class Application {
                                 $('#exampleModal').data('id', dataId);
                                 $('#exampleModal').data('target-id', targetId);
                                 $('#exampleModal').data('target-hook', $(evt.target).index());
-                                let liste = getElement(data, $(target).attr('data-id'))
-                                console.log('la list drop--->', liste)
+                                let liste = getElement(data, $source.attr('data-id'))
+                                console.log(liste)
                                 $('#exampleModal').data('lalist', liste);
                                 $('#exampleModal').modal('toggle')
                             } else {
