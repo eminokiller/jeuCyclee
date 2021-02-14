@@ -114,6 +114,12 @@
                                 $node.replaceWith(getOrginalHook())
                                 dispatchGameChangeEvent();
                             }, false)
+                            $trash[0].addEventListener('click', function (evt) {
+                                evt.preventDefault()
+                                let $node = $($(evt.target).parents('li').first())
+                                $node.replaceWith(getOrginalHook())
+                                dispatchGameChangeEvent();
+                            }, false);
                             $(this).prepend($trash[0])
                         }
 
