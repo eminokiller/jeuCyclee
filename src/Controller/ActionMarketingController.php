@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin/actionmarketing")
@@ -18,6 +19,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ActionMarketingController extends AbstractController
 {
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     /**
      * @Route("/", name="action_marketing_index", methods={"GET"})
      * @Breadcrumb({
@@ -27,8 +37,11 @@ class ActionMarketingController extends AbstractController
      */
     public function index(ActionMarketingRepository $actionMarketingRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
         return $this->render('action_marketing/index.html.twig', [
-            'action_marketings' => $actionMarketingRepository->findAll(),
+            'action_marketings' => $actionMarketingRepository->findByOwner($owner),
         ]);
     }
 
@@ -36,7 +49,7 @@ class ActionMarketingController extends AbstractController
      * @Route("/new", name="action_marketing_new", methods={"GET","POST"})
      * @Breadcrumb({
      *   { "label" = "gestion action marketing", "route" = "action_marketing_index" },
-     *   { "label" = "Nouvelle action" }
+     *   { "label" = "ajouter une action" }
      * })
      */
     public function new(Request $request): Response
@@ -48,6 +61,15 @@ class ActionMarketingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Action bien ajouter');
             $entityManager = $this->getDoctrine()->getManager();
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $actionMarketing->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $actionMarketing->setOwner($this->security->getUser());
+            }
+
             $entityManager->persist($actionMarketing);
             $entityManager->flush();
 
@@ -72,6 +94,10 @@ class ActionMarketingController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="action_marketing_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   { "label" = "gestion action marketing", "route" = "action_marketing_index" },
+     *   { "label" = "modifier action" }
+     * })
      */
     public function edit(Request $request, ActionMarketing $actionMarketing): Response
     {

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin/task")
@@ -18,17 +19,39 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    /**
      * @Route("/", name="task_index", methods={"GET"})
+     * @Breadcrumb({
+     *   { "label" = "gestion des types d'actions" },
+     *
+     *
+     *     })
      */
     public function index(TaskRepository $taskRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $taskRepository->findByOwner($owner),
         ]);
     }
 
     /**
      * @Route("/new", name="task_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des types d'actions", "route" = "task_index" },
+     *   { "label" = "ajouter un type d'action" }
+     *
+     *     })
      */
     public function new(Request $request): Response
     {
@@ -42,6 +65,14 @@ class TaskController extends AbstractController
             }
 
             $entityManager = $this->getDoctrine()->getManager();
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $task->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $task->setOwner($this->security->getUser());
+            }
             $entityManager->persist($task);
             $entityManager->flush();
 
@@ -66,6 +97,11 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="task_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des types d'actions", "route" = "task_index" },
+     *   { "label" = "modifier un type d'action" }
+     *
+     *     })
      */
     public function edit(Request $request, Task $task): Response
     {

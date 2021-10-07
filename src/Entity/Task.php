@@ -29,6 +29,11 @@ class Task extends EntityRef
      */
     private $taskColor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="tasks")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -100,6 +105,18 @@ class Task extends EntityRef
     public function setTaskColor(?string $taskColor): self
     {
         $this->taskColor = $taskColor;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

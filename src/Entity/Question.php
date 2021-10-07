@@ -24,6 +24,11 @@ class Question extends EntityRef
      */
     private $task;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="questions")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
@@ -67,6 +72,18 @@ class Question extends EntityRef
     public function setTask(?Task $task): self
     {
         $this->task = $task;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

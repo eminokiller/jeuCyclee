@@ -55,6 +55,11 @@ class ActionMarketing
      */
     private $level;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="actionMarketings")
+     */
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +144,18 @@ class ActionMarketing
     public function getColor(): ?string
     {
         return $this->getTask()->getTaskColor();
+    }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 
 

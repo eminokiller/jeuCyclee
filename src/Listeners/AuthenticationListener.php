@@ -34,8 +34,14 @@ class AuthenticationListener implements AuthenticationSuccessHandlerInterface
     {
         $response = null;
 
+                if (in_array('ROLE_SUPERADMIN',$token->getRoleNames())){
+//                    dump('heresuper');die;
+                    $response = new RedirectResponse($this->router->generate('superadmin_index'));
 
-                $response = new RedirectResponse($this->router->generate('admin_index'));
+                }else{
+                    $response = new RedirectResponse($this->router->generate('admin_index'));
+                }
+
 
         // redirect
         return $response;

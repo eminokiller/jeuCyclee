@@ -6,10 +6,42 @@
     <!-- BEGIN: Aside Menu -->
     <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
          m-menu-vertical="1" m-menu-scrollable="1" m-menu-dropdown-timeout="500" style="position: relative;">
+
+
+
         <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+            {% if is_granted('ROLE_SUPERADMIN') %}
+                <li class="m-menu__item" aria-haspopup="true">
+                    <a href="{{ path('list_admin_index') }}" class="m-menu__link">
+                        <i class="m-menu__link-icon flaticon-settings"></i>
+                        <span
+                {% if app.request.get('_route') == 'list_admin_index' %}
+                    style="color: red;"
+                {% endif %}
+                class="m-menu__link-text">
+            {{ "Gestion des Administrateurs"|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% else %}
+
+            {% if is_granted('ROLE_GESTION') == false %}
             <li class="m-menu__item" aria-haspopup="true">
+                <a href="{{ path('list_gestionnaire_index') }}" class="m-menu__link">
+                    <i class="m-menu__link-icon flaticon-map"></i>
+                    <span
+                {% if app.request.get('_route') == 'list_gestionnaire_index' %}
+                    style="color: red;"
+                {% endif %}
+                class="m-menu__link-text">
+            {{ "Gestionnaires"|trans }}
+        </span>
+                </a>
+            </li>
+                {% endif %}
+                <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('game_session_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-settings"></i>
                     <span
                 {% if app.request.get('_route') == 'game_session_index' %}
                     style="color: red;"
@@ -21,76 +53,77 @@
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('action_marketing_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-tabs"></i>
                     <span
                 {% if app.request.get('_route') == 'action_marketing_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des actions marketing"|trans }}
+            {{ "Actions marketing"|trans }}
         </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('task_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-background"></i>
                     <span
                 {% if app.request.get('_route') == 'task_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des types d'actions"|trans }}
+            {{ "Types d'actions"|trans }}
         </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('question_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-list"></i>
                     <span
                 {% if app.request.get('_route') == 'question_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des questions"|trans }}
+            {{ "Questions"|trans }}
         </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('joueur_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-network"></i>
                     <span
                 {% if app.request.get('_route') == 'joueur_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des joueurs"|trans }}
+            {{ "Joueurs"|trans }}
         </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('equipe_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-share"></i>
                     <span
                 {% if app.request.get('_route') == 'equipe_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des equipes"|trans }}
+            {{ "Equipes"|trans }}
         </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true">
                 <a href="{{ path('campaign_index') }}" class="m-menu__link">
-                    <i class="m-menu__link-icon flaticon-users"></i>
+                    <i class="m-menu__link-icon flaticon-event-calendar-symbol"></i>
                     <span
                 {% if app.request.get('_route') == 'campaign_index' %}
                     style="color: red;"
                 {% endif %}
                 class="m-menu__link-text">
-            {{ "Gestion des Campagnes"|trans }}
+            {{ "Campagnes"|trans }}
         </span>
                 </a>
             </li>
+            {% endif %}
         </ul>
     </div>
     <!-- END: Aside Menu -->

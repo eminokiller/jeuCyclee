@@ -83,5 +83,6 @@ security:
     access_control:
         # Admin && Recruiter
          - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/superadmin, role: ROLE_SUPERADMIN }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }

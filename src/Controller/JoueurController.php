@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin/joueur")
@@ -18,17 +19,39 @@ use Symfony\Component\Routing\Annotation\Route;
 class JoueurController extends AbstractController
 {
     /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    /**
      * @Route("/", name="joueur_index", methods={"GET"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des joueurs"},
+     *
+     *
+     *     })
      */
     public function index(JoueurRepository $joueurRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
         return $this->render('joueur/index.html.twig', [
-            'joueurs' => $joueurRepository->findAll(),
+            'joueurs' => $joueurRepository->findByOwner($owner),
         ]);
     }
 
     /**
      * @Route("/new", name="joueur_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des questions/reponses", "route" = "joueur_index" },
+     *   { "label" = "ajouter un joueur" }
+     *
+     *     })
      */
     public function new(Request $request): Response
     {
@@ -38,6 +61,14 @@ class JoueurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $joueur->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $joueur->setOwner($this->security->getUser());
+            }
             $entityManager->persist($joueur);
             $entityManager->flush();
 
@@ -52,6 +83,11 @@ class JoueurController extends AbstractController
 
     /**
      * @Route("/{id}", name="joueur_show", methods={"GET"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des questions/reponses", "route" = "question_index" },
+     *   { "label" = "modifier une questions" }
+     *
+     *     })
      */
     public function show(Joueur $joueur): Response
     {
@@ -62,6 +98,11 @@ class JoueurController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="joueur_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestions des joueurs", "route" = "question_index" },
+     *   { "label" = "modifier un joueur" }
+     *
+     *     })
      */
     public function edit(Request $request,Joueur $joueur): Response
     {

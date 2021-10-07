@@ -26,10 +26,18 @@ class GameSession extends EntityRef
      */
     private $campagnes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="gameSessions")
+     */
+    private $owner;
+
+
+
     public function __construct()
     {
 
         $this->campagnes = new ArrayCollection();
+
     }
 
 
@@ -79,4 +87,18 @@ class GameSession extends EntityRef
 
         return $this;
     }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+
 }

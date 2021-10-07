@@ -3,10 +3,40 @@
 {% block title %}Configure les equipe pour la campagne {{ campagne.libelle }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_rest(form) }}
-    <button class="btn" type="submit">{{ button_label|default('Save') }}</button>
+<!--begin::Portlet-->
+<div class="m-portlet">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+										<span class="m-portlet__head-icon m--hide">
+											<i class="la la-gear"></i>
+										</span>
+                <h3 class="m-portlet__head-text">
+                    Affecter les équipes
+                </h3>
+            </div>
+        </div>
+    </div>
+    {{ form_start(form, { 'attr': {'class': 'm-form'} }) }}
+    <div class="m-portlet__body">
+    <div class="m-form__section m-form__section--first">
+    {{ form_widget(form) }}
+    </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions m-form__actions">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <button class="btn btn-accent m-btn m-btn--pill m-btn--air" type="submit">Enregistrer</button>
+{#                    <button onclick="location.href='{{ path('game_session_index') }}';" class="btn btn-secondary m-btn m-btn--pill m-btn--air">Annuler</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{ form_end(form) }}
+</div>
 {% endblock %}
 {% block JSPersonalScripts %}
     <script src="{{ asset('plugins/collection.js') }}"></script>

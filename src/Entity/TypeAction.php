@@ -12,7 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeAction extends EntityRef
 {
-//    /**
+/**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="typeActions")
+     */
+    private $owner;
+
+    //    /**
 //     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="typeAction")
 //     */
 //    private $tasks;
@@ -53,6 +58,18 @@ class TypeAction extends EntityRef
 //
 //        return $this;
 //    }
+
+public function getOwner(): ?Admin
+{
+    return $this->owner;
+}
+
+public function setOwner(?Admin $owner): self
+{
+    $this->owner = $owner;
+
+    return $this;
+}
 
 
 }

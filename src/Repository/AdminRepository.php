@@ -47,4 +47,13 @@ class AdminRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByRole(string $role)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_'. $role .'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

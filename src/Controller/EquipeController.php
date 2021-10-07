@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin/equipe")
@@ -18,17 +19,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class EquipeController extends AbstractController
 {
     /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    /**
      * @Route("/", name="equipe_index", methods={"GET"})
+     * @Breadcrumb({"label" = "gestion des équipes"})
      */
     public function index(EquipeRepository $equipeRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
         return $this->render('equipe/index.html.twig', [
-            'equipes' => $equipeRepository->findAll(),
+            'equipes' => $equipeRepository->findByOwner($owner),
         ]);
     }
 
     /**
      * @Route("/new", name="equipe_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des équipes", "route" = "equipe_index" },
+     *   { "label" = "ajouter une equipe" }
+     *
+     *     })
      */
     public function new(Request $request): Response
     {
@@ -39,6 +58,14 @@ class EquipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($equipe->getJoueurs() as $item){
                 $equipe->addJoueur($item);
+            }
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $equipe->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $equipe->setOwner($this->security->getUser());
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($equipe);
@@ -65,6 +92,11 @@ class EquipeController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="equipe_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des équipes", "route" = "equipe_index" },
+     *   { "label" = "modifier une equipe" }
+     *
+     *     })
      */
     public function edit(Request $request, Equipe $equipe): Response
     {

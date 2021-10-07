@@ -31,6 +31,11 @@ class Joueur extends User
      */
     private $score = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="joueurs")
+     */
+    private $owner;
+
     public function getNom(): ?string
     {
         return $this->Nom;
@@ -85,6 +90,18 @@ class Joueur extends User
     public function setScore(?int $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

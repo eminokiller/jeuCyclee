@@ -13,12 +13,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+use AndreaSprega\Bundle\BreadcrumbBundle\Annotation\Breadcrumb;
+
 
 /**
  * @Route("/admin/gamesession")
+ * @Breadcrumb({"label" = "home", "route" = "admin_index", "translationDomain" = "domain" })
  */
 class GameSessionController extends AbstractController
 {
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     /**
      * @Route("/score/{id}", name="game_session_score", methods={"GET","POST"}, requirements={"id"="\d+"})
@@ -98,16 +111,29 @@ class GameSessionController extends AbstractController
 
     /**
      * @Route("/", name="game_session_index", methods={"GET"})
+     * @Breadcrumb({
+     *   { "label" = "gestion des sessions" },
+     *
+     *     })
      */
     public function index(GameSessionRepository $gameSessionRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
+
         return $this->render('game_session/index.html.twig', [
-            'game_sessions' => $gameSessionRepository->findAll(),
+            'game_sessions' => $gameSessionRepository->findByOwner($owner),
         ]);
     }
 
     /**
      * @Route("/new", name="game_session_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   { "label" = "gestion des sessions", "route" = "game_session_index" },
+     *   { "label" = "ajouter une session" }
+     *
+     *     })
      */
     public function new(Request $request): Response
     {
@@ -120,6 +146,17 @@ class GameSessionController extends AbstractController
             foreach ($gameSession->getCampagnes() as $item){
                 $gameSession->addCampagne($item);
             }
+//            dump(!in_array('ROLE_GESTION',$this->security->getUser()->getRoles()));die;
+//            dump($this->security->getUser()->getOwner());die;
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $gameSession->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $gameSession->setOwner($this->security->getUser());
+            }
+
             $entityManager->persist($gameSession);
             $entityManager->flush();
 
@@ -144,6 +181,11 @@ class GameSessionController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="game_session_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   { "label" = "gestion des sessions", "route" = "game_session_index" },
+     *   { "label" = "modifier une session" }
+     *
+     *     })
      */
     public function edit(Request $request, GameSession $gameSession): Response
     {

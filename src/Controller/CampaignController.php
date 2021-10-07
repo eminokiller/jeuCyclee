@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class CampaignController
@@ -31,18 +32,36 @@ use Symfony\Component\Routing\Annotation\Route;
 class CampaignController extends AbstractController
 {
     /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    /**
      * @Route("/", name="campaign_index")
+     * @Breadcrumb({"label" = "gestions des compagnes"})
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
     public function index(EntityManagerInterface $entityManager)
     {
-        $campaigns = $entityManager->getRepository(Campagne::class)->findAll();
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
+        $campaigns = $entityManager->getRepository(Campagne::class)->findByOwner($owner);
         return $this->render('campaign/index.html.twig', ['campaigns' => $campaigns]);
     }
 
     /**
      * @Route("/new", name="campaign_new",methods={"GET", "POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des compagnes", "route" = "campaign_index" },
+     *   { "label" = "ajouter une compagne" }
+     *
+     *     })
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return object|Response
@@ -55,6 +74,14 @@ class CampaignController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+                {
+                    //gestionnaire
+                    $campagne->setOwner($this->security->getUser()->getOwner());
+                }else{
+                    //admin
+                    $campagne->setOwner($this->security->getUser());
+                }
                 try {
                     $entityManager->persist($campagne);
                     $entityManager->flush();
@@ -75,6 +102,11 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/update/{id}", name="campaign_update",methods={"GET", "POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des compagnes", "route" = "campaign_index" },
+     *   { "label" = "modifier une compagne" }
+     *
+     *     })
      * @param Request $request
      * @param Campagne $campagne
      * @param EntityManagerInterface $entityManager
@@ -123,6 +155,11 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/configure/{id}", name="campaign_configure",methods={"GET", "POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des compagnes", "route" = "campaign_index" },
+     *   { "label" = "configurer une compagne" }
+     *
+     *     })
      * @param Campagne $campagne
      * @return Response
      */
@@ -143,6 +180,11 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/configure-team/{id}", name="campaign_configure_team",methods={"GET", "POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des compagnes", "route" = "campaign_index" },
+     *   { "label" = "configurer les équipes" }
+     *
+     *     })
      * @param Request $request
      * @param Campagne $campagne
      * @param EntityManagerInterface $entityManager

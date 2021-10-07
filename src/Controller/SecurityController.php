@@ -14,6 +14,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+//        dump('here');die;
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
@@ -31,6 +32,7 @@ class SecurityController extends AbstractController
      */
     public function loginAdmin(AuthenticationUtils $authenticationUtils): Response
     {
+//        dump('here2');die;
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }

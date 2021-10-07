@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mettre à jour l'administrateur{% endblock %}
+
+{% block body %}
+    <h1>Mettre à jour l'administrateur</h1>
+
+    {{ include('admin/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('list_admin_index') }}">back to list</a>
+
+    {{ include('admin/_delete_form.html.twig') }}
+{% endblock %}

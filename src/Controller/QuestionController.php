@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/admin/question")
@@ -21,17 +22,39 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuestionController extends AbstractController
 {
     /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    /**
      * @Route("/", name="question_index", methods={"GET"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des questions/reponses"},
+     *
+     *
+     *     })
      */
     public function index(QuestionRepository $questionRepository): Response
     {
+        $owner=$this->security->getUser();
+        if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            $owner = $owner->getOwner();
         return $this->render('question/index.html.twig', [
-            'questions' => $questionRepository->findAll(),
+            'questions' => $questionRepository->findByOwner($owner),
         ]);
     }
 
     /**
      * @Route("/new", name="question_new", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des questions/reponses", "route" = "question_index" },
+     *   { "label" = "ajouter une questions" }
+     *
+     *     })
      */
     public function new(Request $request): Response
     {
@@ -42,6 +65,14 @@ class QuestionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            if ($this->security->getUser()->getOwner() and in_array('ROLE_GESTION',$this->security->getUser()->getRoles()))
+            {
+                //gestionnaire
+                $question->setOwner($this->security->getUser()->getOwner());
+            }else{
+                //admin
+                $question->setOwner($this->security->getUser());
+            }
             $entityManager->persist($question);
             $entityManager->flush();
 
@@ -66,6 +97,11 @@ class QuestionController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="question_edit", methods={"GET","POST"})
+     * @Breadcrumb({
+     *   {  "label" = "gestion des questions/reponses", "route" = "question_index" },
+     *   { "label" = "modifier une questions" }
+     *
+     *     })
      */
     public function edit(Request $request, Question $question, EntityManagerInterface $entityManager): Response
     {
